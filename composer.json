@@ -1,0 +1,27 @@
+{
+    "name": "agb/news-bundle",
+    "type": "symfony-bundle",
+    "description": "Bundle used to manage and display News Items as they are used within the AGB Group's web sites. Bundle is used within Symfony2.",
+    "keywords": ["news", "blog", "agb", "client"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "James Rickard",
+            "email": "james@frodosghost.com",
+            "homepage": "www.frodosghost.com"
+        },
+        {
+            "name": "Dean White",
+            "email": "daw4123@gmail.com",
+            "homepage": "http://formativebits.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": { "AGB\\Bundle\\NewsBundle": "" }
+    },
+    "target-dir": "AGB/Bundle/NewsBundle",
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": "2.*"
+    }
+}
