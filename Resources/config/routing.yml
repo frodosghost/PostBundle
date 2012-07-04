@@ -1,0 +1,3 @@
+AGBNews:
+    resource: "@AGBNewsBundle/Controller/PostController.php"
+    type:     annotation

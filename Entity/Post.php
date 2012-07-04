@@ -206,7 +206,7 @@ class Post
      * @param datetime $publishedDate
      * @return Post
      */
-    public function setPublishedDate($publishedDate)
+    public function setPublishDate($publishedDate)
     {
         $this->published_date = $publishedDate;
         return $this;
@@ -217,7 +217,7 @@ class Post
      *
      * @return datetime 
      */
-    public function getPublishedDate()
+    public function getPublishDate()
     {
         return $this->published_date;
     }
