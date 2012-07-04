@@ -20,7 +20,7 @@ class ConfigureMenuListener
             ->setChildrenAttribute('class', 'menu-dropdown');
 
         $dropdown->addChild('News', array('route' => 'console_news'));
-        $dropdown->addChild('New News Post', array('route' => 'console_news_new'));
+        $dropdown->addChild('New Post', array('route' => 'console_news_new'));
 
     }
 }
