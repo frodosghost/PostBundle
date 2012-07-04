@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use AGB\Bundle\ContentBundle\Entity\Asset;
+use AGB\Bundle\NewsBundle\Entity\Post;
 
 /**
  * AGB\Bundle\NewsBundle\Entity\Image
@@ -23,6 +24,28 @@ class Image extends Asset
      * )
      */
     private $project;
+
+    /**
+     * Set project
+     *
+     * @param AGB\Bundle\NewsBundle\Entity\Post $project
+     * @return Image
+     */
+    public function setProject(Post $project = null)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return AGB\Bundle\NewsBundle\Entity\Post 
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
 
     public function getUploadDir()
     {
