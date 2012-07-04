@@ -13,7 +13,7 @@ use AGB\Bundle\NewsBundle\Entity\Category;
 /**
  * AGB\Bundle\NewsBundle\Entity\Post
  *
- * @ORM\Table(name="post")
+ * @ORM\Table(name="news_post")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="AGB\Bundle\NewsBundle\Entity\PostRepository")
  */

@@ -12,7 +12,7 @@ use AGB\Bundle\NewsBundle\Entity\Post;
 /**
  * AGB\Bundle\NewsBundle\Entity\Category
  *
- * @ORM\Table(name="service")
+ * @ORM\Table(name="news_category")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity()
  */
