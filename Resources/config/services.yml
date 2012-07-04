@@ -1,1 +1,5 @@
 services:
+    agb_news_bundle.configure_menu_listener:
+        class: AGB\Bundle\NewsBundle\EventListener\ConfigureMenuListener
+        tags:
+          - { name: kernel.event_listener, event: manhattan_console_bundle.menu_configure, method: onMenuConfigure }
