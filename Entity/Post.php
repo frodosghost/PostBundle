@@ -71,7 +71,7 @@ class Post
      * )
      * @ORM\JoinTable(name="news_post_map_category")
      **/
-    private $categories;
+    private $category;
 
     /**
      * @var datetime $published_date
@@ -223,6 +223,15 @@ class Post
     }
 
     /**
+     * Returns format for URL
+     */
+    public function getDate()
+    {
+        $this->date = $this->published_date->format('Y-m-d');
+        return $this->date;
+    }
+
+    /**
      * Set created_at
      *
      * @param datetime $createdAt
@@ -289,25 +298,25 @@ class Post
     }
 
     /**
-     * Add categories
+     * Add category
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Category $categories
+     * @param AGB\Bundle\NewsBundle\Entity\Category $category
      * @return Post
      */
-    public function addCategory(Category $categories)
+    public function addCategory(Category $category)
     {
-        $this->categories[] = $categories;
+        $this->category[] = $category;
         return $this;
     }
 
     /**
-     * Get categories
+     * Get category
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getCategories()
+    public function getCategory()
     {
-        return $this->categories;
+        return $this->category;
     }
 
     /**

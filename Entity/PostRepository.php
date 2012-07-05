@@ -12,4 +12,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class PostRepository extends EntityRepository
 {
+	/**
+     * Returns Category with joined Gallery records
+     *
+     * @param string @slug
+     */
+    public function findOneByDateAndSlug($date, $slug)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post, category, image FROM AGBNewsBundle:Post post
+                LEFT JOIN post.category category
+                LEFT JOIN post.image image
+                WHERE post.published_date BETWEEN :date_start AND :date_end
+                    AND post.slug = :slug'
+            )->setParameters(array(
+            	'date_start' => new \DateTime($date .'00:00:00'),
+            	'date_end'   => new \DateTime($date .'23:59:59'),
+                'slug'       => $slug
+            ));
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
 }

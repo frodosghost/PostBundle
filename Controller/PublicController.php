@@ -31,4 +31,25 @@ class PublicController extends Controller
         );
     }
 
+    /**
+     * Finds and displays a Post entity.
+     *
+     * @Route("/{date}/{slug}", name="news_view")
+     * @Template()
+     */
+    public function viewAction($date, $slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AGBNewsBundle:Post')->findOneByDateAndSlug($date, $slug);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Post entity.');
+        }
+
+        return array(
+            'entity'      => $entity
+        );
+    }
+
 }

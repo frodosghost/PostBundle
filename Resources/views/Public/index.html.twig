@@ -13,7 +13,7 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td>{{ entity.title }}</td>
+            <td><a href="{{ path('news_view', { 'date': entity.date, 'slug': entity.slug }) }}">{{ entity.title }}</a></td>
             <td>{{ entity.slug }}</td>
             <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d H:i:s') }}{% endif %}</td>
         </tr>
