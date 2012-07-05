@@ -69,7 +69,7 @@ class Post
      * @ORM\ManyToMany(
      *     targetEntity="Category", inversedBy="posts"
      * )
-     * @ORM\JoinTable(name="post_map_category")
+     * @ORM\JoinTable(name="news_post_map_category")
      **/
     private $categories;
 
