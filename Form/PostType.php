@@ -26,7 +26,8 @@ class PostType extends AbstractType
                 'label' => 'Body'
             ))
             ->add('image', new ImageType(), array(
-                'data_class' => 'AGB\Bundle\NewsBundle\Entity\Image'
+                'data_class' => 'AGB\Bundle\NewsBundle\Entity\Image',
+                'widget_control_group_attr' => array('class' => 'entity-left')
             ))
             ->add('categories')
         ;
