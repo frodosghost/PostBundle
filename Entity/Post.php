@@ -283,7 +283,11 @@ class Post
      */
     public function setImage(Image $image = null)
     {
-        $this->image = $image;
+        if ($image instanceof Image && $image->hasFile())
+        {
+            $this->image = $image;
+        }
+
         return $this;
     }
 

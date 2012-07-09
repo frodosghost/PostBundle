@@ -29,7 +29,11 @@ class PostType extends AbstractType
                 'data_class' => 'AGB\Bundle\NewsBundle\Entity\Image',
                 'widget_control_group_attr' => array('class' => 'entity-left')
             ))
-            ->add('categories')
+            ->add('category', 'entity', array(
+                'multiple' => false,
+                'expanded' => true,
+                'class'    => 'AGB\Bundle\NewsBundle\Entity\Category'
+            ))
         ;
     }
 
