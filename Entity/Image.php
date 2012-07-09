@@ -18,35 +18,6 @@ use AGB\Bundle\NewsBundle\Entity\Post;
  */
 class Image extends Asset
 {
-    /**
-     * @ORM\OneToOne(
-     *     targetEntity="Post", cascade={"persist", "remove", "merge"}
-     * )
-     */
-    private $project;
-
-    /**
-     * Set project
-     *
-     * @param AGB\Bundle\NewsBundle\Entity\Post $project
-     * @return Image
-     */
-    public function setProject(Post $project = null)
-    {
-        $this->project = $project;
-        return $this;
-    }
-
-    /**
-     * Get project
-     *
-     * @return AGB\Bundle\NewsBundle\Entity\Post 
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-
     public function getUploadDir()
     {
         return 'uploads/news';
