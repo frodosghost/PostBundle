@@ -306,7 +306,7 @@ class Post
      * @param AGB\Bundle\NewsBundle\Entity\Category $category
      * @return Post
      */
-    public function setCategory(Category $category)
+    public function setCategory(Category $category = null)
     {
         $this->category = $category;
         return $this;

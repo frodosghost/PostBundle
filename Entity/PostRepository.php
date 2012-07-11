@@ -38,4 +38,20 @@ class PostRepository extends EntityRepository
             return null;
         }
     }
+
+    /**
+     * Returns Query joined to Image and Category
+     */
+    public function getQueryJoinImageAndCategory()
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post, category, image FROM AGBNewsBundle:Post post
+                LEFT JOIN post.category category
+                LEFT JOIN post.image image'
+            );
+
+        return $query;
+    }
+
 }

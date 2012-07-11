@@ -23,11 +23,15 @@ class PublicController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
+        $paginator = $this->get('knp_paginator');
 
-        $entities = $em->getRepository('AGBNewsBundle:Post')->findAll();
+        $query = $em->getRepository('AGBNewsBundle:Post')->getQueryJoinImageAndCategory();
+
+        $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
+        compact($paginated_entities);
 
         return array(
-            'entities' => $entities,
+            'entities' => $paginated_entities,
         );
     }
 
