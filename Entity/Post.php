@@ -66,10 +66,9 @@ class Post
     private $image;
 
     /**
-     * @ORM\ManyToMany(
+     * @ORM\ManyToOne(
      *     targetEntity="Category", inversedBy="posts"
      * )
-     * @ORM\JoinTable(name="news_post_map_category")
      **/
     private $category;
 
@@ -99,7 +98,7 @@ class Post
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+        $this->category = new ArrayCollection();
     }
     
     /**
@@ -307,9 +306,9 @@ class Post
      * @param AGB\Bundle\NewsBundle\Entity\Category $category
      * @return Post
      */
-    public function addCategory(Category $category)
+    public function setCategory(Category $category)
     {
-        $this->category[] = $category;
+        $this->category = $category;
         return $this;
     }
 

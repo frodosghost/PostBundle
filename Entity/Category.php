@@ -48,7 +48,7 @@ class Category
      *     targetEntity="Post", mappedBy="category"
      * )
      **/
-    private $categories;
+    private $posts;
 
     /**
      * @var datetime $created_at
@@ -69,6 +69,11 @@ class Category
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
     
     /**
@@ -170,25 +175,25 @@ class Category
     }
 
     /**
-     * Add categories
+     * Add post
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Post $categories
+     * @param AGB\Bundle\NewsBundle\Entity\Post $post
      * @return Category
      */
-    public function addPost(Post $categories)
+    public function addPost(Post $post)
     {
-        $this->categories[] = $categories;
+        $this->posts[] = $post;
         return $this;
     }
 
     /**
-     * Get categories
+     * Get posts
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getCategories()
+    public function getPosts()
     {
-        return $this->categories;
+        return $this->posts;
     }
 
         /**
