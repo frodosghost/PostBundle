@@ -41,6 +41,7 @@ class PostRepository extends EntityRepository
 
     /**
      * Returns Query joined to Image and Category
+     * Includes check of Published Date
      */
     public function getQueryJoinImageAndCategory()
     {
@@ -48,8 +49,9 @@ class PostRepository extends EntityRepository
             ->createQuery('
                 SELECT post, category, image FROM AGBNewsBundle:Post post
                 LEFT JOIN post.category category
-                LEFT JOIN post.image image'
-            );
+                LEFT JOIN post.image image
+                WHERE post.published_date < :date'
+            )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
 
         return $query;
     }

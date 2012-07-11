@@ -25,6 +25,8 @@ class PublicController extends Controller
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
 
+        $now = new \DateTime();
+
         $query = $em->getRepository('AGBNewsBundle:Post')->getQueryJoinImageAndCategory();
 
         $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
