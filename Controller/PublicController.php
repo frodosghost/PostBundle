@@ -10,14 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * Public News controller.
  *
- * @Route("/news")
  */
 class PublicController extends Controller
 {
     /**
      * Lists all Post entities.
      *
-     * @Route("/", name="news")
+     * @Route("/news", name="news")
      * @Template()
      */
     public function indexAction()
@@ -40,7 +39,7 @@ class PublicController extends Controller
     /**
      * Finds and displays a Post entity.
      *
-     * @Route("/{date}/{slug}", name="news_view")
+     * @Route("/news/{date}/{slug}", name="news_view")
      * @Template()
      */
     public function viewAction($date, $slug)
