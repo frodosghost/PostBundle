@@ -1,0 +1,14 @@
+{% block latest_news %}
+{% spaceless %}
+	{% if latest_news|length > 0 %}
+	<div class="container box news-information">
+        <h4><span>Latest News</span></h4>
+        {% for post in latest_news %}
+        <h5><a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a></h5>
+        <p class="small"><a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">Published Date: {{ post.publishdate|date('d/m/Y') }}</a></p>
+        <p>{{ post.excerpt|truncate(250)|striptags('<p><a><strong><em>')|raw }} <a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">Read more...</a></p>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}

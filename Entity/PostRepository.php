@@ -56,4 +56,25 @@ class PostRepository extends EntityRepository
         return $query;
     }
 
+    /**
+     * Returns Latest News items
+     *
+     * @param integer $limit Limit of news items required to be returned
+     */
+    public function getLatestNews($limit)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post FROM AGBNewsBundle:Post post
+                WHERE post.published_date < :date')
+            ->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->setMaxResults($limit);
+
+        try {
+            return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
 }
