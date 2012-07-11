@@ -33,7 +33,7 @@ class Post
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotBlank(
-     *     message = "Please enter a Title."
+     *     message = "Please enter a Title"
      * )
      */
     private $title;
@@ -48,6 +48,9 @@ class Post
      * @var text $excerpt
      *
      * @ORM\Column(name="excerpt", type="string", length=500, nullable=true)
+     * @Assert\MaxLength(500)(
+     *     message="The Excerpt is too long. The is a maximum length of {{limit}} characters"
+     * )
      */
     private $excerpt;
 

@@ -66,7 +66,8 @@ class PostRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT post FROM AGBNewsBundle:Post post
-                WHERE post.published_date < :date')
+                WHERE post.published_date < :date
+                ORDER BY post.published_date DESC')
             ->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
             ->setMaxResults($limit);
 
