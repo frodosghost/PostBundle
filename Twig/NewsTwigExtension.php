@@ -34,7 +34,8 @@ class NewsTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'latest_news' => new \Twig_Function_Method($this, 'render', array('is_safe' => array('html')))
+            'latest_news' => new \Twig_Function_Method($this, 'renderLatest', array('is_safe' => array('html'))),
+            'recent_list' => new \Twig_Function_Method($this, 'renderRecent', array('is_safe' => array('html')))
         );
     }
 
@@ -51,17 +52,34 @@ class NewsTwigExtension extends \Twig_Extension
     }
 
     /**
-     * Renders the whole Navbar with the specified renderer.
+     * Renders Latest News Items displaying excerpt below heading
      *
      * @param  \Doctrine\Common\Collections\ArrayCollection|array $latest_news
      * @param  array                               				  $options
      * @return string
      */
-    public function render($latest_news, array $options = array())
+    public function renderLatest($latest_news, array $options = array())
     {
     	$html = $this->getTemplate()->renderBlock('latest_news', array(
         	'latest_news' => $latest_news,
         	'options'     => $options
+        ));
+
+        return $html;
+    }
+
+    /**
+     * Renders recent News Items in list with published date
+     *
+     * @param  \Doctrine\Common\Collections\ArrayCollection|array $recent_news
+     * @param  array                                              $options
+     * @return string
+     */
+    public function renderRecent($recent_news, array $options = array())
+    {
+        $html = $this->getTemplate()->renderBlock('recent_list', array(
+            'recent_news' => $recent_news,
+            'options'     => $options
         ));
 
         return $html;

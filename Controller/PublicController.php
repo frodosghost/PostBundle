@@ -53,8 +53,11 @@ class PublicController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
+        $latest_news = $em->getRepository('AGBNewsBundle:Post')->getLatestNews(5);
+
         return array(
-            'entity'      => $entity
+            'entity'      => $entity,
+            'latest_news' => $latest_news
         );
     }
 
