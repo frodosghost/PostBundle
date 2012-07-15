@@ -49,6 +49,8 @@ class PublicController extends Controller
         $entity = $em->getRepository('AGBNewsBundle:Post')->findOneByDateAndSlug($date, $slug);
 
         if (!$entity) {
+            $log = $this->get('logger');
+            $log->err(sprintf('[404: Page Not Found]: Unable to find Content entity with URI: "%s"', $this->getRequest()->getUri()));
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
