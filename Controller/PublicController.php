@@ -24,8 +24,6 @@ class PublicController extends Controller
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
 
-        $now = new \DateTime();
-
         $query = $em->getRepository('AGBNewsBundle:Post')->getQueryJoinImageAndCategory();
 
         $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
@@ -60,6 +58,17 @@ class PublicController extends Controller
             'entity'      => $entity,
             'latest_news' => $latest_news
         );
+    }
+
+    /**
+     * Displays RSS2.0 for News Feed
+     *
+     * @Route("/news/rss.xml", name="news_rss2")
+     * @Template("AGBNewsBundle:RSS:rss2.xml.twig")
+     */
+    public function rssAction()
+    {
+        return array();
     }
 
 }

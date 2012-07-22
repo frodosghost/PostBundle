@@ -18,7 +18,6 @@ class PublicControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/news');
 
-        var_dump($client->getResponse());
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
             'Visiting the News Index page returns a status code of 200.');
 
@@ -32,4 +31,14 @@ class PublicControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
             'Visiting the view page from the Index page returns a status code of 200.');
     }
+
+    public function testRss()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/news/rss.xml');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(),
+            'Visiting the News RSS page returns a status code of 200.');
+    }
+
 }
