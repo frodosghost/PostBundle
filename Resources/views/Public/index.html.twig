@@ -18,6 +18,12 @@
             <td>{{ entity.slug }}</td>
             <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d H:i:s') }}{% endif %}</td>
         </tr>
+    {% else %}
+        <tr>
+            <td>There are no news posts</td>
+            <td></td>
+            <td></td>
+        </tr>
     {% endfor %}
     </tbody>
 </table>
