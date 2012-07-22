@@ -329,10 +329,14 @@ class Post
      * @ORM\PrePersist()
      */
     public function prePersist() {
-        $date = new \DateTime();
-        $date->modify('+1 week');
+        //Set Published Date if has not been set manually
+        if ($this->published_date === null) {
+            $date = new \DateTime();
+            $date->modify('+1 week');
 
-        $this->setPublishDate($date);
+            $this->setPublishDate($date);
+        }
+
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
