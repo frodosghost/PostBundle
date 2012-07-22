@@ -2,12 +2,33 @@
 /*
 namespace AGB\Bundle\NewsBundle\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Liip\FunctionalTestBundle\Test\WebTestCase;
+//use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PostControllerTest extends WebTestCase
 {
+     public function testIndex()
+    {
+        $client = static::createClient();
+
+        //$crawler = $client->request('GET', '/console/news/');
+        $client->request('GET', '/console/news/');
+        $client->followRedirect();
+
+        var_dump($client->getResponse());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode(),
+            'Visiting the console login returns to 200 page status.');
+    }
+
     public function testCompleteScenario()
     {
+
+    array(), array(
+            'PHP_AUTH_USER' => 'admin',
+            'PHP_AUTH_PW'   => 'password',
+        )
+
+        
         // Create a new client to browse the application
         $client = static::createClient();
 
