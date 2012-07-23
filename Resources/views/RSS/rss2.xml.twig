@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <rss version="2.0">
+    <title>{{ information.title }}</title>
+    <link>{{ url(information.link) }}</link>
+    <description>{{ information.description }}</description>
+    <image>
+        <title>{{ information.image.title }}</title>
+        <link>{{ url(information.image.link) }}</link>
+        <url>{{ url(information.image.src) }}</url>
+    </image>
+    <docs>{{ information.docs }}</docs>
+    <copyright>{{ information.copyright }}</copyright>
+    <pubDate>Tue, 08 Nov 2011 13:18:00 +1100</pubDate>
+    <lastBuildDate>Tue, 08 Nov 2011 13:18:00 +1100</lastBuildDate>
+    <category>{{ information.category }}</category>
     
 </rss>

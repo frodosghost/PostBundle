@@ -68,7 +68,10 @@ class PublicController extends Controller
      */
     public function rssAction()
     {
-        return array();
+        
+        return array(
+            'information' => $this->container->getParameter('agb_news.rss')
+        );
     }
 
 }
