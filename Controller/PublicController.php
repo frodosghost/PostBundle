@@ -2,6 +2,8 @@
 
 namespace AGB\Bundle\NewsBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -64,14 +66,17 @@ class PublicController extends Controller
      * Displays RSS2.0 for News Feed
      *
      * @Route("/news/rss.xml", name="news_rss2")
-     * @Template("AGBNewsBundle:RSS:rss2.xml.twig")
      */
     public function rssAction()
     {
-        
-        return array(
+        $content = $this->renderView('AGBNewsBundle:RSS:rss2.xml.twig', array(
             'information' => $this->container->getParameter('agb_news.rss')
-        );
+        ));
+
+        $response = new Response($content);
+        $response->headers->set('Content-Type', 'application/rss+xml');
+
+        return $response;
     }
 
 }

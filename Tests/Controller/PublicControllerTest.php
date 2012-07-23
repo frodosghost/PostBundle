@@ -60,6 +60,9 @@ class PublicControllerTest extends WebTestCase
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
             'Visiting the News RSS page returns a status code of 200.');
+
+        $this->assertGreaterThan(0, $crawler->filterXpath('rss')->count(),
+            'The RSS page generates xml with an rss element.');
     }
 
 }
