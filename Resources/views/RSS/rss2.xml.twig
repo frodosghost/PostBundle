@@ -1,17 +1,28 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" ?>
 <rss version="2.0">
-    <title>{{ information.title }}</title>
-    <link>{{ url(information.link) }}</link>
-    <description>{{ information.description }}</description>
-    <image>
-        <title>{{ information.image.title }}</title>
-        <link>{{ url(information.image.link) }}</link>
-        <url>{{ url(information.image.src) }}</url>
-    </image>
-    <docs>{{ information.docs }}</docs>
-    <copyright>{{ information.copyright }}</copyright>
-    <pubDate>Tue, 08 Nov 2011 13:18:00 +1100</pubDate>
-    <lastBuildDate>Tue, 08 Nov 2011 13:18:00 +1100</lastBuildDate>
-    <category>{{ information.category }}</category>
-    
+    <channel>
+        <title>{{ information.title }}</title>
+        <link>{{ url(information.link) }}</link>
+        <description>{{ information.description }}</description>
+        <image>
+            <title>{{ information.image.title }}</title>
+            <link>{{ url(information.image.link) }}</link>
+            <url>{{ url(information.image.src) }}</url>
+        </image>
+        <docs>{{ information.docs }}</docs>
+        <copyright>{{ information.copyright }}</copyright>
+        <pubDate>{% if latest_news.0.publishdate %}{{ latest_news.0.publishdate|date('D, d M Y H:i:s O') }}{% endif %}</pubDate>
+        <lastBuildDate>{% if latest_news.0.publishdate %}{{ latest_news.0.publishdate|date('D, d M Y H:i:s O') }}{% endif %}</lastBuildDate>
+        <category>{{ information.category }}</category>
+
+        {% for post in latest_news %}<item>
+            <title>{{ post.title }}</title>
+            <description>{{ post.excerpt|striptags }}</description>
+            <link>{{ url('news_view', { 'date': post.date, 'slug': post.slug }) }}</link>
+            <guid>{{ url('news_view', { 'date': post.date, 'slug': post.slug }) }}</guid>
+            <pubDate>{{ post.publishdate|date('D, d M Y H:i:s O') }}</pubDate>
+        </item>
+        {% endfor %}
+
+    </channel>
 </rss>

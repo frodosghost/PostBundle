@@ -53,6 +53,9 @@ class PublicControllerTest extends WebTestCase
             'Visiting the view page from the Index page returns a status code of 200.');*/
     }
 
+    /**
+     * Tests the RSS page with loaded data.
+     */
     public function testRss()
     {
         $client = static::createClient();
@@ -61,8 +64,12 @@ class PublicControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
             'Visiting the News RSS page returns a status code of 200.');
 
-        $this->assertGreaterThan(0, $crawler->filterXpath('rss')->count(),
+        $this->assertGreaterThan(0, $crawler->filter('rss')->count(),
             'The RSS page generates xml with an rss element.');
+
+        // Count the item tags from the fixtures data
+        $this->assertEquals(10, $crawler->filter('item')->count(),
+            'Displays the 10 items in the news data.');
     }
 
 }

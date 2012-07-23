@@ -69,8 +69,13 @@ class PublicController extends Controller
      */
     public function rssAction()
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $latest_news = $em->getRepository('AGBNewsBundle:Post')->getLatestNews(20);
+
         $content = $this->renderView('AGBNewsBundle:RSS:rss2.xml.twig', array(
-            'information' => $this->container->getParameter('agb_news.rss')
+            'information' => $this->container->getParameter('agb_news.rss'),
+            'latest_news' => $latest_news
         ));
 
         $response = new Response($content);
