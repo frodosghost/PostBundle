@@ -20,9 +20,53 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('agb_news');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode
+            ->children()
+                ->arrayNode('rss')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('title')
+                            ->defaultValue('News Title')
+                            //->setInfo('Sets the Title for the RSS Feed')
+                            ->end()
+                        ->scalarNode('link')
+                            ->defaultValue('news')
+                            //->setInfo('Route name to the index page of the news.')
+                            ->end()
+                        ->scalarNode('description')
+                            ->defaultValue('News Description')
+                            //->setInfo('Sets the Description for the RSS Feed as displayed in <channel> tags')
+                            ->end()
+                        ->arrayNode('image')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->scalarNode('title')
+                                    ->defaultValue('News Title')
+                                    //->setInfo('Sets the Title for the RSS Feed')
+                                    ->end()
+                                ->scalarNode('link')
+                                    ->defaultValue('news')
+                                    //->setInfo('Route name to the index page of the news.')
+                                    ->end()
+                                ->scalarNode('src')
+                                    ->defaultValue('news')
+                                    //->setInfo('Route name to the index page of the news.')
+                                    ->end()
+                            ->end()
+                        ->end()
+                        ->scalarNode('docs')
+                            ->defaultValue('http://feed2.w3.org/docs/rss2.html')
+                            //->setInfo('Sets the Docs reference for the RSS Feed')
+                            ->end()
+                        ->scalarNode('category')
+                            //->setInfo('Sets Category reference for the RSS Feed')
+                            ->defaultValue('All:All:All')
+                            ->end()
+                        ->scalarNode('copyright')
+                            ->defaultValue('Copyright')
+                            //  ->setInfo('Sets Copyright information for the RSS Feed')
+                            ->end()
+            ->end();
 
         return $treeBuilder;
     }
