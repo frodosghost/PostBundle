@@ -32,7 +32,7 @@ class Category
      *
      * @ORM\Column(name="title", type="string", length=128)
      * @Assert\NotBlank(
-     *     message = "Please enter a Title."
+     *     message = "Please enter a Category."
      * )
      */
     private $title;

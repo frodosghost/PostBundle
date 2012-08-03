@@ -1,3 +1,7 @@
 AGBNews:
     resource: "@AGBNewsBundle/Controller/PostController.php"
     type:     annotation
+
+AGBNewsCategory:
+    resource: "@AGBNewsBundle/Controller/CategoryController.php"
+    type:     annotation

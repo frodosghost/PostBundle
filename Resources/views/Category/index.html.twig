@@ -1,0 +1,29 @@
+{% extends "AGBNewsBundle::layout.html.twig" %}
+{% block subheadline %}Category{% endblock %}
+
+{% block content %}
+
+<table class="records_list table table-striped">
+    <thead>
+        <tr>
+            <th class="title">Title</th>
+            <th>Slug</th>
+            <th class="actions">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('console_news_category_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+            <td>{{ entity.slug }}</td>
+            <td>
+                <a href="{{ path('console_news_category_show', { 'id': entity.id }) }}" class="btn btn-small">show</a>
+                <a href="{{ path('console_news_category_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">edit</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('console_news_category_new') }}"  class="btn primary">Create a new entry</a>
+{% endblock %}
