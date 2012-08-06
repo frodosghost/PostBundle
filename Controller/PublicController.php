@@ -38,6 +38,28 @@ class PublicController extends Controller
     }
 
     /**
+     * Displays RSS2.0 for News Feed
+     *
+     * @Route("/news/rss.xml", name="news_rss2")
+     */
+    public function rssAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $latest_news = $em->getRepository('AGBNewsBundle:Post')->getLatestNews(20);
+
+        $content = $this->renderView('AGBNewsBundle:RSS:rss2.xml.twig', array(
+            'information' => $this->container->getParameter('agb_news.rss'),
+            'latest_news' => $latest_news
+        ));
+
+        $response = new Response($content);
+        $response->headers->set('Content-Type', 'application/rss+xml');
+
+        return $response;
+    }
+
+    /**
      * Lists all Post entities that belong to a category
      *
      * @Route("/news/{category}", name="news_category")
@@ -83,28 +105,6 @@ class PublicController extends Controller
             'entity'      => $entity,
             'latest_news' => $latest_news
         );
-    }
-
-    /**
-     * Displays RSS2.0 for News Feed
-     *
-     * @Route("/news/rss.xml", name="news_rss2")
-     */
-    public function rssAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $latest_news = $em->getRepository('AGBNewsBundle:Post')->getLatestNews(20);
-
-        $content = $this->renderView('AGBNewsBundle:RSS:rss2.xml.twig', array(
-            'information' => $this->container->getParameter('agb_news.rss'),
-            'latest_news' => $latest_news
-        ));
-
-        $response = new Response($content);
-        $response->headers->set('Content-Type', 'application/rss+xml');
-
-        return $response;
     }
 
 }
