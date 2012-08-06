@@ -37,3 +37,18 @@
     {% endif %}
 {% endspaceless %}
 {% endblock %}
+
+{% block categories %}
+{% spaceless %}
+<div class="container box news-information">
+    <h4>Browse Categories</h4>
+    <dl class="sub-nav">
+        <dt>Filter:</dt>
+        <dd><a href="{{ path('news') }}">All</a></dd>
+        {% for category in categories %}
+        <dd{% if options.current == category.slug %} class="active"{% endif %}><a href="{{ path('news_category', {'category': category.slug}) }}">{{ category.title }}</a></dd>
+        {% endfor %}
+    </dl>
+</div>
+{% endspaceless %}
+{% endblock %}

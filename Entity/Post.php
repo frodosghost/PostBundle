@@ -57,7 +57,10 @@ class Post
     /**
      * @var text $body
      *
-     * @ORM\Column(name="body", type="text")
+     * @ORM\Column(name="body", type="text", nullable=true)
+     * @Assert\NotBlank(
+     *     message = "Please enter some text for the body"
+     * )
      */
     private $body;
 

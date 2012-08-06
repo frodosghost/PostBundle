@@ -7,6 +7,7 @@
 namespace AGB\Bundle\NewsBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Twig Extension for displaying latest news
@@ -21,21 +22,26 @@ class NewsTwigExtension extends \Twig_Extension
 
     private $twig_template;
 
+    private $doctrine;
+
     /**
      * @param \Twig_Environment $environment
+     * @param RegistryInterface $doctrine
      * @param string            $template
      */
-    public function __construct(\Twig_Environment $environment, $template)
+    public function __construct(\Twig_Environment $environment, RegistryInterface $doctrine, $template)
     {
         $this->environment = $environment;
+        $this->doctrine = $doctrine;
         $this->template = $template;
     }
 
     public function getFunctions()
     {
         return array(
-            'latest_news' => new \Twig_Function_Method($this, 'renderLatest', array('is_safe' => array('html'))),
-            'recent_list' => new \Twig_Function_Method($this, 'renderRecent', array('is_safe' => array('html')))
+            'latest_news'   => new \Twig_Function_Method($this, 'renderLatest', array('is_safe' => array('html'))),
+            'recent_list'   => new \Twig_Function_Method($this, 'renderRecent', array('is_safe' => array('html'))),
+            'category_list' => new \Twig_Function_Method($this, 'renderCategories', array('is_safe' => array('html')))
         );
     }
 
@@ -83,6 +89,33 @@ class NewsTwigExtension extends \Twig_Extension
         ));
 
         return $html;
+    }
+
+    /**
+     * Renders category listings
+     *
+     * @param  array  $options
+     * @return string
+     */
+    public function renderCategories(array $options = array())
+    {
+        $categories = $this->getDoctrine()->getRepository('AGBNewsBundle:Category')
+            ->getCategoriesJoinPost();
+
+        $html = $this->getTemplate()->renderBlock('categories', array(
+            'categories' => $categories,
+            'options'    => $options
+        ));
+
+        return $html;
+    }
+
+    /**
+     * @return RegistryInterface
+     */
+    public function getDoctrine()
+    {
+        return $this->doctrine;
     }
 
     /**

@@ -57,6 +57,25 @@ class PostRepository extends EntityRepository
     }
 
     /**
+     * Returns Query joined to Image and Category
+     * Includes check of Published Date
+     */
+    public function getQueryJoinCategory($category)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post, category, image FROM AGBNewsBundle:Post post
+                LEFT JOIN post.category category
+                LEFT JOIN post.image image
+                WHERE post.published_date < :date
+                    AND category.slug = :category'
+            )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
+             ->setParameter('category', $category);
+
+        return $query;
+    }
+
+    /**
      * Returns Latest News items
      *
      * @param integer $limit Limit of news items required to be returned

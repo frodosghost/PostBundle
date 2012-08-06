@@ -33,6 +33,29 @@ class PublicController extends Controller
 
         return array(
             'entities' => $paginated_entities,
+            'category' => null
+        );
+    }
+
+    /**
+     * Lists all Post entities that belong to a category
+     *
+     * @Route("/news/{category}", name="news_category")
+     * @Template("AGBNewsBundle:Public:index.html.twig")
+     */
+    public function categoryAction($category)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $paginator = $this->get('knp_paginator');
+
+        $query = $em->getRepository('AGBNewsBundle:Post')->getQueryJoinCategory($category);
+
+        $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
+        compact($paginated_entities);
+
+        return array(
+            'entities' => $paginated_entities,
+            'category' => $category
         );
     }
 

@@ -14,7 +14,7 @@ use AGB\Bundle\NewsBundle\Entity\Post;
  *
  * @ORM\Table(name="news_category")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AGB\Bundle\NewsBundle\Entity\CategoryRepository")
  */
 class Category
 {
