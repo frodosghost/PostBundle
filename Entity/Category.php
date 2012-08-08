@@ -196,7 +196,7 @@ class Category
         return $this->posts;
     }
 
-        /**
+    /**
      * @ORM\PrePersist()
      */
     public function prePersist() {
