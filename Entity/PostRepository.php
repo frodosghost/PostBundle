@@ -15,7 +15,7 @@ class PostRepository extends EntityRepository
 	/**
      * Returns Category with joined Gallery records
      *
-     * @param string @slug
+     * @param string $slug
      */
     public function findOneByDateAndSlug($date, $slug)
     {
