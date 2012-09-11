@@ -77,12 +77,15 @@ class NewsTwigExtension extends \Twig_Extension
     /**
      * Renders recent News Items in list with published date
      *
-     * @param  \Doctrine\Common\Collections\ArrayCollection|array $recent_news
-     * @param  array                                              $options
+     * @param  integer $item_count
+     * @param  array   $options
      * @return string
      */
-    public function renderRecent($recent_news, array $options = array())
+    public function renderRecent($item_count, array $options = array())
     {
+        $recent_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
+            ->getLatestNews($item_count);
+
         $html = $this->getTemplate()->renderBlock('recent_list', array(
             'recent_news' => $recent_news,
             'options'     => $options
