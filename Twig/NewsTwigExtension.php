@@ -60,12 +60,15 @@ class NewsTwigExtension extends \Twig_Extension
     /**
      * Renders Latest News Items displaying excerpt below heading
      *
-     * @param  \Doctrine\Common\Collections\ArrayCollection|array $latest_news
-     * @param  array                               				  $options
+     * @param  integer $item_count
+     * @param  array   $options
      * @return string
      */
-    public function renderLatest($latest_news, array $options = array())
+    public function renderLatest($item_count, array $options = array())
     {
+        $latest_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
+            ->getLatestNews($item_count);
+
     	$html = $this->getTemplate()->renderBlock('latest_news', array(
         	'latest_news' => $latest_news,
         	'options'     => $options
