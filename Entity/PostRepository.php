@@ -50,7 +50,8 @@ class PostRepository extends EntityRepository
                 SELECT post, category, image FROM AGBNewsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                WHERE post.published_date < :date'
+                WHERE post.published_date < :date
+                ORDER BY post.published_date DESC'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
 
         return $query;
