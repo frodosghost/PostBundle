@@ -22,12 +22,13 @@ class PostType extends AbstractType
                 'attr'  => array(
                     'class' => 'tinymce',
                     'data-theme' => 'body'
-                ), 'required' => false,
+                ), 'required' => true,
                 'label' => 'Body'
             ))
             ->add('image', new ImageType(), array(
                 'data_class' => 'AGB\Bundle\NewsBundle\Entity\Image',
-                'widget_control_group_attr' => array('class' => 'entity-left')
+                'widget_control_group' => false,
+                'widget_controls' => false
             ))
             ->add('category', 'entity', array(
                 'multiple' => false,
