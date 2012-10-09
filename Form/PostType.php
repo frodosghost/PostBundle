@@ -15,7 +15,7 @@ class PostType extends AbstractType
                 'label' => 'Title'
             ))
             ->add('excerpt', 'textarea', array(
-                'required' => false,
+                'required' => true,
                 'label' => 'Excerpt'
             ))
             ->add('body', 'textarea', array(
