@@ -1,13 +1,13 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Controller;
+namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AGB\Bundle\NewsBundle\Entity\Category;
-use AGB\Bundle\NewsBundle\Form\CategoryType;
+use Manhattan\Bundle\PostsBundle\Entity\Category;
+use Manhattan\Bundle\PostsBundle\Form\CategoryType;
 
 /**
  * Category controller.
@@ -26,7 +26,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AGBNewsBundle:Category')->findAll();
+        $entities = $em->getRepository('ManhattanPostsBundle:Category')->findAll();
 
         return array(
             'entities' => $entities,
@@ -43,7 +43,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Category')->find($id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Category')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
@@ -79,7 +79,7 @@ class CategoryController extends Controller
      *
      * @Route("/create", name="console_news_category_create")
      * @Method("post")
-     * @Template("AGBNewsBundle:Category:new.html.twig")
+     * @Template("ManhattanPostsBundle:Category:new.html.twig")
      */
     public function createAction()
     {
@@ -112,7 +112,7 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Category')->find($id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Category')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
@@ -133,13 +133,13 @@ class CategoryController extends Controller
      *
      * @Route("/{id}/update", name="console_news_category_update")
      * @Method("post")
-     * @Template("AGBNewsBundle:Category:edit.html.twig")
+     * @Template("ManhattanPostsBundle:Category:edit.html.twig")
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Category')->find($id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Category')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Category entity.');
@@ -181,7 +181,7 @@ class CategoryController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AGBNewsBundle:Category')->find($id);
+            $entity = $em->getRepository('ManhattanPostsBundle:Category')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Category entity.');

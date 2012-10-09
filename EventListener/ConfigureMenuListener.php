@@ -1,15 +1,15 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\EventListener;
+namespace Manhattan\Bundle\PostsBundle\EventListener;
 
-use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
+use Manhattan\Bundle\PostsBundle\Event\ConfigureMenuEvent;
 
 class ConfigureMenuListener
 {
     private $title;
 
     /**
-     * @param AGB\Bundle\ConsoleBundle\Event\ConfigureMenuEvent $event
+     * @param Manhattan\Bundle\PostsBundle\Event\ConfigureMenuEvent $event
      */
     public function onMenuConfigure(ConfigureMenuEvent $event)
     {

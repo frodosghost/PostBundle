@@ -1,13 +1,13 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Tests\DataFixtures\ORM;
+namespace Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM;
  
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use AGB\Bundle\NewsBundle\Entity\Category;
-use AGB\Bundle\NewsBundle\Entity\Post;
-use AGB\Bundle\NewsBundle\Entity\Image;
+use Manhattan\Bundle\PostsBundle\Entity\Category;
+use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Image;
  
 class FixtureLoader implements FixtureInterface
 {

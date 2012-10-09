@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Form;
+namespace Manhattan\Bundle\PostsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,14 +26,14 @@ class PostType extends AbstractType
                 'label' => 'Body'
             ))
             ->add('image', new ImageType(), array(
-                'data_class' => 'AGB\Bundle\NewsBundle\Entity\Image',
+                'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Image',
                 'widget_control_group' => false,
                 'widget_controls' => false
             ))
             ->add('category', 'entity', array(
                 'multiple' => false,
                 'expanded' => true,
-                'class'    => 'AGB\Bundle\NewsBundle\Entity\Category'
+                'class'    => 'Manhattan\Bundle\PostsBundle\Entity\Category'
             ))
         ;
     }
@@ -41,7 +41,7 @@ class PostType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AGB\Bundle\NewsBundle\Entity\Post'
+            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Post'
         ));
     }
 

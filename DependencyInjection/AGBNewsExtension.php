@@ -1,20 +1,20 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\DependencyInjection;
+namespace Manhattan\Bundle\PostsBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 
-use AGB\Bundle\NewsBundle\Configuration\RSS;
+use Manhattan\Bundle\PostsBundle\Configuration\RSS;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class AGBNewsExtension extends Extension
+class ManhattanPostsExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -27,7 +27,7 @@ class AGBNewsExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $container->setParameter('agb_news.rss', $config['rss']);
-        $container->setParameter('agb_news.config', $config['configuration']);
+        $container->setParameter('manhattan_posts.rss', $config['rss']);
+        $container->setParameter('manhattan_posts.config', $config['configuration']);
     }
 }

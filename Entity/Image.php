@@ -1,16 +1,16 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use AGB\Bundle\ContentBundle\Entity\Asset;
-use AGB\Bundle\NewsBundle\Entity\Post;
+use Manhattan\Bundle\ContentBundle\Entity\Asset;
+use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
- * AGB\Bundle\NewsBundle\Entity\Image
+ * Manhattan\Bundle\PostsBundle\Entity\Image
  *
  * @ORM\Table(name="news_image")
  * @ORM\Entity

@@ -1,21 +1,21 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use AGB\Bundle\NewsBundle\Entity\Image;
-use AGB\Bundle\NewsBundle\Entity\Category;
+use Manhattan\Bundle\PostsBundle\Entity\Image;
+use Manhattan\Bundle\PostsBundle\Entity\Category;
 
 /**
- * AGB\Bundle\NewsBundle\Entity\Post
+ * Manhattan\Bundle\PostsBundle\Entity\Post
  *
  * @ORM\Table(name="news_post")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="AGB\Bundle\NewsBundle\Entity\PostRepository")
+ * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\PostRepository")
  */
 class Post
 {
@@ -283,7 +283,7 @@ class Post
     /**
      * Set image
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Image $image
+     * @param Manhattan\Bundle\PostsBundle\Entity\Image $image
      * @return Post
      */
     public function setImage(Image $image = null)
@@ -299,7 +299,7 @@ class Post
     /**
      * Get image
      *
-     * @return AGB\Bundle\NewsBundle\Entity\Image 
+     * @return Manhattan\Bundle\PostsBundle\Entity\Image 
      */
     public function getImage()
     {
@@ -309,7 +309,7 @@ class Post
     /**
      * Add category
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Category $category
+     * @param Manhattan\Bundle\PostsBundle\Entity\Category $category
      * @return Post
      */
     public function setCategory(Category $category = null)

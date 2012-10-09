@@ -1,7 +1,7 @@
-AGBNews:
-    resource: "@AGBNewsBundle/Controller/PostController.php"
+ManhattanPosts:
+    resource: "@ManhattanPostsBundle/Controller/PostController.php"
     type:     annotation
 
-AGBNewsCategory:
-    resource: "@AGBNewsBundle/Controller/CategoryController.php"
+ManhattanPostsCategory:
+    resource: "@ManhattanPostsBundle/Controller/CategoryController.php"
     type:     annotation

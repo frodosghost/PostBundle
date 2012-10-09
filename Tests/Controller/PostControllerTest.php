@@ -1,6 +1,6 @@
 <?php
 /*
-namespace AGB\Bundle\NewsBundle\Tests\Controller;
+namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 //use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

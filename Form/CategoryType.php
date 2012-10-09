@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Form;
+namespace Manhattan\Bundle\PostsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,7 +20,7 @@ class CategoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AGB\Bundle\NewsBundle\Entity\Category'
+            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Category'
         ));
     }
 

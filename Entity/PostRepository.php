@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -21,7 +21,7 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM AGBNewsBundle:Post post
+                SELECT post, category, image FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
                 WHERE post.published_date BETWEEN :date_start AND :date_end
@@ -47,7 +47,7 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM AGBNewsBundle:Post post
+                SELECT post, category, image FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
                 WHERE post.published_date < :date
@@ -65,7 +65,7 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM AGBNewsBundle:Post post
+                SELECT post, category, image FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
                 WHERE post.published_date < :date
@@ -85,7 +85,7 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post FROM AGBNewsBundle:Post post
+                SELECT post FROM ManhattanPostsBundle:Post post
                 WHERE post.published_date < :date
                 ORDER BY post.published_date DESC')
             ->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)

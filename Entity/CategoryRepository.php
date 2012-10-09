@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -19,7 +19,7 @@ class CategoryRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT category, post FROM AGBNewsBundle:Category category
+                SELECT category, post FROM ManhattanPostsBundle:Category category
                 JOIN category.posts post'
             );
 

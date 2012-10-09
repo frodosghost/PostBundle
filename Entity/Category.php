@@ -1,20 +1,20 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use AGB\Bundle\NewsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
- * AGB\Bundle\NewsBundle\Entity\Category
+ * Manhattan\Bundle\PostsBundle\Entity\Category
  *
  * @ORM\Table(name="news_category")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="AGB\Bundle\NewsBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\CategoryRepository")
  */
 class Category
 {
@@ -177,7 +177,7 @@ class Category
     /**
      * Add post
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Post $post
+     * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
      * @return Category
      */
     public function addPost(Post $post)

@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Tests\Controller;
+namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
@@ -33,7 +33,7 @@ class PublicControllerTest extends WebTestCase
 
         // Add data with Fixtures to include post listings
         $classes = array(
-            'AGB\Bundle\NewsBundle\Tests\DataFixtures\ORM\FixtureLoader'
+            'Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM\FixtureLoader'
         );
         $this->loadFixtures($classes);
 

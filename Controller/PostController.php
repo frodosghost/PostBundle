@@ -1,13 +1,13 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Controller;
+namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AGB\Bundle\NewsBundle\Entity\Post;
-use AGB\Bundle\NewsBundle\Form\PostType;
+use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Form\PostType;
 
 /**
  * Post controller.
@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('AGBNewsBundle:Post')->findAll();
+        $entities = $em->getRepository('ManhattanPostsBundle:Post')->findAll();
 
         return array(
             'entities' => $entities,
@@ -43,7 +43,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Post')->find($id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
@@ -79,7 +79,7 @@ class PostController extends Controller
      *
      * @Route("/create", name="console_news_create")
      * @Method("post")
-     * @Template("AGBNewsBundle:Post:new.html.twig")
+     * @Template("ManhattanPostsBundle:Post:new.html.twig")
      */
     public function createAction()
     {
@@ -112,7 +112,7 @@ class PostController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Post')->find($id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
@@ -133,13 +133,13 @@ class PostController extends Controller
      *
      * @Route("/{id}/update", name="console_news_update")
      * @Method("post")
-     * @Template("AGBNewsBundle:Post:edit.html.twig")
+     * @Template("ManhattanPostsBundle:Post:edit.html.twig")
      */
     public function updateAction($id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Post')->find($id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
@@ -181,7 +181,7 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AGBNewsBundle:Post')->find($id);
+            $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Post entity.');

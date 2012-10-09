@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Controller;
+namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,7 +26,7 @@ class PublicController extends Controller
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
 
-        $query = $em->getRepository('AGBNewsBundle:Post')->getQueryJoinImageAndCategory();
+        $query = $em->getRepository('ManhattanPostsBundle:Post')->getQueryJoinImageAndCategory();
 
         $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
         compact($paginated_entities);
@@ -46,10 +46,10 @@ class PublicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $latest_news = $em->getRepository('AGBNewsBundle:Post')->getLatestNews(20);
+        $latest_news = $em->getRepository('ManhattanPostsBundle:Post')->getLatestNews(20);
 
-        $content = $this->renderView('AGBNewsBundle:RSS:rss2.xml.twig', array(
-            'information' => $this->container->getParameter('agb_news.rss'),
+        $content = $this->renderView('ManhattanPostsBundle:RSS:rss2.xml.twig', array(
+            'information' => $this->container->getParameter('manhattan_posts.rss'),
             'latest_news' => $latest_news
         ));
 
@@ -63,14 +63,14 @@ class PublicController extends Controller
      * Lists all Post entities that belong to a category
      *
      * @Route("/news/{category}", name="news_category")
-     * @Template("AGBNewsBundle:Public:index.html.twig")
+     * @Template("ManhattanPostsBundle:Public:index.html.twig")
      */
     public function categoryAction($category)
     {
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
 
-        $query = $em->getRepository('AGBNewsBundle:Post')->getQueryJoinCategory($category);
+        $query = $em->getRepository('ManhattanPostsBundle:Post')->getQueryJoinCategory($category);
 
         $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
         compact($paginated_entities);
@@ -91,7 +91,7 @@ class PublicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AGBNewsBundle:Post')->findOneByDateAndSlug($date, $slug);
+        $entity = $em->getRepository('ManhattanPostsBundle:Post')->findOneByDateAndSlug($date, $slug);
 
         if (!$entity) {
             $log = $this->get('logger');
@@ -99,7 +99,7 @@ class PublicController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $latest_news = $em->getRepository('AGBNewsBundle:Post')->getLatestNews(5);
+        $latest_news = $em->getRepository('ManhattanPostsBundle:Post')->getLatestNews(5);
 
         return array(
             'entity'      => $entity,

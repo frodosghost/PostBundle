@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\DependencyInjection;
+namespace Manhattan\Bundle\PostsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,7 +18,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('agb_news');
+        $rootNode = $treeBuilder->root('manhattan_posts');
 
         $rootNode
             ->children()

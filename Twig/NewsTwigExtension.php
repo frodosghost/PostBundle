@@ -1,10 +1,10 @@
 <?php
 
 /*
- * This file is part of the AGB Web Bundle.
+ * This file is part of the Manhattan Web Bundle.
  */
 
-namespace AGB\Bundle\NewsBundle\Twig;
+namespace Manhattan\Bundle\PostsBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -66,7 +66,7 @@ class NewsTwigExtension extends \Twig_Extension
      */
     public function renderLatest($item_count, array $options = array())
     {
-        $latest_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
+        $latest_news = $this->getDoctrine()->getRepository('ManhattanPostsBundle:Post')
             ->getLatestNews($item_count);
 
     	$html = $this->getTemplate()->renderBlock('latest_news', array(
@@ -86,7 +86,7 @@ class NewsTwigExtension extends \Twig_Extension
      */
     public function renderRecent($item_count, array $options = array())
     {
-        $recent_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
+        $recent_news = $this->getDoctrine()->getRepository('ManhattanPostsBundle:Post')
             ->getLatestNews($item_count);
 
         $html = $this->getTemplate()->renderBlock('recent_list', array(
@@ -105,7 +105,7 @@ class NewsTwigExtension extends \Twig_Extension
      */
     public function renderCategories(array $options = array())
     {
-        $categories = $this->getDoctrine()->getRepository('AGBNewsBundle:Category')
+        $categories = $this->getDoctrine()->getRepository('ManhattanPostsBundle:Category')
             ->getCategoriesJoinPost();
 
         $html = $this->getTemplate()->renderBlock('categories', array(
@@ -129,6 +129,6 @@ class NewsTwigExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'agb_news_twig';
+        return 'manhattan_posts_twig';
     }
 }
