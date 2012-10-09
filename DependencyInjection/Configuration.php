@@ -66,6 +66,17 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('Copyright')
                             //  ->setInfo('Sets Copyright information for the RSS Feed')
                             ->end()
+                    ->end()
+                ->end()
+            
+                ->arrayNode('configuration')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('name')
+                            ->defaultValue('News')
+                            //->setInfo('Sets the Title for the RSS Feed')
+                            ->end()
+                    ->end()
             ->end();
 
         return $treeBuilder;
