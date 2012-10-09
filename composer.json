@@ -1,8 +1,8 @@
 {
-    "name": "agb/news-bundle",
+    "name": "manhattan/posts-bundle",
     "type": "symfony-bundle",
-    "description": "Bundle used to manage and display News Items as they are used within the AGB Group's web sites. Bundle is used within Symfony2.",
-    "keywords": ["news", "blog", "agb", "client"],
+    "description": "Bundle used to manage and display Posts. Bundle is used within Symfony2.",
+    "keywords": ["news", "blog", "article", "posts"],
     "license": "MIT",
     "authors": [
         {
@@ -17,9 +17,9 @@
         }
     ],
     "autoload": {
-        "psr-0": { "AGB\\Bundle\\NewsBundle": "" }
+        "psr-0": { "Manhattan\\Bundle\\PostsBundle": "" }
     },
-    "target-dir": "AGB/Bundle/NewsBundle",
+    "target-dir": "Manhattan/Bundle/PostsBundle",
     "require": {
         "php": ">=5.3.2",
         "symfony/framework-bundle": "2.*"
