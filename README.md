@@ -8,21 +8,19 @@ If you are using Symfony 2.1 you can install by adding the dependencies into the
         ...
         "manhattan/posts-bundle": "dev-master"        
     },
-    "repositories": [
-       {
-           "type": "package",
-           "package": {
-               "version": "dev-master",
-               "name": "manhattan/posts-bundle",
-               "source": {
-                   "url": "git@bitbucket.org:frodosghost/postsbundle.git",
-                   "type": "git",
-                   "reference": "master"
-               },
-               "dist": {
-                   "url": "https://bitbucket.org/frodosghost/postsbundle/get/master.zip",
-                   "type": "zip"
-               }
-           }
-       }
-    ]
+    [{
+        "type": "package",
+        "package": {
+            "version": "dev-master",
+            "name": "manhattan/posts-bundle",
+            "source": {
+                "url": "git@bitbucket.org:frodosghost/postsbundle.git",
+                "type": "git",
+                "reference": "master"
+            },
+            "autoload": {
+                "psr-0": { "Manhattan\\Bundle\\PostsBundle": "" }
+            },
+            "target-dir": "Manhattan/Bundle/PostsBundle"
+        }
+    }]
