@@ -15,17 +15,17 @@ class PublicControllerTest extends WebTestCase
 
         $this->loadFixtures(array());
 
-        $crawler = $client->request('GET', '/news');
+        $crawler = $client->request('GET', '/articles');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
-            'Visiting the News Index page returns a status code of 200.');
+            'Visiting the Articles Index page returns a status code of 200.');
 
-        $this->assertGreaterThan(0, $crawler->filter('html:contains("There are no news posts")')->count(),
-            'Visiting the News Index page with no results displays a small string with no results.');
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("There are no posts")')->count(),
+            'Visiting the Articles Index page with no results displays a small string with no results.');
     }
 
     /**
-     * Populates News Index pageto show test data for list page
+     * Populates Articles Index pageto show test data for list page
      */
     public function testPopulatedIndex()
     {
@@ -37,15 +37,15 @@ class PublicControllerTest extends WebTestCase
         );
         $this->loadFixtures($classes);
 
-        $crawler = $client->request('GET', '/news');
+        $crawler = $client->request('GET', '/articles');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
-            'Visiting the News Index page returns a status code of 200.');
+            'Visiting the Articles Index page returns a status code of 200.');
 
-        $this->assertGreaterThan(0, $crawler->filter('h1:contains("News")')->count(),
-            'Visiting the News Index page displays the Header of News');
+        $this->assertGreaterThan(0, $crawler->filter('h1:contains("Articles")')->count(),
+            'Visiting the Articles Index page displays the Header of Articles');
 
-        /* Click Link of News Item
+        /* Click Link of Articles Item
         $link = $crawler->selectLink('Post Title 2')->link();
         $crawler = $client->click($link);
 
@@ -59,17 +59,17 @@ class PublicControllerTest extends WebTestCase
     public function testRss()
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', '/news/rss.xml');
+        $crawler = $client->request('GET', '/articles/rss.xml');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
-            'Visiting the News RSS page returns a status code of 200.');
+            'Visiting the Articles RSS page returns a status code of 200.');
 
         $this->assertGreaterThan(0, $crawler->filter('rss')->count(),
             'The RSS page generates xml with an rss element.');
 
         // Count the item tags from the fixtures data
         $this->assertEquals(10, $crawler->filter('item')->count(),
-            'Displays the 10 items in the news data.');
+            'Displays the 10 items in the Articles data.');
     }
 
 }

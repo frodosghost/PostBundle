@@ -77,11 +77,11 @@ class PostRepository extends EntityRepository
     }
 
     /**
-     * Returns Latest News items
+     * Returns Latest Post items
      *
-     * @param integer $limit Limit of news items required to be returned
+     * @param integer $limit Limit of post items required to be returned
      */
-    public function getLatestNews($limit)
+    public function getLatestPosts($limit)
     {
         $query = $this->getEntityManager()
             ->createQuery('

@@ -1,8 +1,4 @@
-{% extends "ManhattanConsoleBundle::layout.html.twig" %}
-
-{% block content %}
-
-<h1>News</h1>
+<h1>Articles</h1>
 <table class="records_list table table-striped">
     <thead>
         <tr>
@@ -14,18 +10,16 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('news_view', { 'date': entity.date, 'slug': entity.slug }) }}">{{ entity.title }}</a></td>
+            <td><a href="{{ path('posts_view', { 'date': entity.date, 'slug': entity.slug }) }}">{{ entity.title }}</a></td>
             <td>{{ entity.slug }}</td>
             <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d H:i:s') }}{% endif %}</td>
         </tr>
     {% else %}
         <tr>
-            <td>There are no news posts</td>
+            <td>There are no posts</td>
             <td></td>
             <td></td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-
-{% endblock %}

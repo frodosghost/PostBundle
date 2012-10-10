@@ -18,7 +18,7 @@ class PublicController extends Controller
     /**
      * Lists all Post entities.
      *
-     * @Route("/news", name="news")
+     * @Route("/articles", name="posts")
      * @Template()
      */
     public function indexAction()
@@ -40,17 +40,17 @@ class PublicController extends Controller
     /**
      * Displays RSS2.0 for News Feed
      *
-     * @Route("/news/rss.xml", name="news_rss2")
+     * @Route("/articles/rss.xml", name="posts_rss2")
      */
     public function rssAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $latest_news = $em->getRepository('ManhattanPostsBundle:Post')->getLatestNews(20);
+        $latest_posts = $em->getRepository('ManhattanPostsBundle:Post')->getLatestPosts(20);
 
         $content = $this->renderView('ManhattanPostsBundle:RSS:rss2.xml.twig', array(
-            'information' => $this->container->getParameter('manhattan_posts.rss'),
-            'latest_news' => $latest_news
+            'information'  => $this->container->getParameter('manhattan_posts.rss'),
+            'latest_posts' => $latest_posts
         ));
 
         $response = new Response($content);
@@ -62,7 +62,7 @@ class PublicController extends Controller
     /**
      * Lists all Post entities that belong to a category
      *
-     * @Route("/news/{category}", name="news_category")
+     * @Route("/articles/{category}", name="posts_category")
      * @Template("ManhattanPostsBundle:Public:index.html.twig")
      */
     public function categoryAction($category)
@@ -84,7 +84,7 @@ class PublicController extends Controller
     /**
      * Finds and displays a Post entity.
      *
-     * @Route("/news/{date}/{slug}", name="news_view")
+     * @Route("/articles/{date}/{slug}", name="posts_view")
      * @Template()
      */
     public function viewAction($date, $slug)
