@@ -2,7 +2,7 @@
 
 namespace Manhattan\Bundle\PostsBundle\EventListener;
 
-use Manhattan\Bundle\PostsBundle\Event\ConfigureMenuEvent;
+use Manhattan\Bundle\ConsoleBundle\Event\ConfigureMenuEvent;
 
 class ConfigureMenuListener
 {
