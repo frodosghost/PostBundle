@@ -25,6 +25,9 @@ class PostType extends AbstractType
                 ), 'required' => true,
                 'label' => 'Body'
             ))
+            ->add('publish_state', 'choice', array(
+                'choices' => $options['data']->getStaticArray()
+            ))
             ->add('image', new ImageType(), array(
                 'data_class' => 'AGB\Bundle\NewsBundle\Entity\Image',
                 'widget_control_group' => false,
