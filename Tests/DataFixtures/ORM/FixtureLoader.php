@@ -28,7 +28,8 @@ class FixtureLoader implements FixtureInterface
                 'Cras placerat convallis ante, sit amet placerat dui pellentesque at. Nulla elit dui, fermentum ac sodales vitae, consequat non nibh. Vestibulum cursus placerat lorem ac vulputate. Ut aliquet diam ut lectus dictum ullamcorper. Sed eget lacus ante. Vestibulum a ligula at leo pharetra adipiscing. In sapien leo, blandit vitae vehicula a, blandit et massa. Sed in nulla metus, vitae egestas quam. Nullam viverra vehicula interdum. Nullam porttitor nisl at diam laoreet id porta eros faucibus.' .
                 'Praesent nec mauris sapien, id ullamcorper arcu. Aenean a magna ligula, vitae adipiscing dui. Sed sollicitudin porttitor convallis. Morbi imperdiet leo et lectus consequat tempus. Fusce mollis, sapien a tempus rhoncus, arcu augue laoreet libero, a varius neque neque vel risus. Fusce venenatis gravida leo sit amet luctus. Mauris ac nulla sit amet nisl tempor rhoncus. Fusce imperdiet, nunc non elementum tristique, purus ante laoreet nisl, ac pharetra lorem nulla vitae orci. Curabitur ultricies nisl nec tellus semper congue. Aliquam risus massa, adipiscing eget vulputate eu, tempus non purus.'
             );
-            $post->setPublishDate(new \DateTime());
+            //$post->setPublishDate(new \DateTime());
+            $post->setPublishState(($i % 2) ? 2 : 1);
 
             $manager->persist($post);
         }
