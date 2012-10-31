@@ -52,3 +52,13 @@
 </div>
 {% endspaceless %}
 {% endblock %}
+
+{% block simple_list %}
+{% spaceless %}
+<ul class="news">
+    {% for post in recent_news %}
+    <li><a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endspaceless %}
+{% endblock %}

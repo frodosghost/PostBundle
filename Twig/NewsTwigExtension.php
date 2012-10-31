@@ -39,9 +39,10 @@ class NewsTwigExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'latest_news'   => new \Twig_Function_Method($this, 'renderLatest', array('is_safe' => array('html'))),
-            'recent_list'   => new \Twig_Function_Method($this, 'renderRecent', array('is_safe' => array('html'))),
-            'category_list' => new \Twig_Function_Method($this, 'renderCategories', array('is_safe' => array('html')))
+            'latest_news'        => new \Twig_Function_Method($this, 'renderLatest', array('is_safe' => array('html'))),
+            'recent_list'        => new \Twig_Function_Method($this, 'renderRecent', array('is_safe' => array('html'))),
+            'latest_news_simple' => new \Twig_Function_Method($this, 'simpleList', array('is_safe' => array('html'))),
+            'category_list'      => new \Twig_Function_Method($this, 'renderCategories', array('is_safe' => array('html')))
         );
     }
 
@@ -90,6 +91,25 @@ class NewsTwigExtension extends \Twig_Extension
             ->getLatestNews($item_count);
 
         $html = $this->getTemplate()->renderBlock('recent_list', array(
+            'recent_news' => $recent_news,
+            'options'     => $options
+        ));
+
+        return $html;
+    }
+
+    /**
+     * Renders a simple News List
+     * @param  integer $item_count
+     * @param  array   $options
+     * @return HTML
+     */
+    public function simpleList($item_count = 5, array $options = array())
+    {
+        $recent_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
+            ->getLatestNews($item_count);
+
+        $html = $this->getTemplate()->renderBlock('simple_list', array(
             'recent_news' => $recent_news,
             'options'     => $options
         ));
