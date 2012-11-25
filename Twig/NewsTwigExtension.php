@@ -68,7 +68,7 @@ class NewsTwigExtension extends \Twig_Extension
     public function renderLatest($item_count, array $options = array())
     {
         $latest_news = $this->getDoctrine()->getRepository('ManhattanPostsBundle:Post')
-            ->getLatestNews($item_count);
+            ->findAllLatestPosts($item_count);
 
     	$html = $this->getTemplate()->renderBlock('latest_news', array(
         	'latest_news' => $latest_news,
@@ -88,7 +88,7 @@ class NewsTwigExtension extends \Twig_Extension
     public function renderRecent($item_count, array $options = array())
     {
         $recent_news = $this->getDoctrine()->getRepository('ManhattanPostsBundle:Post')
-            ->getLatestNews($item_count);
+            ->findAllLatestPosts($item_count);
 
         $html = $this->getTemplate()->renderBlock('recent_list', array(
             'recent_news' => $recent_news,
@@ -107,7 +107,7 @@ class NewsTwigExtension extends \Twig_Extension
     public function simpleList($item_count = 5, array $options = array())
     {
         $recent_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
-            ->getLatestNews($item_count);
+            ->findAllLatestPosts($item_count);
 
         $html = $this->getTemplate()->renderBlock('simple_list', array(
             'recent_news' => $recent_news,

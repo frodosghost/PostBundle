@@ -90,7 +90,7 @@ class PostRepository extends EntityRepository
      *
      * @param integer $limit Limit of post items required to be returned
      */
-    public function getLatestPosts($limit)
+    public function findAllLatestPosts($limit)
     {
         $query = $this->getEntityManager()
             ->createQuery('

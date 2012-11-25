@@ -46,7 +46,7 @@ class PublicController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $latest_posts = $em->getRepository('ManhattanPostsBundle:Post')->getLatestPosts(20);
+        $latest_posts = $em->getRepository('ManhattanPostsBundle:Post')->findAllLatestPosts(20);
 
         $content = $this->renderView('ManhattanPostsBundle:RSS:rss2.xml.twig', array(
             'information'  => $this->container->getParameter('manhattan_posts.rss'),
@@ -99,11 +99,8 @@ class PublicController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $latest_news = $em->getRepository('ManhattanPostsBundle:Post')->getLatestNews(5);
-
         return array(
-            'entity'      => $entity,
-            'latest_news' => $latest_news
+            'entity'      => $entity
         );
     }
 
