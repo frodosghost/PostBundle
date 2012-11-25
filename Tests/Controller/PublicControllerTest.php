@@ -68,8 +68,8 @@ class PublicControllerTest extends WebTestCase
             'The RSS page generates xml with an rss element.');
 
         // Count the item tags from the fixtures data
-        $this->assertEquals(10, $crawler->filter('item')->count(),
-            'Displays the 10 items in the Articles data.');
+        $this->assertEquals(5, $crawler->filter('item')->count(),
+            'Displays the 5 Published Items in the news data.');
     }
 
 }

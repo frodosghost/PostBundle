@@ -20,6 +20,17 @@ use Manhattan\Bundle\PostsBundle\Entity\Category;
 class Post
 {
     /**
+     * Publish States
+     *
+     * @link(Bitwise Operators, http://php.net/manual/en/language.operators.bitwise.php)
+     */
+    const DRAFT = 1;
+
+    const PUBLISH = 2;
+
+    const ARCHIVE = 4;
+
+    /**
      * @var integer $id
      *
      * @ORM\Column(name="id", type="integer")
@@ -81,10 +92,17 @@ class Post
     /**
      * @var datetime $published_date
      *
-     * @ORM\Column(name="published_date", type="datetime")
+     * @ORM\Column(name="published_date", type="datetime", nullable=true)
      * @Assert\Type("\DateTime")
      */
     private $published_date;
+
+    /**
+     * var integer $publish_state
+     * 
+     * @ORM\Column(name="publish_state", type="integer")
+     */
+    private $publish_state;
 
     /**
      * @var datetime $created_at
@@ -105,6 +123,7 @@ class Post
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->publish_state = 1;
     }
     
     /**
@@ -329,17 +348,35 @@ class Post
     }
 
     /**
+     * Set publish_state
+     *
+     * @param integer $publish_state
+     */
+    public function setPublishState($publish_state)
+    {
+        $this->publish_state = $publish_state;
+
+        if ($publish_state === self::PUBLISH) {
+            $this->setPublishDate(new \DateTime());
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get publish_state
+     *
+     * @return integer 
+     */
+    public function getPublishState()
+    {
+        return $this->publish_state;
+    }
+
+    /**
      * @ORM\PrePersist()
      */
     public function prePersist() {
-        //Set Published Date if has not been set manually
-        if ($this->published_date === null) {
-            $date = new \DateTime();
-            $date->modify('+1 week');
-
-            $this->setPublishDate($date);
-        }
-
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
@@ -349,6 +386,20 @@ class Post
      */
     public function preUpdate() {
         $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Returns array of static values for configuring form select values
+     * 
+     * @return srray
+     */
+    public function getStaticArray()
+    {
+        return array(
+            self::DRAFT => 'Draft',
+            self::PUBLISH => 'Publish',
+            self::ARCHIVE => 'Archive'
+        );
     }
 
 }
