@@ -77,7 +77,8 @@ class PostRepository extends EntityRepository
                 LEFT JOIN post.image image
                 WHERE post.published_date < :date
                     AND post.publish_state = :publish_state
-                    AND category.slug = :category'
+                    AND category.slug = :category
+                ORDER BY post.published_date DESC'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
              ->setParameter('publish_state', $this->getPublishState())
              ->setParameter('category', $category);
