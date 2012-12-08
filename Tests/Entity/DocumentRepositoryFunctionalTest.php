@@ -40,7 +40,7 @@ class DocumentRepositoryFunctionalTest extends WebTestCase
         $this->assertInstanceOf('AGB\Bundle\NewsBundle\Entity\Post', $document->getPost(),
             '->getPost() returns a Post object.');
 
-        $this->assertEquals(9, $document->getPost()->getId(),
+        $this->assertEquals(10, $document->getPost()->getId(),
             '->getPost() returns the correct Post object.');
     }
 }

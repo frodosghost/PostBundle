@@ -111,6 +111,30 @@ class PostRepository extends EntityRepository
     }
 
     /**
+     * Returns Content with joined Documents
+     * 
+     * @param  int     $id
+     * @return Content
+     */
+    public function findOneByIdJoinDocuments($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post, document FROM AGBNewsBundle:Post post
+                LEFT JOIN post.documents document
+                WHERE post.id = :id'
+            )->setParameters(array(
+                'id' => $id
+        ));
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
      * Sets Publish State to be returned from query
      * 
      * @param  int     $publish_state
