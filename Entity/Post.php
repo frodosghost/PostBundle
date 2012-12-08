@@ -90,6 +90,13 @@ class Post
     private $category;
 
     /**
+     * @ORM\OneToMany(
+     *     targetEntity="AGB\Bundle\NewsBundle\Entity\Document", mappedBy="post", cascade={"persist", "remove"}
+     * )
+     */
+    private $documents;
+
+    /**
      * @var datetime $published_date
      *
      * @ORM\Column(name="published_date", type="datetime", nullable=true)
@@ -123,6 +130,7 @@ class Post
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->documents = new ArrayCollection();
         $this->publish_state = 1;
     }
     
@@ -222,6 +230,29 @@ class Post
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Add Document
+     *
+     * @param AGB\Bundle\NewsBundle\Entity\Document $document
+     */
+    public function addDocument(Document $document)
+    {
+        $document->addPost($this);
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Get Documents
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 
     /**
