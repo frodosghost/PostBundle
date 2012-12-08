@@ -44,13 +44,19 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
         // check if the object is "new"
         if (!$data->getId()) {
             $form->add($this->factory->createNamed('file',
-                'file', array(
+                'file', $data->getFile(), array(
                     'required' => true,
-                    'data_class' => null
+                    'data_class' => 'AGB\Bundle\NewsBundle\Entity\Document'
             )));
         }
     }
+/*
 
+echo '<pre>';
+        print_r(get_class($data));
+        echo '</pre>';
+        exit;
+ */
     /**
      * Determines if the file has been provided, and displays error if not provided.
      * 

@@ -77,7 +77,7 @@ class DocumentController extends Controller
             $em->persist($document);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('console_project_documents', array('id' => $post->getId())));
+            return $this->redirect($this->generateUrl('console_news_documents', array('id' => $post->getId())));
         }
 
         return array(
@@ -141,7 +141,7 @@ class DocumentController extends Controller
             $em->persist($document);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('console_document_edit', array('id' => $id, 'document_id' => $document_id)));
+            return $this->redirect($this->generateUrl('console_news_document_edit', array('id' => $id, 'document_id' => $document_id)));
         }
 
         return array(
@@ -168,7 +168,7 @@ class DocumentController extends Controller
         $em->remove($entity);
         $em->flush();
 
-        return $this->redirect($this->generateUrl('console_project_documents', array('id' => $id)));
+        return $this->redirect($this->generateUrl('console_news_documents', array('id' => $id)));
     }
 
 }

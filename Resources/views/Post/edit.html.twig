@@ -8,6 +8,17 @@
         <h2>{{ entity.title }}</h2>
     {{ form_widget(edit_form) }}
 
+    <div class="control-group">
+        <label class="control-label" for="content_documents">Documents</label>
+        <div class="controls">
+            <ul class="documents">
+            {% for document in entity.documents %}
+                <li class="{{ document.extension }}"><i class="icon-file"></i> {{ document.title }} - <small><a href="{{ asset(document.webPath) }}" target="_document">view</a></small></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
     <div class="form-actions">
         <a href="{{ path('console_news') }}" class="btn">Back to the list</a>
         <button type="submit" class="btn btn-primary">Edit</button>
