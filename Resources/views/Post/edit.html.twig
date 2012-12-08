@@ -4,6 +4,8 @@
 
 <form action="{{ path('console_news_update', { 'id': entity.id }) }}" class ="form-horizontal well" method="post" {{ form_enctype(edit_form) }} novalidate>
     <div class="manage">
+        <a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn manage">Manage Documents</a>
+        <h2>{{ entity.title }}</h2>
     {{ form_widget(edit_form) }}
 
     <div class="form-actions">
