@@ -12,6 +12,7 @@ class ImageType extends AbstractType
     {
         $builder
             ->add('file', 'preview_file', array(
+                'data_class' => null, // http://j.mp/ULMa2k
                 'required' => true,
                 'label' => 'Image',
                 "attr" => array(
