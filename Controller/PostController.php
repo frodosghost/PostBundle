@@ -30,6 +30,7 @@ class PostController extends Controller
 
         return array(
             'entities' => $entities,
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 
@@ -54,6 +55,7 @@ class PostController extends Controller
         return array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 
@@ -125,6 +127,7 @@ class PostController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 
@@ -163,6 +166,7 @@ class PostController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 

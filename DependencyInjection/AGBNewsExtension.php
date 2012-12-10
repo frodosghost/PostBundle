@@ -29,5 +29,6 @@ class AGBNewsExtension extends Extension
 
         $container->setParameter('agb_news.rss', $config['rss']);
         $container->setParameter('agb_news.config', $config['configuration']);
+        $container->setParameter('agb_news.include_documents', $config['configuration']['include_documents']);
     }
 }

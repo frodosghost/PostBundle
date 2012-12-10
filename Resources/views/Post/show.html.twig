@@ -28,11 +28,14 @@
 
     <div class="form-actions">
         <a href="{{ path('console_news') }}" class="btn">Back to the list</a>
+        {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn btn-warning">Manage Documents</a>{% endif %}
         <a href="{{ path('console_news_edit', { 'id': entity.id }) }}" class="btn btn-primary">Edit</a>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
         <form action="{{ path('console_news_delete', { 'id': entity.id }) }}" class="actions-delete" method="post">
             {{ form_row(delete_form.id) }}
             {{ form_rest(delete_form) }}
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
+        {% endif %}
     </div>
 {% endblock %}

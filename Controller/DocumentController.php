@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use AGB\Bundle\NewsBundle\Entity\Post;
 use AGB\Bundle\NewsBundle\Entity\Document;
@@ -29,6 +30,10 @@ class DocumentController extends Controller
      */
     public function documentsAction($id)
     {
+        if (!$this->container->getParameter('agb_news.include_documents')) {
+            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $post = $em->getRepository('AGBNewsBundle:Post')
@@ -58,6 +63,10 @@ class DocumentController extends Controller
      */
     public function createAction($id)
     {
+        if (!$this->container->getParameter('agb_news.include_documents')) {
+            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $post = $em->getRepository('AGBNewsBundle:Post')->findOneById($id);
@@ -95,6 +104,10 @@ class DocumentController extends Controller
      */
     public function editAction($id, $document_id)
     {
+        if (!$this->container->getParameter('agb_news.include_documents')) {
+            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $document = $em->getRepository('AGBNewsBundle:Document')
@@ -122,6 +135,10 @@ class DocumentController extends Controller
      */
     public function updateAction($id, $document_id)
     {
+        if (!$this->container->getParameter('agb_news.include_documents')) {
+            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
 
         $document = $em->getRepository('AGBNewsBundle:Document')
@@ -158,6 +175,10 @@ class DocumentController extends Controller
      */
     public function deleteAction($id, $document_id)
     {
+        if (!$this->container->getParameter('agb_news.include_documents')) {
+            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+        }
+
         $em = $this->getDoctrine()->getEntityManager();
         $entity = $em->getRepository('AGBNewsBundle:Document')->find($document_id);
 

@@ -4,7 +4,7 @@
 
 <form action="{{ path('console_news_update', { 'id': entity.id }) }}" class ="form-horizontal well" method="post" {{ form_enctype(edit_form) }} novalidate>
     <div class="manage">
-        <a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn manage">Manage Documents</a>
+        {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn manage btn-warning">Manage Documents</a>{% endif %}
         <h2>{{ entity.title }}</h2>
     {{ form_widget(edit_form) }}
 
@@ -23,11 +23,13 @@
         <a href="{{ path('console_news') }}" class="btn">Back to the list</a>
         <button type="submit" class="btn btn-primary">Edit</button>
 </form>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
         <form action="{{ path('console_news_delete', { 'id': entity.id }) }}" class="actions-delete" method="post">
             {{ form_row(delete_form.id) }}
             {{ form_rest(delete_form) }}
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
+        {% endif %}
     </div>
     </div>
 
