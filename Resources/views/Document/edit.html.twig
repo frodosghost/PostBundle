@@ -11,7 +11,7 @@
         <a href="{{ path('console_news_documents', { 'id': entity.post.id }) }}" class="btn">Back to Documents</a>
         <button type="submit" class="btn btn-primary">Edit</button>
 </form>
-        <a href="{{ path('console_news_document_delete', { 'id': entity.post.id, 'document_id': entity.id }) }}" class="btn btn-danger">Remove</a>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}<a href="{{ path('console_news_document_delete', { 'id': entity.post.id, 'document_id': entity.id }) }}" class="btn btn-danger">Remove</a>{% endif %}
     </div>
     </div>
 
