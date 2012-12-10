@@ -46,7 +46,7 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
             $form->add($this->factory->createNamed('file',
                 'file', $data->getFile(), array(
                     'required' => true,
-                    'data_class' => 'AGB\Bundle\NewsBundle\Entity\Document'
+                    'data_class' => null
             )));
         }
     }
