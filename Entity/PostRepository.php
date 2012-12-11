@@ -24,9 +24,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM AGBNewsBundle:Post post
+                SELECT post, category, image, document FROM AGBNewsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
+                LEFT JOIN post.documents document
                 WHERE post.published_date BETWEEN :date_start AND :date_end
                     AND post.slug = :slug
                     AND post.publish_state = :publish_state'

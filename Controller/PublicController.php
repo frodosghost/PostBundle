@@ -33,7 +33,8 @@ class PublicController extends Controller
 
         return array(
             'entities' => $paginated_entities,
-            'category' => null
+            'category' => null,
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 
@@ -77,7 +78,8 @@ class PublicController extends Controller
 
         return array(
             'entities' => $paginated_entities,
-            'category' => $category
+            'category' => $category,
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 
@@ -103,7 +105,8 @@ class PublicController extends Controller
 
         return array(
             'entity'      => $entity,
-            'latest_news' => $latest_news
+            'latest_news' => $latest_news,
+            'include_documents' => $this->container->getParameter('agb_news.include_documents')
         );
     }
 
