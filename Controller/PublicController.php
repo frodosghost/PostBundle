@@ -18,7 +18,7 @@ class PublicController extends Controller
     /**
      * Lists all Post entities.
      *
-     * @Route("/articles", name="posts")
+     * @Route("", name="posts")
      * @Template()
      */
     public function indexAction()
@@ -40,7 +40,7 @@ class PublicController extends Controller
     /**
      * Displays RSS2.0 for News Feed
      *
-     * @Route("/articles/rss.xml", name="posts_rss2")
+     * @Route("/rss.xml", name="posts_rss2")
      */
     public function rssAction()
     {
@@ -62,7 +62,7 @@ class PublicController extends Controller
     /**
      * Lists all Post entities that belong to a category
      *
-     * @Route("/articles/{category}", name="posts_category")
+     * @Route("/{category}", name="posts_category")
      * @Template("ManhattanPostsBundle:Public:index.html.twig")
      */
     public function categoryAction($category)
@@ -84,7 +84,7 @@ class PublicController extends Controller
     /**
      * Finds and displays a Post entity.
      *
-     * @Route("/articles/{date}/{slug}", name="posts_view")
+     * @Route("/{date}/{slug}", name="posts_view")
      * @Template()
      */
     public function viewAction($date, $slug)
