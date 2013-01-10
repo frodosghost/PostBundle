@@ -19,17 +19,17 @@
 {% spaceless %}
 	{% if recent_news|length > 0 %}
 	<div class="container box news-related">
-        <h4>Recent News</h4>
+        <h4>Recent Articles</h4>
         <ul class="social show-on-desktops">
             <li>
-                <a href="{{ path('news_rss2') }}" class="rss"><span>RSS</span></a>
+                <a href="{{ path('posts_rss2') }}" class="rss"><span>RSS</span></a>
             </li>
         </ul>
         <ul>
         	{% for post in recent_news %}
         	<li>
-                <a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a>
-                <span class="small">Published: <strong>{{ post.publishdate|date('d/m/Y') }}</strong></span>
+                <a href="{{ path('posts_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a>
+                <span class="small"><strong>{{ post.publishdate|date('d/m/Y') }}</strong></span>
             </li>
         	{% endfor %}
         </ul>
@@ -44,9 +44,9 @@
     <h4>Browse Categories</h4>
     <dl class="sub-nav">
         <dt>Filter:</dt>
-        <dd><a href="{{ path('news') }}">All</a></dd>
+        <dd><a href="{{ path('posts') }}">All</a></dd>
         {% for category in categories %}
-        <dd{% if options.current == category.slug %} class="active"{% endif %}><a href="{{ path('news_category', {'category': category.slug}) }}">{{ category.title }}</a></dd>
+        <dd{% if options.current == category.slug %} class="active"{% endif %}><a href="{{ path('posts_category', {'category': category.slug}) }}">{{ category.title }}</a></dd>
         {% endfor %}
     </dl>
 </div>

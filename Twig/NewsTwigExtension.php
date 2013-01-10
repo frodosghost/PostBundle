@@ -106,7 +106,7 @@ class NewsTwigExtension extends \Twig_Extension
      */
     public function simpleList($item_count = 5, array $options = array())
     {
-        $recent_news = $this->getDoctrine()->getRepository('AGBNewsBundle:Post')
+        $recent_news = $this->getDoctrine()->getRepository('ManhattanPostsBundle:Post')
             ->findAllLatestPosts($item_count);
 
         $html = $this->getTemplate()->renderBlock('simple_list', array(
