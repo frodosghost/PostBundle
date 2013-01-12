@@ -19,7 +19,7 @@ class CategoryController extends Controller
     /**
      * Lists all Category entities.
      *
-     * @Route("/", name="console_news_category")
+     * @Route("", name="console_news_category")
      * @Template()
      */
     public function indexAction()
