@@ -44,7 +44,7 @@ class DocumentControllerTest extends WebTestCase
         $this->assertTrue($crawler->filter('td:contains("Foo")')->count() > 0);
 
         // Follow to the Edit page to display link to Documents
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
+        $crawler = $client->click($crawler->filter('a.btn-primary')->link());
 
         $crawler = $client->click($crawler->selectLink('Manage Documents')->link());
 
