@@ -20,6 +20,7 @@ class CategoryController extends Controller
      * Lists all Category entities.
      *
      * @Route("", name="console_news_category")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function indexAction()
@@ -37,6 +38,7 @@ class CategoryController extends Controller
      * Finds and displays a Category entity.
      *
      * @Route("/{id}/show", name="console_news_category_show")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function showAction($id)
@@ -61,6 +63,7 @@ class CategoryController extends Controller
      * Displays a form to create a new Category entity.
      *
      * @Route("/new", name="console_news_category_new")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function newAction()
@@ -78,6 +81,7 @@ class CategoryController extends Controller
      * Creates a new Category entity.
      *
      * @Route("/create", name="console_news_category_create")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("post")
      * @Template("ManhattanPostsBundle:Category:new.html.twig")
      */
@@ -106,6 +110,7 @@ class CategoryController extends Controller
      * Displays a form to edit an existing Category entity.
      *
      * @Route("/{id}/edit", name="console_news_category_edit")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function editAction($id)
@@ -132,6 +137,7 @@ class CategoryController extends Controller
      * Edits an existing Category entity.
      *
      * @Route("/{id}/update", name="console_news_category_update")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("post")
      * @Template("ManhattanPostsBundle:Category:edit.html.twig")
      */
@@ -170,6 +176,7 @@ class CategoryController extends Controller
      * Deletes a Category entity.
      *
      * @Route("/{id}/delete", name="console_news_category_delete")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("post")
      */
     public function deleteAction($id)

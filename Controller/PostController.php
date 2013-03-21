@@ -20,6 +20,7 @@ class PostController extends Controller
      * Lists all Post entities.
      *
      * @Route("", name="console_news")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function indexAction()
@@ -37,6 +38,7 @@ class PostController extends Controller
      * Finds and displays a Post entity.
      *
      * @Route("/{id}/show", name="console_news_show")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function showAction($id)
@@ -61,6 +63,7 @@ class PostController extends Controller
      * Displays a form to create a new Post entity.
      *
      * @Route("/new", name="console_news_new")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function newAction()
@@ -78,6 +81,7 @@ class PostController extends Controller
      * Creates a new Post entity.
      *
      * @Route("/create", name="console_news_create")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("post")
      * @Template("ManhattanPostsBundle:Post:new.html.twig")
      */
@@ -106,6 +110,7 @@ class PostController extends Controller
      * Displays a form to edit an existing Post entity.
      *
      * @Route("/{id}/edit", name="console_news_edit")
+     * @Secure(roles="ROLE_ADMIN")
      * @Template()
      */
     public function editAction($id)
@@ -132,6 +137,7 @@ class PostController extends Controller
      * Edits an existing Post entity.
      *
      * @Route("/{id}/update", name="console_news_update")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("post")
      * @Template("ManhattanPostsBundle:Post:edit.html.twig")
      */
@@ -170,6 +176,7 @@ class PostController extends Controller
      * Deletes a Post entity.
      *
      * @Route("/{id}/delete", name="console_news_delete")
+     * @Secure(roles="ROLE_ADMIN")
      * @Method("post")
      */
     public function deleteAction($id)
