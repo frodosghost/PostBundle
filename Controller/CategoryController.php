@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
 use Manhattan\Bundle\PostsBundle\Form\CategoryType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 /**
  * Category controller.
  *

@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 use Manhattan\Bundle\PostsBundle\Form\PostType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 /**
  * Post controller.
  *
