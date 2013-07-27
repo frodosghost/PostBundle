@@ -29,5 +29,6 @@ class ManhattanPostsExtension extends Extension
 
         $container->setParameter('manhattan_posts.rss', $config['rss']);
         $container->setParameter('manhattan_posts.config', $config['configuration']);
+        $container->setParameter('manhattan_posts.include_documents', $config['configuration']['include_documents']);
     }
 }

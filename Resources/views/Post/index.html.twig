@@ -8,15 +8,25 @@
             <th class="title">Title</th>
             <th>Slug</th>
             <th>Published Date</th>
+            <th>&nbsp;</th>
             <th class="actions">Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('console_news_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+            <td><a href="{{ path('console_news_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
             <td>{{ entity.slug }}</td>
             <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td class="update">{% spaceless %}
+                {% if entity.publishState == 2 %}
+                    <span class="btn-small btn-success">Published</span>
+                {% elseif entity.publishState == 4 %}
+                    <span class="btn-small">Archived</span>
+                {% else %}
+                    <span class="btn-small btn-info">Draft</span>
+                {% endif %}
+            {% endspaceless %}</td>
             <td>
                 <a href="{{ path('console_news_show', { 'id': entity.id }) }}" class="btn btn-small">show</a>
                 <a href="{{ path('console_news_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">edit</a>
@@ -26,5 +36,5 @@
     </tbody>
 </table>
 
-<a href="{{ path('console_news_new') }}"  class="btn primary">Create a new entry</a>
+<a href="{{ path('console_news_new') }}"  class="btn primary btn-success">Create a new entry</a>
 {% endblock %}

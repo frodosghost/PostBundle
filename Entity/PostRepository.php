@@ -24,9 +24,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, document FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
+                LEFT JOIN post.documents document
                 WHERE post.published_date BETWEEN :date_start AND :date_end
                     AND post.slug = :slug
                     AND post.publish_state = :publish_state'
@@ -77,7 +78,8 @@ class PostRepository extends EntityRepository
                 LEFT JOIN post.image image
                 WHERE post.published_date < :date
                     AND post.publish_state = :publish_state
-                    AND category.slug = :category'
+                    AND category.slug = :category
+                ORDER BY post.published_date DESC'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
              ->setParameter('publish_state', $this->getPublishState())
              ->setParameter('category', $category);
@@ -110,8 +112,32 @@ class PostRepository extends EntityRepository
     }
 
     /**
+     * Returns Content with joined Documents
+     *
+     * @param  int     $id
+     * @return Content
+     */
+    public function findOneByIdJoinDocuments($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post, document FROM AGBNewsBundle:Post post
+                LEFT JOIN post.documents document
+                WHERE post.id = :id'
+            )->setParameters(array(
+                'id' => $id
+        ));
+
+        try {
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
      * Sets Publish State to be returned from query
-     * 
+     *
      * @param  int     $publish_state
      * @return Content
      */

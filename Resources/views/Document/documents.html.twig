@@ -1,0 +1,41 @@
+{% extends "AGBNewsBundle::layout.html.twig" %}
+
+{% block content %}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="manage">
+            <a href="{{ path('console_news_edit', { 'id': entity.id }) }}" class="btn manage btn-warning">Back to Edit</a>
+            <h2><span>Documents:</span> {{ entity.title }}</h2>
+
+            <div class="row">
+                <div class="span8">
+                    <div class="control-group">
+                        <div class="document-list">
+                        {% for document in entity.documents %}
+                            <div class="document well {{ document.extension }}">
+                                <p><strong>{{ document.title }}</strong>: {{ document.description }}</p>
+                                <ul class="actions">
+                                    <li><a href="{{ path('console_news_document_edit', {id: entity.id, document_id: document.id}) }}" class="btn btn-small btn-info">Edit</a></li>
+                                    {% if is_granted('ROLE_SUPER_ADMIN') %}<li><a href="{{ path('console_news_document_delete', {id: entity.id, document_id: document.id}) }}" class="btn btn-small btn-danger">Remove</a></li>{% endif %}
+                                </ul>
+                            </div>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <form action="{{ path('console_news_document_create', { 'id': entity.id }) }}" class="form-vertical well" method="post" {{ form_enctype(form) }} novalidate>
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Add Document</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

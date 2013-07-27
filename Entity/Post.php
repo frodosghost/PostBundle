@@ -90,6 +90,13 @@ class Post
     private $category;
 
     /**
+     * @ORM\OneToMany(
+     *     targetEntity="AGB\Bundle\NewsBundle\Entity\Document", mappedBy="post", cascade={"persist", "remove"}
+     * )
+     */
+    private $documents;
+
+    /**
      * @var datetime $published_date
      *
      * @ORM\Column(name="published_date", type="datetime", nullable=true)
@@ -99,7 +106,7 @@ class Post
 
     /**
      * var integer $publish_state
-     * 
+     *
      * @ORM\Column(name="publish_state", type="integer")
      */
     private $publish_state;
@@ -123,13 +130,14 @@ class Post
     public function __construct()
     {
         $this->category = new ArrayCollection();
+        $this->documents = new ArrayCollection();
         $this->publish_state = 1;
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -151,7 +159,7 @@ class Post
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -173,7 +181,7 @@ class Post
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -195,7 +203,7 @@ class Post
     /**
      * Get excerpt
      *
-     * @return string 
+     * @return string
      */
     public function getExcerpt()
     {
@@ -217,11 +225,34 @@ class Post
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
         return $this->body;
+    }
+
+    /**
+     * Add Document
+     *
+     * @param AGB\Bundle\NewsBundle\Entity\Document $document
+     */
+    public function addDocument(Document $document)
+    {
+        $document->addPost($this);
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Get Documents
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
     }
 
     /**
@@ -239,7 +270,7 @@ class Post
     /**
      * Get published_date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getPublishDate()
     {
@@ -270,7 +301,7 @@ class Post
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -292,7 +323,7 @@ class Post
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -318,7 +349,7 @@ class Post
     /**
      * Get image
      *
-     * @return Manhattan\Bundle\PostsBundle\Entity\Image 
+     * @return Manhattan\Bundle\PostsBundle\Entity\Image
      */
     public function getImage()
     {
@@ -340,7 +371,7 @@ class Post
     /**
      * Get category
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCategory()
     {
@@ -366,7 +397,7 @@ class Post
     /**
      * Get publish_state
      *
-     * @return integer 
+     * @return integer
      */
     public function getPublishState()
     {
@@ -380,7 +411,7 @@ class Post
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
-    
+
     /**
      * @ORM\PreUpdate()
      */
@@ -390,7 +421,7 @@ class Post
 
     /**
      * Returns array of static values for configuring form select values
-     * 
+     *
      * @return srray
      */
     public function getStaticArray()

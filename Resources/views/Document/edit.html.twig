@@ -1,0 +1,18 @@
+{% extends "AGBNewsBundle::layout.html.twig" %}
+{% block subheadline %}Document{% endblock %}
+
+{% block content %}
+
+<form action="{{ path('console_news_document_update', { 'id': entity.post.id, 'document_id': entity.id }) }}" class ="form-horizontal well" method="post" {{ form_enctype(edit_form) }} novalidate>
+    <div class="manage">
+    {{ form_widget(edit_form) }}
+
+    <div class="form-actions">
+        <a href="{{ path('console_news_documents', { 'id': entity.post.id }) }}" class="btn">Back to Documents</a>
+        <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}<a href="{{ path('console_news_document_delete', { 'id': entity.post.id, 'document_id': entity.id }) }}" class="btn btn-danger">Remove</a>{% endif %}
+    </div>
+    </div>
+
+{% endblock %}
