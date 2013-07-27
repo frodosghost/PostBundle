@@ -91,7 +91,7 @@ class Post
 
     /**
      * @ORM\OneToMany(
-     *     targetEntity="AGB\Bundle\NewsBundle\Entity\Document", mappedBy="post", cascade={"persist", "remove"}
+     *     targetEntity="Manhattan\Bundle\PostsBundle\Entity\Document", mappedBy="post", cascade={"persist", "remove"}
      * )
      */
     private $documents;
@@ -235,7 +235,7 @@ class Post
     /**
      * Add Document
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Document $document
+     * @param Manhattan\Bundle\PostsBundle\Entity\Document $document
      */
     public function addDocument(Document $document)
     {

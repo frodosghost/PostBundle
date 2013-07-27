@@ -121,7 +121,7 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, document FROM AGBNewsBundle:Post post
+                SELECT post, document FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.documents document
                 WHERE post.id = :id'
             )->setParameters(array(

@@ -1,8 +1,8 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Tests\Entity;
+namespace Manhattan\Bundle\PostsBundle\Tests\Entity;
 
-use AGB\Bundle\NewsBundle\Entity\Document;
+use Manhattan\Bundle\PostsBundle\Entity\Document;
 
 /**
  * DocumentTest
@@ -15,7 +15,7 @@ class DocumentTest extends \PHPUnit_Framework_TestCase
     {
         $document = new Document();
 
-        $mock_post = $this->getMock('AGB\Bundle\NewsBundle\Entity\Post');
+        $mock_post = $this->getMock('Manhattan\Bundle\PostsBundle\Entity\Post');
         $mock_post->expects($this->any())
             ->method('getSlug')
             ->will($this->returnValue('foo-bar'));

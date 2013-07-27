@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Tests\Entity;
+namespace Manhattan\Bundle\PostsBundle\Tests\Entity;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
@@ -19,7 +19,7 @@ class DocumentRepositoryFunctionalTest extends WebTestCase
 
         // Add data with Fixtures to include post listings
         $this->loadFixtures(array(
-            'AGB\Bundle\NewsBundle\Tests\DataFixtures\ORM\FixtureLoader'
+            'Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM\FixtureLoader'
         ));
     }
 
@@ -31,13 +31,13 @@ class DocumentRepositoryFunctionalTest extends WebTestCase
     public function testOneByIdJoinContent()
     {
         $document = $this->em
-            ->getRepository('AGBNewsBundle:Document')
+            ->getRepository('ManhattanPostsBundle:Document')
             ->findOneByIdJoinPost(1);
 
-        $this->assertInstanceOf('AGB\Bundle\NewsBundle\Entity\Document', $document,
+        $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Document', $document,
             'testOneByIdJoinPost() returns Document object with query');
 
-        $this->assertInstanceOf('AGB\Bundle\NewsBundle\Entity\Post', $document->getPost(),
+        $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Post', $document->getPost(),
             '->getPost() returns a Post object.');
 
         $this->assertEquals(10, $document->getPost()->getId(),

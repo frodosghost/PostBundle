@@ -1,19 +1,19 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use AGB\Bundle\ContentBundle\Entity\Asset;
-use AGB\Bundle\NewsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Asset;
+use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
- * AGB\Bundle\NewsBundle\Entity\Document
+ * Manhattan\Bundle\PostsBundle\Entity\Document
  *
  * @ORM\Table(name="news_document")
- * @ORM\Entity(repositoryClass="AGB\Bundle\NewsBundle\Entity\DocumentRepository")
+ * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\DocumentRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Document extends Asset
@@ -62,7 +62,7 @@ class Document extends Asset
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -84,7 +84,7 @@ class Document extends Asset
     /**
      * Get description
      *
-     * @return text 
+     * @return text
      */
     public function getDescription()
     {
@@ -94,7 +94,7 @@ class Document extends Asset
     /**
      * Add post
      *
-     * @param AGB\Bundle\NewsBundle\Entity\Post $post
+     * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
      */
     public function addPost(Post $post)
     {
@@ -105,7 +105,7 @@ class Document extends Asset
     /**
      * Get post
      *
-     * @return AGB\Bundle\NewsBundle\Entity\Post
+     * @return Manhattan\Bundle\PostsBundle\Entity\Post
      */
     public function getPost()
     {

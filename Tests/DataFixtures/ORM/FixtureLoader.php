@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
-use AGB\Bundle\NewsBundle\Entity\Document;
+use Manhattan\Bundle\PostsBundle\Entity\Document;
 
 class FixtureLoader implements FixtureInterface
 {

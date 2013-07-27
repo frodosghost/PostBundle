@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Tests\Controller;
+namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -11,7 +11,7 @@ class DocumentControllerTest extends WebTestCase
     {
         // Add data with Fixtures to include post listings
         $this->loadFixtures(array(
-            'AGB\Bundle\NewsBundle\Tests\DataFixtures\ORM\FixtureLoader'
+            'Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM\FixtureLoader'
         ));
     }
 

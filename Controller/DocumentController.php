@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Controller;
+namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -8,9 +8,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-use AGB\Bundle\NewsBundle\Entity\Post;
-use AGB\Bundle\NewsBundle\Entity\Document;
-use AGB\Bundle\NewsBundle\Form\DocumentType;
+use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Document;
+use Manhattan\Bundle\PostsBundle\Form\DocumentType;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 
@@ -36,7 +36,7 @@ class DocumentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $post = $em->getRepository('AGBNewsBundle:Post')
+        $post = $em->getRepository('ManhattanPostsBundle:Post')
             ->findOneByIdJoinDocuments($id);
 
         if (!$post) {
@@ -59,7 +59,7 @@ class DocumentController extends Controller
      * @Route("/{id}/document/create", name="console_news_document_create")
      * @Method("POST")
      * @Secure(roles="ROLE_ADMIN")
-     * @Template("AGBNewsBundle:Document:documents.html.twig")
+     * @Template("ManhattanPostsBundle:Document:documents.html.twig")
      */
     public function createAction($id)
     {
@@ -69,7 +69,7 @@ class DocumentController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $post = $em->getRepository('AGBNewsBundle:Post')->findOneById($id);
+        $post = $em->getRepository('ManhattanPostsBundle:Post')->findOneById($id);
 
         if (!$post) {
             throw $this->createNotFoundException('Unable to find Post entity.');
@@ -110,7 +110,7 @@ class DocumentController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $document = $em->getRepository('AGBNewsBundle:Document')
+        $document = $em->getRepository('ManhattanPostsBundle:Document')
             ->findOneByIdJoinPost($document_id);
 
         if (!$document) {
@@ -131,7 +131,7 @@ class DocumentController extends Controller
      * @Route("/{id}/document/{document_id}/update", name="console_news_document_update")
      * @Method("POST")
      * @Secure(roles="ROLE_ADMIN")
-     * @Template("AGBNewsBundle:Document:edit.html.twig")
+     * @Template("ManhattanPostsBundle:Document:edit.html.twig")
      */
     public function updateAction($id, $document_id)
     {
@@ -141,7 +141,7 @@ class DocumentController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
 
-        $document = $em->getRepository('AGBNewsBundle:Document')
+        $document = $em->getRepository('ManhattanPostsBundle:Document')
             ->findOneByIdJoinPost($document_id);
 
         if (!$document) {
@@ -180,7 +180,7 @@ class DocumentController extends Controller
         }
 
         $em = $this->getDoctrine()->getEntityManager();
-        $entity = $em->getRepository('AGBNewsBundle:Document')->find($document_id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Document')->find($document_id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Document entity.');

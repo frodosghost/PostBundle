@@ -6,6 +6,6 @@ ManhattanPostsCategory:
     resource: "@ManhattanPostsBundle/Controller/CategoryController.php"
     type:     annotation
 
-AGBNewsDocument:
-    resource: "@AGBNewsBundle/Controller/DocumentController.php"
+ManhattanPostsDocument:
+    resource: "@ManhattanPostsBundle/Controller/DocumentController.php"
     type:     annotation

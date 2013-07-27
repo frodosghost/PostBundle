@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -14,7 +14,7 @@ class DocumentRepository extends EntityRepository
 {
     /**
      * Returns Document with joined Post
-     * 
+     *
      * @param  int      $id
      * @return Document
      */
@@ -22,7 +22,7 @@ class DocumentRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT document, post FROM AGBNewsBundle:Document document
+                SELECT document, post FROM ManhattanPostsBundle:Document document
                 LEFT JOIN document.post post
                 WHERE document.id = :id'
             )->setParameters(array(

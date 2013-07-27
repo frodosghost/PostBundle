@@ -1,12 +1,12 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Form;
+namespace Manhattan\Bundle\PostsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-use AGB\Bundle\NewsBundle\Form\EventListener\AddFileFieldSubscriber;
+use Manhattan\Bundle\PostsBundle\Form\EventListener\AddFileFieldSubscriber;
 
 class DocumentType extends AbstractType
 {
@@ -27,7 +27,7 @@ class DocumentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AGB\Bundle\NewsBundle\Entity\Document'
+            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Document'
         ));
     }
 

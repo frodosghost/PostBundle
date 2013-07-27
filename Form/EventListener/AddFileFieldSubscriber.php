@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\NewsBundle\Form\EventListener;
+namespace Manhattan\Bundle\PostsBundle\Form\EventListener;
 
 use Symfony\Component\Form\Event\DataEvent;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -29,7 +29,7 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
 
     /**
      * Adds the file field to the form if create form.
-     * 
+     *
      * @param  DataEvent $event
      */
     public function preSetData(DataEvent $event)
@@ -50,16 +50,10 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
             )));
         }
     }
-/*
 
-echo '<pre>';
-        print_r(get_class($data));
-        echo '</pre>';
-        exit;
- */
     /**
      * Determines if the file has been provided, and displays error if not provided.
-     * 
+     *
      * @param  DataEvent $event
      */
     public function postBind(DataEvent $event)
