@@ -1,0 +1,21 @@
+Manhattan\Bundle\PostsBundle\Entity\Document:
+    type:  entity
+    table: news_document
+    repositoryClass: Manhattan\Bundle\PostsBundle\Entity\Repository\DocumentRepository
+
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+
+    manyToOne:
+        post:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Post
+            inversedBy: documents
+            joinColumn:
+                name: post_id
+                referencedColumnName: id
+                onDelete: SET NULL

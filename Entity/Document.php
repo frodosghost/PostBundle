@@ -6,38 +6,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-use Manhattan\Bundle\PostsBundle\Entity\Asset;
+use Manhattan\Bundle\ContentBundle\Entity\Asset;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Document
- *
- * @ORM\Table(name="news_document")
- * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\DocumentRepository")
- * @ORM\HasLifecycleCallbacks
  */
 class Document extends Asset
 {
     /**
      * @var string $title
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank(
-     *     message = "Please enter a Title."
-     * )
      */
     private $title;
 
     /**
      * @var text $description
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="documents")
-     * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="cascade")
+     * @var Manhattan\Bundle\PostsBundle\Entity\Post
      */
     private $post;
 
@@ -112,23 +100,13 @@ class Document extends Asset
         return $this->post;
     }
 
-    /**
-     * Returns file extension
-     *
-     * @return string
-     */
-    public function getExtension()
-    {
-        return preg_replace('/^.*\./', '', $this->getFilename());;
-    }
-
     public function getUploadDir()
     {
         return 'uploads/documents/'. $this->getPost()->getSlug();
     }
 
     /**
-     * @ORM\PrePersist()
+     * PrePersist()
      */
     public function preUpload()
     {

@@ -51,6 +51,15 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
             targetEntity: Manhattan\Bundle\PostsBundle\Entity\Category
             inversedBy: posts
 
+    oneToMany:
+        documents:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Document
+            cascade:
+                - persist
+            mappedBy: document
+            joinColumn:
+                onDelete: CASCADE
+
     lifecycleCallbacks:
         prePersist: [ prePersist ]
         preUpdate:  [ preUpdate ]
