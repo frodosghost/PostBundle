@@ -2,6 +2,7 @@
 
 namespace Manhattan\Bundle\PostsBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,7 +35,7 @@ class PublicController extends Controller
         return array(
             'entities' => $paginated_entities,
             'category' => null,
-            'include_documents' => $this->container->getParameter('agb_news.include_documents')
+            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
         );
     }
 
@@ -79,7 +80,7 @@ class PublicController extends Controller
         return array(
             'entities' => $paginated_entities,
             'category' => $category,
-            'include_documents' => $this->container->getParameter('agb_news.include_documents')
+            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
         );
     }
 
@@ -103,7 +104,7 @@ class PublicController extends Controller
 
         return array(
             'entity'      => $entity,
-            'include_documents' => $this->container->getParameter('agb_news.include_documents')
+            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
         );
     }
 
