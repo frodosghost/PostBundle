@@ -1,0 +1,3 @@
+Manhattan\Bundle\PostsBundle\Entity\Image:
+    type:  entity
+    table: news_image

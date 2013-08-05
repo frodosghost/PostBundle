@@ -1,6 +1,6 @@
 <?php
 
-namespace Manhattan\Bundle\PostsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
@@ -13,7 +13,7 @@ use Doctrine\ORM\EntityRepository;
 class PostRepository extends EntityRepository
 {
     // Set to automatically return Published Posts
-    private $publish_state = 2;
+    private $publishState = 2;
 
 	/**
      * Returns Category with joined Gallery records
@@ -27,14 +27,14 @@ class PostRepository extends EntityRepository
                 SELECT post, category, image FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                WHERE post.published_date BETWEEN :date_start AND :date_end
+                WHERE post.publishDate BETWEEN :date_start AND :date_end
                     AND post.slug = :slug
-                    AND post.publish_state = :publish_state'
+                    AND post.publishState = :publishState'
             )->setParameters(array(
             	'date_start'    => new \DateTime($date .'00:00:00'),
             	'date_end'      => new \DateTime($date .'23:59:59'),
                 'slug'          => $slug,
-                'publish_state' => $this->getPublishState()
+                'publishState' => $this->getPublishState()
             ));
 
         try {
@@ -55,11 +55,11 @@ class PostRepository extends EntityRepository
                 SELECT post, category, image FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                WHERE post.published_date < :date
-                    AND post.publish_state = :publish_state
-                ORDER BY post.published_date DESC'
+                WHERE post.publishDate < :date
+                    AND post.publishState = :publishState
+                ORDER BY post.publishDate DESC'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
-             ->setParameter('publish_state', $this->getPublishState());
+             ->setParameter('publishState', $this->getPublishState());
 
         return $query;
     }
@@ -75,11 +75,11 @@ class PostRepository extends EntityRepository
                 SELECT post, category, image FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                WHERE post.published_date < :date
-                    AND post.publish_state = :publish_state
+                WHERE post.publishDate < :date
+                    AND post.publishState = :publishState
                     AND category.slug = :category'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
-             ->setParameter('publish_state', $this->getPublishState())
+             ->setParameter('publishState', $this->getPublishState())
              ->setParameter('category', $category);
 
         return $query;
@@ -95,11 +95,11 @@ class PostRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT post FROM ManhattanPostsBundle:Post post
-                WHERE post.published_date < :date
-                    AND post.publish_state = :publish_state
-                ORDER BY post.published_date DESC')
+                WHERE post.publishDate < :date
+                    AND post.publishState = :publishState
+                ORDER BY post.publishDate DESC')
             ->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
-            ->setParameter('publish_state', $this->getPublishState())
+            ->setParameter('publishState', $this->getPublishState())
             ->setMaxResults($limit);
 
         try {
@@ -111,20 +111,20 @@ class PostRepository extends EntityRepository
 
     /**
      * Sets Publish State to be returned from query
-     * 
-     * @param  int     $publish_state
+     *
+     * @param  int     $publishState
      * @return Content
      */
-    public function setPublishState($publish_state)
+    public function setPublishState($publishState)
     {
-        $this->publish_state = $publish_state;
+        $this->publishState = $publishState;
 
         return $this;
     }
 
     public function getPublishState()
     {
-        return $this->publish_state;
+        return $this->publishState;
     }
 
 }

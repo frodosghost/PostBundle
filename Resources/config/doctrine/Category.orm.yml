@@ -1,0 +1,38 @@
+Manhattan\Bundle\PostsBundle\Entity\Category:
+    type: entity
+    table: news_category
+    repositoryClass: Manhattan\Bundle\PostsBundle\Entity\Repository\CategoryRepository
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            type: string
+            length: 128
+        slug:
+            type: string
+            length: 128
+            unique: true
+            gedmo:
+                slug:
+                    fields: [ title ]
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+
+    oneToMany:
+        posts:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Post
+            mappedBy: category
+            cascade:
+                - persist
+
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
+        preUpdate:  [ preUpdate ]

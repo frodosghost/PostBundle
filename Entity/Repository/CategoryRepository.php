@@ -1,6 +1,6 @@
 <?php
 
-namespace Manhattan\Bundle\PostsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

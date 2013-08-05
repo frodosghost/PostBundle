@@ -11,64 +11,43 @@ use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Category
- *
- * @ORM\Table(name="news_category")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\Repository\CategoryRepository")
  */
 class Category
 {
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string $title
-     *
-     * @ORM\Column(name="title", type="string", length=128)
-     * @Assert\NotBlank(
-     *     message = "Please enter a Category."
-     * )
      */
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=128, unique=true)
+     * @var string $slug
      */
     private $slug;
 
     /**
-     * @ORM\OneToMany(
-     *     targetEntity="Post", mappedBy="category"
-     * )
+     * @var Manhattan\Bundle\PostsBundle\Entity\Post
      **/
     private $posts;
 
     /**
-     * @var datetime $created_at
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     * @Assert\Type("\DateTime")
+     * @var datetime $createdAt
      */
-    private $created_at;
+    private $createdAt;
 
     /**
-     * @var datetime $updated_at
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     * @Assert\Type("\DateTime")
+     * @var datetime $updatedAt
      */
-    private $updated_at;
+    private $updatedAt;
+
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
+        $this->posts = new ArrayCollection();
     }
 
     public function __toString()
@@ -131,50 +110,6 @@ class Category
     }
 
     /**
-     * Set created_at
-     *
-     * @param datetime $createdAt
-     * @return Category
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-        return $this;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return datetime
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set updated_at
-     *
-     * @param datetime $updatedAt
-     * @return Category
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-        return $this;
-    }
-
-    /**
-     * Get updated_at
-     *
-     * @return datetime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
-
-    /**
      * Add post
      *
      * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
@@ -197,7 +132,51 @@ class Category
     }
 
     /**
-     * @ORM\PrePersist()
+     * Set createdAt
+     *
+     * @param datetime $createdAt
+     * @return Category
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return datetime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param datetime $updatedAt
+     * @return Category
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return datetime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * PrePersist()
      */
     public function prePersist() {
         $this->setCreatedAt(new \DateTime());
@@ -205,7 +184,7 @@ class Category
     }
 
     /**
-     * @ORM\PreUpdate()
+     * PreUpdate()
      */
     public function preUpdate() {
         $this->setUpdatedAt(new \DateTime());

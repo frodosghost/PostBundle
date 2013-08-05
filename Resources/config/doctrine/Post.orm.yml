@@ -1,0 +1,56 @@
+Manhattan\Bundle\PostsBundle\Entity\Post:
+    type: entity
+    table: news_post
+    repositoryClass: Manhattan\Bundle\PostsBundle\Entity\Repository\PostRepository
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    fields: [ title ]
+        excerpt:
+            type: string
+            length: 500
+            nullable: true
+        body:
+            type: text
+            nullable: true
+        publishState:
+            type: integer
+            column: publish_state
+        publishDate:
+            type: datetime
+            column: publish_date
+            nullable: true
+        createdAt:
+            type: datetime
+            column: created_at
+        updatedAt:
+            type: datetime
+            column: updated_at
+
+    oneToOne:
+        image:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Image
+            cascade:
+                - persist
+                - remove
+                - merge
+
+    manyToOne:
+        category:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Category
+            inversedBy: posts
+
+    lifecycleCallbacks:
+        prePersist: [ prePersist ]
+        preUpdate:  [ preUpdate ]

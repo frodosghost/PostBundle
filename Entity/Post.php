@@ -9,121 +9,65 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 use Manhattan\Bundle\PostsBundle\Entity\Image;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
+use Manhattan\Bundle\PostsBundle\Entity\Base\Publish;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Post
- *
- * @ORM\Table(name="news_post")
- * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\Repository\PostRepository")
  */
-class Post
+class Post extends Publish
 {
-    /**
-     * Publish States
-     *
-     * @link(Bitwise Operators, http://php.net/manual/en/language.operators.bitwise.php)
-     */
-    const DRAFT = 1;
-
-    const PUBLISH = 2;
-
-    const ARCHIVE = 4;
 
     /**
      * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string $title
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     * @Assert\NotBlank(
-     *     message = "Please enter a Title"
-     * )
      */
     private $title;
 
     /**
-     * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(length=128, unique=true)
+     * @var string $slug
      */
     private $slug;
 
     /**
      * @var text $excerpt
-     *
-     * @ORM\Column(name="excerpt", type="string", length=500, nullable=true)
-     * Assert\MaxLength(500)(
-     *     message="The Excerpt is too long. The is a maximum length of {{limit}} characters"
-     * )
      */
     private $excerpt;
 
     /**
      * @var text $body
-     *
-     * @ORM\Column(name="body", type="text", nullable=true)
-     * @Assert\NotBlank(
-     *     message = "Please enter some text for the body"
-     * )
      */
     private $body;
 
     /**
-     * @ORM\OneToOne(
-     *     targetEntity="Image", cascade={"persist", "remove", "merge"}
-     * )
+     * @var Manhattan\Bundle\PostsBundle\Entity\Image
      */
     private $image;
 
     /**
-     * @ORM\ManyToOne(
-     *     targetEntity="Category", inversedBy="posts"
-     * )
+     * @var Doctrine\Common\Collections\ArrayCollection
      **/
     private $category;
 
     /**
-     * @var datetime $published_date
-     *
-     * @ORM\Column(name="published_date", type="datetime", nullable=true)
-     * @Assert\Type("\DateTime")
+     * @var datetime $createdAt
      */
-    private $published_date;
+    private $createdAt;
 
     /**
-     * var integer $publish_state
-     *
-     * @ORM\Column(name="publish_state", type="integer")
+     * @var datetime $updatedAt
      */
-    private $publish_state;
+    private $updatedAt;
 
-    /**
-     * @var datetime $created_at
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     * @Assert\Type("\DateTime")
-     */
-    private $created_at;
-
-    /**
-     * @var datetime $updated_at
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     * @Assert\Type("\DateTime")
-     */
-    private $updated_at;
 
     public function __construct()
     {
-        $this->category = new ArrayCollection();
-        $this->publish_state = 1;
+        //$this->category = new ArrayCollection();
+
+        parent::__construct();
     }
 
     /**
@@ -225,81 +169,6 @@ class Post
     }
 
     /**
-     * Set published_date
-     *
-     * @param datetime $publishedDate
-     * @return Post
-     */
-    public function setPublishDate($publishedDate)
-    {
-        $this->published_date = $publishedDate;
-        return $this;
-    }
-
-    /**
-     * Get published_date
-     *
-     * @return datetime
-     */
-    public function getPublishDate()
-    {
-        return $this->published_date;
-    }
-
-    /**
-     * Returns format for URL
-     */
-    public function getDate()
-    {
-        $this->date = $this->published_date->format('Y-m-d');
-        return $this->date;
-    }
-
-    /**
-     * Set created_at
-     *
-     * @param datetime $createdAt
-     * @return Post
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->created_at = $createdAt;
-        return $this;
-    }
-
-    /**
-     * Get created_at
-     *
-     * @return datetime
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * Set updated_at
-     *
-     * @param datetime $updatedAt
-     * @return Post
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updated_at = $updatedAt;
-        return $this;
-    }
-
-    /**
-     * Get updated_at
-     *
-     * @return datetime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
-    }
-
-    /**
      * Set image
      *
      * @param Manhattan\Bundle\PostsBundle\Entity\Image $image
@@ -307,8 +176,7 @@ class Post
      */
     public function setImage(Image $image = null)
     {
-        if ($image instanceof Image && $image->hasFile())
-        {
+        if ($image instanceof Image && $image->hasFile()) {
             $this->image = $image;
         }
 
@@ -331,8 +199,10 @@ class Post
      * @param Manhattan\Bundle\PostsBundle\Entity\Category $category
      * @return Post
      */
-    public function setCategory(Category $category = null)
+    public function addCategory(Category $category = null)
     {
+        $category->addPost($this);
+
         $this->category = $category;
         return $this;
     }
@@ -340,7 +210,7 @@ class Post
     /**
      * Get category
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return Doctrine\Common\Collections\ArrayCollection
      */
     public function getCategory()
     {
@@ -348,33 +218,51 @@ class Post
     }
 
     /**
-     * Set publish_state
+     * Set createdAt
      *
-     * @param integer $publish_state
+     * @param datetime $createdAt
+     * @return Post
      */
-    public function setPublishState($publish_state)
+    public function setCreatedAt($createdAt)
     {
-        $this->publish_state = $publish_state;
-
-        if ($publish_state === self::PUBLISH) {
-            $this->setPublishDate(new \DateTime());
-        }
-
+        $this->createdAt = $createdAt;
         return $this;
     }
 
     /**
-     * Get publish_state
+     * Get createdAt
      *
-     * @return integer
+     * @return datetime
      */
-    public function getPublishState()
+    public function getCreatedAt()
     {
-        return $this->publish_state;
+        return $this->createdAt;
     }
 
     /**
-     * @ORM\PrePersist()
+     * Set updatedAt
+     *
+     * @param datetime $updatedAt
+     * @return Post
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return datetime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * PrePersist()
      */
     public function prePersist() {
         $this->setCreatedAt(new \DateTime());
@@ -382,24 +270,10 @@ class Post
     }
 
     /**
-     * @ORM\PreUpdate()
+     * PreUpdate()
      */
     public function preUpdate() {
         $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * Returns array of static values for configuring form select values
-     *
-     * @return srray
-     */
-    public function getStaticArray()
-    {
-        return array(
-            self::DRAFT => 'Draft',
-            self::PUBLISH => 'Publish',
-            self::ARCHIVE => 'Archive'
-        );
     }
 
 }
