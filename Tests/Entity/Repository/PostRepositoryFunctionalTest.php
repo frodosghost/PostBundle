@@ -39,4 +39,40 @@ class PostRepositoryFunctionalTest extends WebTestCase
         $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Post', $post, '->findOneByDateAndSlug() returns Post object with query');
     }
 
+    /**
+     * Tests finding no documents when item has no documents attached
+     */
+    public function testFindByIdJoinDocumentsNone()
+    {
+        $post = $this->em
+            ->getRepository('ManhattanPostsBundle:Post')
+            ->setPublishState(2)
+            ->findOneByIdJoinDocuments(2);
+
+        $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Post', $post,
+            'findOneByIdJoinDocuments() returns Post object with query');
+
+        $this->assertEquals(0, $post->getDocuments()->count(),
+            '->getDocuments() returns a count of 0 with no documents attached.');
+    }
+
+    /**
+     * Tests Finding Document as joined object with one database entry
+     */
+    public function testFindByIdJoinDocumentsOne()
+    {
+        $post = $this->em
+            ->getRepository('ManhattanPostsBundle:Post')
+            ->findOneByIdJoinDocuments(10);
+
+        $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Post', $post,
+            'findOneByIdJoinDocuments() returns Post object with query');
+
+        $this->assertEquals(1, $post->getDocuments()->count(),
+            '->getDocuments() returns a count of 1 when one document is attached.');
+
+        $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Document', $post->getDocuments()->first(),
+            '->getDocuments() First element is returned matches the class Document');
+    }
+
 }

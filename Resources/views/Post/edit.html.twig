@@ -4,17 +4,32 @@
 
 <form action="{{ path('console_news_update', { 'id': entity.id }) }}" class ="form-horizontal well" method="post" {{ form_enctype(edit_form) }} novalidate>
     <div class="manage">
+        {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn manage btn-warning">Manage Documents</a>{% endif %}
+        <h2>{{ entity.title }}</h2>
     {{ form_widget(edit_form) }}
+
+    <div class="control-group">
+        <label class="control-label" for="content_documents">Documents</label>
+        <div class="controls">
+            <ul class="documents">
+            {% for document in entity.documents %}
+                <li class="{{ document.extension }}"><i class="icon-file"></i> {{ document.title }} - <small><a href="{{ asset(document.webPath) }}" target="_document">view</a></small></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
 
     <div class="form-actions">
         <a href="{{ path('console_news') }}" class="btn">Back to the list</a>
         <button type="submit" class="btn btn-primary">Edit</button>
 </form>
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
         <form action="{{ path('console_news_delete', { 'id': entity.id }) }}" class="actions-delete" method="post">
             {{ form_row(delete_form.id) }}
             {{ form_rest(delete_form) }}
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
+        {% endif %}
     </div>
     </div>
 

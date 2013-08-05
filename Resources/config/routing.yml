@@ -5,3 +5,7 @@ ManhattanPosts:
 ManhattanPostsCategory:
     resource: "@ManhattanPostsBundle/Controller/CategoryController.php"
     type:     annotation
+
+ManhattanPostsDocument:
+    resource: "@ManhattanPostsBundle/Controller/DocumentController.php"
+    type:     annotation

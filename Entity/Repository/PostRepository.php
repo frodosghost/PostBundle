@@ -24,9 +24,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, document FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
+                LEFT JOIN post.documents document
                 WHERE post.publishDate BETWEEN :date_start AND :date_end
                     AND post.slug = :slug
                     AND post.publishState = :publishState'
@@ -52,9 +53,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, document FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
+                LEFT JOIN post.documents document
                 WHERE post.publishDate < :date
                     AND post.publishState = :publishState
                 ORDER BY post.publishDate DESC'
@@ -72,12 +74,14 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, document FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
+                LEFT JOIN post.documents document
                 WHERE post.publishDate < :date
                     AND post.publishState = :publishState
-                    AND category.slug = :category'
+                    AND category.slug = :category
+                ORDER BY post.published_date DESC'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
              ->setParameter('publishState', $this->getPublishState())
              ->setParameter('category', $category);
@@ -104,6 +108,30 @@ class PostRepository extends EntityRepository
 
         try {
             return $query->getResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Returns Content with joined Documents
+     *
+     * @param  int     $id
+     * @return Content
+     */
+    public function findOneByIdJoinDocuments($id)
+    {
+        $query = $this->getEntityManager()
+            ->createQuery('
+                SELECT post, document FROM ManhattanPostsBundle:Post post
+                LEFT JOIN post.documents document
+                WHERE post.id = :id'
+            )->setParameters(array(
+                'id' => $id
+        ));
+
+        try {
+            return $query->getSingleResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }

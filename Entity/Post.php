@@ -2,12 +2,10 @@
 
 namespace Manhattan\Bundle\PostsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
 use Manhattan\Bundle\PostsBundle\Entity\Image;
+use Manhattan\Bundle\PostsBundle\Entity\Document;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
 use Manhattan\Bundle\PostsBundle\Entity\Base\Publish;
 
@@ -43,12 +41,17 @@ class Post extends Publish
     private $body;
 
     /**
+     * @var Doctrine\Common\Collections\ArrayCollection
+     */
+    private $documents;
+
+    /**
      * @var Manhattan\Bundle\PostsBundle\Entity\Image
      */
     private $image;
 
     /**
-     * @var Doctrine\Common\Collections\ArrayCollection
+     * @var Manhattan\Bundle\PostsBundle\Entity\Category
      **/
     private $category;
 
@@ -65,7 +68,7 @@ class Post extends Publish
 
     public function __construct()
     {
-        //$this->category = new ArrayCollection();
+        $this->documents = new ArrayCollection();
 
         parent::__construct();
     }
@@ -169,6 +172,29 @@ class Post extends Publish
     }
 
     /**
+     * Add Document
+     *
+     * @param Manhattan\Bundle\PostsBundle\Entity\Document $document
+     */
+    public function addDocument(Document $document)
+    {
+        $document->addPost($this);
+        $this->documents[] = $document;
+
+        return $this;
+    }
+
+    /**
+     * Get Documents
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
      * Set image
      *
      * @param Manhattan\Bundle\PostsBundle\Entity\Image $image
@@ -210,7 +236,7 @@ class Post extends Publish
     /**
      * Get category
      *
-     * @return Doctrine\Common\Collections\ArrayCollection
+     * @return Manhattan\Bundle\PostsBundle\Entity\Category
      */
     public function getCategory()
     {
