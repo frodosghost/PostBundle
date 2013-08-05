@@ -14,7 +14,7 @@ use Manhattan\Bundle\PostsBundle\Entity\Post;
  *
  * @ORM\Table(name="news_category")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\CategoryRepository")
+ * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\Repository\CategoryRepository")
  */
 class Category
 {
@@ -75,11 +75,11 @@ class Category
     {
         return $this->getTitle();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -101,7 +101,7 @@ class Category
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -123,7 +123,7 @@ class Category
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -145,7 +145,7 @@ class Category
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -167,7 +167,7 @@ class Category
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -189,7 +189,7 @@ class Category
     /**
      * Get posts
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getPosts()
     {
@@ -203,7 +203,7 @@ class Category
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
-    
+
     /**
      * @ORM\PreUpdate()
      */

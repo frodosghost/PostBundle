@@ -15,7 +15,7 @@ use Manhattan\Bundle\PostsBundle\Entity\Category;
  *
  * @ORM\Table(name="news_post")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\PostRepository")
+ * @ORM\Entity(repositoryClass="Manhattan\Bundle\PostsBundle\Entity\Repository\PostRepository")
  */
 class Post
 {
@@ -59,7 +59,7 @@ class Post
      * @var text $excerpt
      *
      * @ORM\Column(name="excerpt", type="string", length=500, nullable=true)
-     * @Assert\MaxLength(500)(
+     * Assert\MaxLength(500)(
      *     message="The Excerpt is too long. The is a maximum length of {{limit}} characters"
      * )
      */
@@ -99,7 +99,7 @@ class Post
 
     /**
      * var integer $publish_state
-     * 
+     *
      * @ORM\Column(name="publish_state", type="integer")
      */
     private $publish_state;
@@ -125,11 +125,11 @@ class Post
         $this->category = new ArrayCollection();
         $this->publish_state = 1;
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -151,7 +151,7 @@ class Post
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -173,7 +173,7 @@ class Post
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -195,7 +195,7 @@ class Post
     /**
      * Get excerpt
      *
-     * @return string 
+     * @return string
      */
     public function getExcerpt()
     {
@@ -217,7 +217,7 @@ class Post
     /**
      * Get body
      *
-     * @return text 
+     * @return text
      */
     public function getBody()
     {
@@ -239,7 +239,7 @@ class Post
     /**
      * Get published_date
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getPublishDate()
     {
@@ -270,7 +270,7 @@ class Post
     /**
      * Get created_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreatedAt()
     {
@@ -292,7 +292,7 @@ class Post
     /**
      * Get updated_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdatedAt()
     {
@@ -318,7 +318,7 @@ class Post
     /**
      * Get image
      *
-     * @return Manhattan\Bundle\PostsBundle\Entity\Image 
+     * @return Manhattan\Bundle\PostsBundle\Entity\Image
      */
     public function getImage()
     {
@@ -340,7 +340,7 @@ class Post
     /**
      * Get category
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCategory()
     {
@@ -366,7 +366,7 @@ class Post
     /**
      * Get publish_state
      *
-     * @return integer 
+     * @return integer
      */
     public function getPublishState()
     {
@@ -380,7 +380,7 @@ class Post
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
-    
+
     /**
      * @ORM\PreUpdate()
      */
@@ -390,7 +390,7 @@ class Post
 
     /**
      * Returns array of static values for configuring form select values
-     * 
+     *
      * @return srray
      */
     public function getStaticArray()
