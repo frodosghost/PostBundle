@@ -21,7 +21,7 @@
     },
     "target-dir": "Manhattan/Bundle/PostsBundle",
     "require": {
-        "php": ">=5.3.2",
-        "symfony/framework-bundle": "2.*"
+        "symfony/symfony": "2.3.*",
+        "manhattan/content-bundle": "dev-master"
     }
 }
