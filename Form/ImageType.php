@@ -6,20 +6,25 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+use Symfony\Component\Validator\Constraints\Image;
+
 class ImageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('file', 'preview_file', array(
-                'data_class' => null, // http://j.mp/ULMa2k
                 'required' => true,
                 'label' => 'Image',
                 "attr" => array(
                     "accept" => "image/*"
+                ),
+                'constraints' => array(
+                    new Image(array(
+                        'maxSize' => '1024k'
+                    ))
                 )
-            )
-        );
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -28,7 +28,7 @@ class PostType extends AbstractType
                 'widget_control_group' => false,
                 'label' => false
             ))
-            ->add('categorys', 'entity', array(
+            ->add('category', 'entity', array(
                 'multiple' => false,
                 'expanded' => true,
                 'class'    => 'Manhattan\Bundle\PostsBundle\Entity\Category'
