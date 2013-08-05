@@ -12,15 +12,11 @@ use Manhattan\Bundle\PostsBundle\Form\PostType;
 
 /**
  * Post controller.
- *
- * @Route("/console/news")
  */
 class PostController extends Controller
 {
     /**
      * Lists all Post entities.
-     *
-     * @Route("", name="console_news")
      */
     public function indexAction()
     {
@@ -40,8 +36,6 @@ class PostController extends Controller
 
     /**
      * Displays a form to create a new Post entity.
-     *
-     * @Route("/new", name="console_news_new")
      */
     public function newAction()
     {
@@ -60,9 +54,6 @@ class PostController extends Controller
 
     /**
      * Creates a new Post entity.
-     *
-     * @Route("/create", name="console_news_create")
-     * @Method("post")
      */
     public function createAction(Request $request)
     {
@@ -75,8 +66,8 @@ class PostController extends Controller
         $form = $this->createForm(new PostType(), $entity);
         $form->bind($request);
 
-        print_r($form->getErrors());
-        exit;
+        // print_r($form->getErrors());
+        // exit;
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -95,8 +86,6 @@ class PostController extends Controller
 
     /**
      * Displays a form to edit an existing Post entity.
-     *
-     * @Route("/{id}/edit", name="console_news_edit")
      */
     public function editAction($id)
     {
@@ -125,9 +114,6 @@ class PostController extends Controller
 
     /**
      * Edits an existing Post entity.
-     *
-     * @Route("/{id}/update", name="console_news_update")
-     * @Method("post")
      */
     public function updateAction(Request $request, $id)
     {
@@ -165,9 +151,6 @@ class PostController extends Controller
 
     /**
      * Deletes a Post entity.
-     *
-     * @Route("/{id}/delete", name="console_news_delete")
-     * @Method("post")
      */
     public function deleteAction(Request $request, $id)
     {

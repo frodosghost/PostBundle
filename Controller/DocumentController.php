@@ -21,8 +21,6 @@ class DocumentController extends Controller
 {
     /**
      * Finds and displays documents for a Post.
-     *
-     * @Route("/{id}/documents", name="console_news_documents")
      */
     public function documentsAction(Request $request, $id)
     {
@@ -55,14 +53,9 @@ class DocumentController extends Controller
 
     /**
      * Creates a new Photo entity.
-     *
-     * @Route("/{id}/document/create", name="console_news_document_create")
-     * @Method("POST")
      */
     public function createAction(Request $request, $id)
     {
-        var_dump('$form->isValid()');
-        exit;
         if (!$this->container->getParameter('manhattan_posts.include_documents')) {
             throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
         }
@@ -100,8 +93,6 @@ class DocumentController extends Controller
 
     /**
      * Displays a form to edit an existing Document entity.
-     *
-     * @Route("/{id}/document/{document_id}/edit", name="console_news_document_edit")
      */
     public function editAction(Request $request, $id, $document_id)
     {
@@ -132,9 +123,6 @@ class DocumentController extends Controller
 
     /**
      * Edits an existing Document entity.
-     *
-     * @Route("/{id}/document/{document_id}/update", name="console_news_document_update")
-     * @Method("POST")
      */
     public function updateAction(Request $request, $id, $document_id)
     {
@@ -174,8 +162,6 @@ class DocumentController extends Controller
 
     /**
      * Deletes a Post entity.
-     *
-     * @Route("/{id}/document/{document_id}/delete", name="console_news_document_delete")
      */
     public function deleteAction(Request $request, $id, $document_id)
     {

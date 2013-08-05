@@ -4,45 +4,35 @@ namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
  * Public News controller.
- *
  */
 class PublicController extends Controller
 {
     /**
      * Lists all Post entities.
-     *
-     * @Route("", name="posts")
-     * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
 
         $query = $em->getRepository('ManhattanPostsBundle:Post')->getQueryJoinImageAndCategory();
 
-        $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
+        $paginated_entities = $paginator->paginate($query, $request->query->get('page', 1), 6);
         compact($paginated_entities);
 
-        return array(
+        return $this->render('ManhattanPostsBundle:Public:index.html.twig', array(
             'entities' => $paginated_entities,
             'category' => null,
             'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
-        );
+        ));
     }
 
     /**
      * Displays RSS2.0 for News Feed
-     *
-     * @Route("/rss.xml", name="posts_rss2")
      */
     public function rssAction()
     {
@@ -63,32 +53,26 @@ class PublicController extends Controller
 
     /**
      * Lists all Post entities that belong to a category
-     *
-     * @Route("/{category}", name="posts_category")
-     * @Template("ManhattanPostsBundle:Public:index.html.twig")
      */
-    public function categoryAction($category)
+    public function categoryAction(Request $request, $category)
     {
         $em = $this->getDoctrine()->getManager();
         $paginator = $this->get('knp_paginator');
 
         $query = $em->getRepository('ManhattanPostsBundle:Post')->getQueryJoinCategory($category);
 
-        $paginated_entities = $paginator->paginate($query, $this->get('request')->query->get('page', 1), 6);
+        $paginated_entities = $paginator->paginate($query, $request->query->get('page', 1), 6);
         compact($paginated_entities);
 
-        return array(
+        return $this->render('ManhattanPostsBundle:Public:index.html.twig', array(
             'entities' => $paginated_entities,
             'category' => $category,
             'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
-        );
+        ));
     }
 
     /**
      * Finds and displays a Post entity.
-     *
-     * @Route("/{date}/{slug}", name="posts_view")
-     * @Template()
      */
     public function viewAction($date, $slug)
     {
@@ -102,10 +86,10 @@ class PublicController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        return array(
-            'entity'      => $entity,
+        return $this->render('ManhattanPostsBundle:Public:view.html.twig', array(
+            'entity' => $entity,
             'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
-        );
+        ));
     }
 
 }
