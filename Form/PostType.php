@@ -25,8 +25,8 @@ class PostType extends AbstractType
                 ), 'required' => true,
                 'label' => 'Body'
             ))
-            ->add('publish_state', 'choice', array(
-                'choices' => $options['data']->getStaticArray()
+            ->add('publishState', 'publish_state', array(
+                'label' => 'Publish State'
             ))
             ->add('image', new ImageType(), array(
                 'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Image',
@@ -34,7 +34,7 @@ class PostType extends AbstractType
                 'widget_controls' => false,
                 'label_render' => false
             ))
-            ->add('category', 'entity', array(
+            ->add('categorys', 'entity', array(
                 'multiple' => false,
                 'expanded' => true,
                 'class'    => 'Manhattan\Bundle\PostsBundle\Entity\Category'

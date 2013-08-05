@@ -1,6 +1,6 @@
 <?php
 
-namespace AGB\Bundle\ContentBundle\Tests\Entity;
+namespace Manhattan\Bundle\PostsBundle\Tests\Entity;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
@@ -19,7 +19,7 @@ class PostRepositoryFunctionalTest extends WebTestCase
 
         // Add data with Fixtures to include post listings
         $this->loadFixtures(array(
-            'AGB\Bundle\NewsBundle\Tests\DataFixtures\ORM\FixtureLoader'
+            'Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM\FixtureLoader'
         ));
     }
 
@@ -33,11 +33,10 @@ class PostRepositoryFunctionalTest extends WebTestCase
         $date = new \DateTime();
 
         $post = $this->em
-            ->getRepository('AGBNewsBundle:Post')
+            ->getRepository('ManhattanPostsBundle:Post')
             ->findOneByDateAndSlug($date->format('Y-m-d'), 'post-title-1');
 
-        $this->assertInstanceOf('AGB\Bundle\NewsBundle\Entity\Post', $post,
-            'findOneByDateAndSlug() returns Post object with query');
+        $this->assertInstanceOf('Manhattan\Bundle\PostsBundle\Entity\Post', $post, '->findOneByDateAndSlug() returns Post object with query');
     }
 
 }
