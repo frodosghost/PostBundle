@@ -225,7 +225,7 @@ class Post extends Publish
      * @param Manhattan\Bundle\PostsBundle\Entity\Category $category
      * @return Post
      */
-    public function addCategory(Category $category = null)
+    public function setCategory(Category $category = null)
     {
         $category->addPost($this);
 
