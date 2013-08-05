@@ -8,7 +8,7 @@
         {
             "name": "James Rickard",
             "email": "james@frodosghost.com",
-            "homepage": "www.frodosghost.com"
+            "homepage": "http://www.frodosghost.com"
         },
         {
             "name": "Dean White",
@@ -22,6 +22,7 @@
     "target-dir": "Manhattan/Bundle/PostsBundle",
     "require": {
         "symfony/symfony": "2.3.*",
-        "manhattan/content-bundle": "dev-master"
+        "manhattan/content-bundle": "dev-master",
+        "knplabs/knp-paginator-bundle": "*"
     }
 }
