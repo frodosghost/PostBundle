@@ -14,16 +14,11 @@ class PostType extends AbstractType
             ->add('title', 'text', array(
                 'label' => 'Title'
             ))
-            ->add('excerpt', 'textarea', array(
-                'required' => true,
-                'label' => 'Excerpt'
+            ->add('excerpt', 'markdown', array(
+                'show_help' => false
             ))
-            ->add('body', 'textarea', array(
-                'attr'  => array(
-                    'class' => 'tinymce',
-                    'data-theme' => 'body'
-                ), 'required' => true,
-                'label' => 'Body'
+            ->add('body', 'markdown', array(
+                'show_help' => true
             ))
             ->add('publishState', 'publish_state', array(
                 'label' => 'Publish State'
