@@ -56,7 +56,7 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
             targetEntity: Manhattan\Bundle\PostsBundle\Entity\Document
             cascade:
                 - persist
-            mappedBy: document
+            mappedBy: post
             joinColumn:
                 onDelete: CASCADE
 
