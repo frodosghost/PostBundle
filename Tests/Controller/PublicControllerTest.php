@@ -1,14 +1,14 @@
 <?php
-
+/*
 namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class PublicControllerTest extends WebTestCase
 {
-    /**
+    /*
      * Tests empty index with no data loaded into display on list page
-     */
+     *
     public function testEmptyIndex()
     {
         $client = static::createClient();
@@ -24,9 +24,9 @@ class PublicControllerTest extends WebTestCase
             'Visiting the Articles Index page with no results displays a small string with no results.');
     }
 
-    /**
+    /*
      * Populates Articles Index pageto show test data for list page
-     */
+     *
     public function testPopulatedIndex()
     {
         $client = static::createClient();
@@ -50,12 +50,12 @@ class PublicControllerTest extends WebTestCase
         $crawler = $client->click($link);
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode(),
-            'Visiting the view page from the Index page returns a status code of 200.');*/
+            'Visiting the view page from the Index page returns a status code of 200.');
     }
 
-    /**
+    /*
      * Tests the RSS page with loaded data.
-     */
+     *
     public function testRss()
     {
         $client = static::createClient();
@@ -72,4 +72,4 @@ class PublicControllerTest extends WebTestCase
             'Displays the 5 Published Items in the news data.');
     }
 
-}
+}*/
