@@ -1,5 +1,41 @@
-services:
-    manhattan_posts_bundle.configure_menu_listener:
-        class: Manhattan\Bundle\PostsBundle\EventListener\ConfigureMenuListener
-        tags:
-            - { name: kernel.event_listener, event: manhattan_console_bundle.menu_configure, method: onMenuConfigure }
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <parameters>
+        <parameter key="manhattan_content.menu.menu_listener">Manhattan\Bundle\PostsBundle\EventListener\ConfigureMenuListener</parameter>
+        <parameter key="manhattan_content.event.persist_listener">Manhattan\Bundle\ContentBundle\EventListener\ObjectPersistListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="manhattan_posts_bundle.configure_menu_listener" class="%manhattan_content.menu.menu_listener%">
+            <tag name="kernel.event_listener" event="manhattan_console_bundle.menu_configure" method="onMenuConfigure" />
+        </service>
+
+        <!-- DOCTRINE PERSISTING -->
+        <service id="doctrine.pre_persist" class="%manhattan_content.event.persist_listener%">
+            <tag name="doctrine.event_listener" event="prePersist" />
+        </service>
+
+        <service id="doctrine.post_persist" class="%manhattan_content.event.persist_listener%">
+            <tag name="doctrine.event_listener" event="postPersist" />
+        </service>
+
+        <service id="doctrine.pre_update" class="%manhattan_content.event.persist_listener%">
+            <tag name="doctrine.event_listener" event="preUpdate" />
+        </service>
+
+        <service id="doctrine.post_update" class="%manhattan_content.event.persist_listener%">
+            <tag name="doctrine.event_listener" event="postUpdate" />
+        </service>
+
+        <service id="doctrine.pre_remove" class="%manhattan_content.event.persist_listener%">
+            <tag name="doctrine.event_listener" event="preRemove" />
+        </service>
+
+        <service id="doctrine.post_remove" class="%manhattan_content.event.persist_listener%">
+            <tag name="doctrine.event_listener" event="postRemove" />
+        </service>
+    </services>
+</container>
