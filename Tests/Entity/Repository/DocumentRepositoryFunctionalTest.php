@@ -1,6 +1,6 @@
 <?php
 
-namespace Manhattan\Bundle\PostsBundle\Tests\Entity;
+namespace Manhattan\Bundle\PostsBundle\Tests\Entity\Repository;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
