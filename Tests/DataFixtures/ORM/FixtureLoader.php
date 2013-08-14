@@ -28,7 +28,7 @@ class FixtureLoader implements FixtureInterface
         {
             $post = new Post();
             $post->setTitle('Post Title '. $i);
-            $post->addCategory($category_one);
+            $post->setCategory($category_one);
             $post->setExcerpt('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue pulvinar egestas. Aliquam erat volutpat. Praesent tempor tincidunt elit sit amet lobortis. Duis cursus massa sed libero adipiscing lacinia. Praesent mauris arcu, convallis at pulvinar at, tempus a lacus.');
             $post->setBody('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue pulvinar egestas. Aliquam erat volutpat. Praesent tempor tincidunt elit sit amet lobortis. Duis cursus massa sed libero adipiscing lacinia. Praesent mauris arcu, convallis at pulvinar at, tempus a lacus. Donec massa magna, aliquet sit amet fermentum et, ultrices in velit. Ut semper elementum eros ac faucibus. Nulla facilisi. Phasellus non risus neque. Mauris sollicitudin, tellus sit amet euismod gravida, magna lectus interdum magna, vitae malesuada diam ipsum non ante.' .
                 'In facilisis congue ante, ac malesuada dui feugiat at. Integer et velit ligula, in porttitor lacus. In tempor lacinia ipsum vel fermentum. Suspendisse laoreet justo at enim fermentum posuere. Duis convallis pharetra elementum. Pellentesque purus lorem, dictum non viverra et, fringilla elementum nunc. Praesent pellentesque lacus at eros tristique interdum. Etiam et ultricies justo. Vestibulum adipiscing magna sit amet mi consectetur vel placerat neque placerat. Donec scelerisque odio vitae nisi vulputate nec tincidunt augue tempus. Aliquam auctor cursus orci, ut tincidunt nibh lobortis id. Vestibulum sit amet purus quis velit rutrum faucibus. Nullam elementum mauris et nisl feugiat non dignissim mauris vulputate. Praesent a magna luctus urna tempus tincidunt.'.
@@ -36,7 +36,6 @@ class FixtureLoader implements FixtureInterface
                 'Praesent nec mauris sapien, id ullamcorper arcu. Aenean a magna ligula, vitae adipiscing dui. Sed sollicitudin porttitor convallis. Morbi imperdiet leo et lectus consequat tempus. Fusce mollis, sapien a tempus rhoncus, arcu augue laoreet libero, a varius neque neque vel risus. Fusce venenatis gravida leo sit amet luctus. Mauris ac nulla sit amet nisl tempor rhoncus. Fusce imperdiet, nunc non elementum tristique, purus ante laoreet nisl, ac pharetra lorem nulla vitae orci. Curabitur ultricies nisl nec tellus semper congue. Aliquam risus massa, adipiscing eget vulputate eu, tempus non purus.'
             );
 
-            //$post->setPublishDate(new \DateTime());
             $post->setPublishState(($i % 2) ? 2 : 1);
 
             if ($i % 3 == 0) {

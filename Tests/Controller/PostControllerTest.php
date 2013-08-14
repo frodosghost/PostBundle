@@ -1,59 +1,70 @@
 <?php
-/*
+
 namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
 use Liip\FunctionalTestBundle\Test\WebTestCase;
-//use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PostControllerTest extends WebTestCase
 {
-     public function testIndex()
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
+    public function setUp()
     {
-        $client = static::createClient();
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
+        $this->em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
 
-        //$crawler = $client->request('GET', '/console/news/');
-        $client->request('GET', '/console/news/');
-        $client->followRedirect();
+        // Add data with Fixtures
+        $this->loadFixtures(array(
+            'Manhattan\Bundle\ConsoleBundle\Tests\DataFixtures\ORM\LoadAuthenticatedAdminUserData',
+            'Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM\FixtureLoader'
+        ));
+    }
 
-        var_dump($client->getResponse());
-        $this->assertEquals(200, $client->getResponse()->getStatusCode(),
-            'Visiting the console login returns to 200 page status.');
+    protected function tearDown()
+    {
+        $this->loadFixtures(array());
+
+        $this->getContainer()->get('doctrine')->getConnection()->close();
+        parent::tearDown();
     }
 
     public function testCompleteScenario()
     {
+        $this->getContainer()->set('manhattan_posts.include_documents', true);
 
-    array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'password',
-        )
-
-        
-        // Create a new client to browse the application
-        $client = static::createClient();
+        $user = $this->em->getRepository('ManhattanConsoleBundle:User')->find(1);
+        $this->loginAs($user, 'secured_area');
+        $client = $this->makeClient(true);
 
         // Create a new entry in the database
-        $crawler = $client->request('GET', '/console/news/');
+        $crawler = $client->request('GET', '/console/posts');
+
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        $crawler = $client->click($crawler->selectLink('Create a new post')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'post[field_name]'  => 'Test',
-            // ... other fields to fill
+            'post[title]'        => 'Foo',
+            'post[excerpt]'      => 'Foo Bar',
+            'post[body]'         => 'Foo Bar',
+            'post[publishState]' => 2,
+            'post[category]'     => 1,
         ));
 
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        // Check data in the show view
-        $this->assertTrue($crawler->filter('td:contains("Test")')->count() > 0);
+        $this->assertEquals(1, $crawler->filter('a:contains("Foo")')->count(), 'New Post is created.');
 
         // Edit the entity
-        $crawler = $client->click($crawler->selectLink('Edit')->link());
+        $crawler = $client->click($crawler->filter('a:contains("Foo")')->last()->link());
 
         $form = $crawler->selectButton('Edit')->form(array(
-            'post[field_name]'  => 'Foo',
+            'post[title]'  => 'Foo',
             // ... other fields to fill
         ));
 
@@ -70,5 +81,5 @@ class PostControllerTest extends WebTestCase
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
     }
-    
-}*/
+
+}

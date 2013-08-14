@@ -11,19 +11,13 @@ use Manhattan\Bundle\PostsBundle\Entity\Document;
  */
 class DocumentTest extends \PHPUnit_Framework_TestCase
 {
+    // $this->createUploadedFileMock('abcdef', 'original.jpg', true);
+
     public function testGetUploadDir()
     {
         $document = new Document();
 
-        $mock_post = $this->getMock('Manhattan\Bundle\PostsBundle\Entity\Post');
-        $mock_post->expects($this->any())
-            ->method('getSlug')
-            ->will($this->returnValue('foo-bar'));
-
-        $document->addPost($mock_post);
-
-        $this->assertEquals('uploads/documents/foo-bar', $document->getUploadDir(),
-            '->getUploadDir() returns the correctly set directory.');
+        $this->assertEquals('uploads/documents', $document->getUploadDir(), '->getUploadDir() returns the correctly set directory.');
     }
 
     public function testPreUpload()

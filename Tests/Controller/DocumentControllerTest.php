@@ -7,10 +7,22 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class DocumentControllerTest extends WebTestCase
 {
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $em;
+
     public function setUp()
     {
-        // Add data with Fixtures to include post listings
+        static::$kernel = static::createKernel();
+        static::$kernel->boot();
+        $this->em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+
+        $this->getContainer()->set('manhattan_posts.include_documents', true);
+
+        // Add data with Fixtures
         $this->loadFixtures(array(
+            'Manhattan\Bundle\ConsoleBundle\Tests\DataFixtures\ORM\LoadAuthenticatedAdminUserData',
             'Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM\FixtureLoader'
         ));
     }
@@ -18,33 +30,39 @@ class DocumentControllerTest extends WebTestCase
     protected function tearDown()
     {
         $this->loadFixtures(array());
+
+        $this->getContainer()->get('doctrine')->getConnection()->close();
+        parent::tearDown();
     }
 
     public function testDocuments()
     {
-        $client = static::createClient(array(), array(
-            'PHP_AUTH_USER' => 'admin',
-            'PHP_AUTH_PW'   => 'test'
-        ));
+        $this->getContainer()->set('manhattan_posts.include_documents', true);
 
-        $crawler = $client->request('GET', '/console/news/new');
+        $user = $this->em->getRepository('ManhattanConsoleBundle:User')->find(1);
+        $this->loginAs($user, 'secured_area');
+        $client = $this->makeClient(true);
+
+        $crawler = $client->request('GET', '/console/posts/new');
+
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'post[title]'         => 'Foo',
-            'post[body]'          => 'Foo Bar',
-            'post[publish_state]' => 2,
-            'post[category]'      => 1,
+            'post[title]'        => 'Foo',
+            'post[excerpt]'      => 'Foo Bar',
+            'post[body]'         => 'Foo Bar',
+            'post[publishState]' => 2,
+            'post[category]'     => 1
         ));
 
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        $this->assertTrue($crawler->filter('td:contains("Foo")')->count() > 0);
+        $this->assertEquals(1, $crawler->filter('a:contains("Foo")')->count(), 'New Post is created.');
 
         // Follow to the Edit page to display link to Documents
-        $crawler = $client->click($crawler->filter('a.btn-primary')->link());
+        $crawler = $client->click($crawler->filter('a:contains("Foo")')->link());
 
         $crawler = $client->click($crawler->selectLink('Manage Documents')->link());
 
