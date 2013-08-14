@@ -4,8 +4,6 @@ namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Manhattan\Bundle\PostsBundle\Entity\Post;
@@ -14,8 +12,6 @@ use Manhattan\Bundle\PostsBundle\Form\DocumentType;
 
 /**
  * Document controller.
- *
- * @Route("/console/news")
  */
 class DocumentController extends Controller
 {

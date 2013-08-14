@@ -4,10 +4,9 @@ namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Image;
 use Manhattan\Bundle\PostsBundle\Form\PostType;
 
 /**
@@ -65,9 +64,6 @@ class PostController extends Controller
 
         $form = $this->createForm(new PostType(), $entity);
         $form->bind($request);
-
-        // print_r($form->getErrors());
-        // exit;
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
