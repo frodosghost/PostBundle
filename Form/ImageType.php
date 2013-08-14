@@ -13,18 +13,14 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', 'preview_file', array(
-                'required' => true,
+            ->add('file', 'file', array(
                 'label' => 'Image',
+                'image_path' => 'webPath',
                 "attr" => array(
                     "accept" => "image/*"
-                ),
-                'constraints' => array(
-                    new Image(array(
-                        'maxSize' => '1024k'
-                    ))
                 )
-        ));
+            ))
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

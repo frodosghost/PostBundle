@@ -27,7 +27,8 @@ class DocumentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Document'
+            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Document',
+            'cascade_validation' => true
         ));
     }
 
