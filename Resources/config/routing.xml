@@ -4,10 +4,10 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <import resource="@ManhattanContentBundle/Resources/config/routing/post.xml" prefix="/console" />
-    <import resource="@ManhattanContentBundle/Resources/config/routing/category.xml" prefix="/console/content" />
-    <import resource="@ManhattanContentBundle/Resources/config/routing/document.xml" prefix="/console/content" />
+    <import resource="@ManhattanPostsBundle/Resources/config/routing/post.xml" prefix="/console" />
+    <import resource="@ManhattanPostsBundle/Resources/config/routing/category.xml" prefix="/console/posts" />
+    <import resource="@ManhattanPostsBundle/Resources/config/routing/document.xml" prefix="/console/posts" />
 
-    <import resource="@ManhattanContentBundle/Resources/config/routing/public.xml" prefix="/console/content" />
+    <import resource="@ManhattanPostsBundle/Resources/config/routing/public.xml" prefix="/console" />
 
 </routes>
