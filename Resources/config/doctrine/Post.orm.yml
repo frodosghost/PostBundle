@@ -41,6 +41,7 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
     oneToOne:
         image:
             targetEntity: Manhattan\Bundle\PostsBundle\Entity\Image
+            nullable: true
             cascade:
                 - persist
                 - remove
