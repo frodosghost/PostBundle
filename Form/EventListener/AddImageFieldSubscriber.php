@@ -10,27 +10,23 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\CallbackValidator;
 use Symfony\Component\Form\FormError;
 
-class AddFileFieldSubscriber implements EventSubscriberInterface
-{
-    private $factory;
+use Manhattan\Bundle\PostsBundle\Form\ImageType;
 
-    public function __construct(FormFactoryInterface $factory)
-    {
-        $this->factory = $factory;
-    }
+class AddImageFieldSubscriber implements EventSubscriberInterface
+{
 
     public static function getSubscribedEvents()
     {
         return array(
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::POST_BIND    => 'postBind'
+            //FormEvents::POST_BIND    => 'postBind'
         );
     }
 
     /**
      * Adds the file field to the form if create form.
      *
-     * @param  FormEvent $event
+     * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
     {
@@ -42,21 +38,20 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
         }
 
         // check if the object is "new"
-        if (!$data->getId()) {
-            if (!$data->getId()) {
-            $form->add('file', 'file', array(
-                'required' => true,
-                'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Document'
+        if ($data->getId()) {
+            $form->add('image', new ImageType(), array(
+                'property_path' => 'image',
+                'widget_control_group' => false,
+                'label' => false
             ));
-        }
         }
     }
 
-    /**
+    /*
      * Determines if the file has been provided, and displays error if not provided.
      *
-     * @param  FormEvent $event
-     */
+     * @param FormEvent $event
+
     public function postBind(FormEvent $event)
     {
         $data = $event->getData();
@@ -69,5 +64,6 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
             }
         }
     }
+    */
 
 }
