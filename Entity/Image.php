@@ -2,8 +2,7 @@
 
 namespace Manhattan\Bundle\PostsBundle\Entity;
 
-use Manhattan\Bundle\ContentBundle\Entity\Asset;
-use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Asset;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Image

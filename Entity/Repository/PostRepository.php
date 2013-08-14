@@ -24,17 +24,14 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image, document FROM ManhattanPostsBundle:Post post
-                LEFT JOIN post.category category
-                LEFT JOIN post.image image
-                LEFT JOIN post.documents document
+                SELECT post FROM ManhattanPostsBundle:Post post
                 WHERE post.publishDate BETWEEN :date_start AND :date_end
                     AND post.slug = :slug
                     AND post.publishState = :publishState'
             )->setParameters(array(
-            	'date_start'    => new \DateTime($date .'00:00:00'),
-            	'date_end'      => new \DateTime($date .'23:59:59'),
-                'slug'          => $slug,
+            	'date_start'   => new \DateTime($date .' 00:00:00'),
+            	'date_end'     => new \DateTime($date .' 23:59:59'),
+                'slug'         => $slug,
                 'publishState' => $this->getPublishState()
             ));
 
@@ -114,10 +111,10 @@ class PostRepository extends EntityRepository
     }
 
     /**
-     * Returns Content with joined Documents
+     * Returns Post with joined Documents
      *
      * @param  int     $id
-     * @return Content
+     * @return Post
      */
     public function findOneByIdJoinDocuments($id)
     {
@@ -141,7 +138,7 @@ class PostRepository extends EntityRepository
      * Sets Publish State to be returned from query
      *
      * @param  int     $publishState
-     * @return Content
+     * @return Post
      */
     public function setPublishState($publishState)
     {

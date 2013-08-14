@@ -2,7 +2,7 @@
 
 namespace Manhattan\Bundle\PostsBundle\Entity;
 
-use Manhattan\Bundle\ContentBundle\Entity\Asset;
+use Manhattan\Bundle\PostsBundle\Entity\Asset;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
@@ -98,7 +98,7 @@ class Document extends Asset
 
     public function getUploadDir()
     {
-        return 'uploads/documents/'. $this->getPost()->getSlug();
+        return 'uploads/documents';
     }
 
     /**

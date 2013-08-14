@@ -82,7 +82,7 @@ abstract class Publish
     {
         $this->publishState = $publishState;
 
-        if ($publishState === self::PUBLISH) {
+        if ($publishState === self::PUBLISH && (is_null($this->publishDate))) {
             $this->setPublishDate(new \DateTime());
         }
 

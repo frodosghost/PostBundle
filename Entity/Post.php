@@ -204,6 +204,7 @@ class Post extends Publish
     {
         if ($image instanceof Image && $image->hasFile()) {
             $this->image = $image;
+            $this->image->preUpload();
         }
 
         return $this;
