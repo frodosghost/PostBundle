@@ -69,7 +69,11 @@ abstract class Publish
      */
     public function getDate()
     {
-        return $this->getPublishDate()->format('Y-m-d');
+        if ($this->getPublishDate() instanceof \DateTime) {
+            return $this->getPublishDate()->format('Y-m-d');
+        }
+
+        return null;
     }
 
     /**

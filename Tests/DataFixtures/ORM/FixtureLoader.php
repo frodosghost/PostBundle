@@ -24,8 +24,7 @@ class FixtureLoader implements FixtureInterface
         $download->setFilename('document.pdf');
         $download->setMimeType('application/pdf');
 
-        for ( $i = 0; $i < 10; ++$i )
-        {
+        for ( $i = 0; $i < 10; ++$i ) {
             $post = new Post();
             $post->setTitle('Post Title '. $i);
             $post->setCategory($category_one);

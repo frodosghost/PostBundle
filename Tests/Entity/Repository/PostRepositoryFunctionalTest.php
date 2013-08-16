@@ -26,11 +26,18 @@ class PostRepositoryFunctionalTest extends WebTestCase
     protected function tearDown()
     {
         $this->loadFixtures(array());
+
+        $this->getContainer()->get('doctrine')->getConnection()->close();
+        parent::tearDown();
     }
 
     public function testOneByDateAndSlug()
     {
         $date = new \DateTime();
+
+        foreach ($this->em->getRepository('ManhattanPostsBundle:Post')->findAll() as $post) {
+            print_r($post->getDate() .': '. $post->getSlug() .' - '. $post->getPublishState() ."\n");
+        }
 
         $post = $this->em
             ->getRepository('ManhattanPostsBundle:Post')
