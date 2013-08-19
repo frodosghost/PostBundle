@@ -4,6 +4,7 @@ namespace Manhattan\Bundle\PostsBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
