@@ -35,10 +35,6 @@ class PostRepositoryFunctionalTest extends WebTestCase
     {
         $date = new \DateTime();
 
-        foreach ($this->em->getRepository('ManhattanPostsBundle:Post')->findAll() as $post) {
-            print_r($post->getDate() .': '. $post->getSlug() .' - '. $post->getPublishState() ."\n");
-        }
-
         $post = $this->em
             ->getRepository('ManhattanPostsBundle:Post')
             ->findOneByDateAndSlug($date->format('Y-m-d'), 'post-title-1');

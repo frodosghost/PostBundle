@@ -5,7 +5,6 @@ namespace Manhattan\Bundle\PostsBundle\Tests\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-
 use Manhattan\Bundle\PostsBundle\Entity\Category;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
