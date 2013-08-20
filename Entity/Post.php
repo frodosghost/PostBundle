@@ -4,10 +4,10 @@ namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Manhattan\PublishBundle\Entity\Publish;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
 use Manhattan\Bundle\PostsBundle\Entity\Document;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
-use Manhattan\Bundle\PostsBundle\Entity\Base\Publish;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Post
@@ -54,16 +54,6 @@ class Post extends Publish
      * @var Manhattan\Bundle\PostsBundle\Entity\Category
      **/
     private $category;
-
-    /**
-     * @var datetime $createdAt
-     */
-    private $createdAt;
-
-    /**
-     * @var datetime $updatedAt
-     */
-    private $updatedAt;
 
 
     public function __construct()
@@ -242,65 +232,6 @@ class Post extends Publish
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param datetime $createdAt
-     * @return Post
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return datetime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param datetime $updatedAt
-     * @return Post
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return datetime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * PrePersist()
-     */
-    public function prePersist() {
-        $this->setCreatedAt(new \DateTime());
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * PreUpdate()
-     */
-    public function preUpdate() {
-        $this->setUpdatedAt(new \DateTime());
     }
 
 }

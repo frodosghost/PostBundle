@@ -24,19 +24,6 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
         body:
             type: text
             nullable: true
-        publishState:
-            type: integer
-            column: publish_state
-        publishDate:
-            type: datetime
-            column: publish_date
-            nullable: true
-        createdAt:
-            type: datetime
-            column: created_at
-        updatedAt:
-            type: datetime
-            column: updated_at
 
     oneToOne:
         image:
@@ -60,7 +47,3 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
             mappedBy: post
             joinColumn:
                 onDelete: CASCADE
-
-    lifecycleCallbacks:
-        prePersist: [ prePersist ]
-        preUpdate:  [ preUpdate ]
