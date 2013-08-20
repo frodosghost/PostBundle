@@ -24,11 +24,11 @@ class ManhattanPostsExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.xml');
-
         $container->setParameter('manhattan_posts.rss', $config['rss']);
         $container->setParameter('manhattan_posts.config', $config['configuration']);
         $container->setParameter('manhattan_posts.include_documents', $config['configuration']['include_documents']);
+
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.xml');
     }
 }

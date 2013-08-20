@@ -18,8 +18,6 @@ class DocumentControllerTest extends WebTestCase
         static::$kernel->boot();
         $this->em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
 
-        $this->getContainer()->set('manhattan_posts.include_documents', true);
-
         // Add data with Fixtures
         $this->loadFixtures(array(
             'Manhattan\Bundle\ConsoleBundle\Tests\DataFixtures\ORM\LoadAuthenticatedAdminUserData',
@@ -37,8 +35,6 @@ class DocumentControllerTest extends WebTestCase
 
     public function testDocuments()
     {
-        $this->getContainer()->set('manhattan_posts.include_documents', true);
-
         $user = $this->em->getRepository('ManhattanConsoleBundle:User')->find(1);
         $this->loginAs($user, 'secured_area');
         $client = $this->makeClient(true);
