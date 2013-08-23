@@ -69,7 +69,7 @@ class CategoryController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('console_news_category_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('console_news_category'));
         }
 
         return $this->render('ManhattanPostsBundle:Category:new.html.twig', array(
