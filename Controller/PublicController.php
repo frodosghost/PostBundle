@@ -5,6 +5,7 @@ namespace Manhattan\Bundle\PostsBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Public News controller.
@@ -81,15 +82,30 @@ class PublicController extends Controller
         $entity = $em->getRepository('ManhattanPostsBundle:Post')->findOneByDateAndSlug($date, $slug);
 
         if (!$entity) {
-            $log = $this->get('logger');
-            $log->err(sprintf('[404: Page Not Found]: Unable to find Content entity with URI: "%s"', $this->getRequest()->getUri()));
-            throw $this->createNotFoundException('Unable to find Post entity.');
+            throw $this->createNotFoundException(sprintf('Exception: 404 Page Not Found. Unable to find Content entity with URI: "%s"', $this->getRequest()->getUri()));
         }
 
         return $this->render('ManhattanPostsBundle:Public:view.html.twig', array(
             'entity' => $entity,
             'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
         ));
+    }
+
+    /**
+     * Sends 404 to Page AtomLogger
+     *
+     * @param  string     $message  Error Message to be Loggers
+     * @param  \Exception $previous Previous message made prior to 404
+     * @return NotFoundHttpException
+     */
+    public function createNotFoundException($message = 'Not Found', \Exception $previous = null)
+    {
+        if ($this->has('atom.404.logger')) {
+            $log = $this->get('atom.404.logger');
+            $log->addRecord(400, $message, array('request' => $this->getRequest()->getUri()));
+        }
+
+        return new NotFoundHttpException($message, $previous);
     }
 
 }
