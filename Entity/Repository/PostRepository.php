@@ -84,7 +84,7 @@ class PostRepository extends EntityRepository
                 WHERE post.publishDate < :date
                     AND post.publishState = :publishState
                     AND category.slug = :category
-                ORDER BY post.published_date DESC'
+                ORDER BY post.publishDate DESC'
             )->setParameter('date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME)
              ->setParameter('publishState', $this->getPublishState())
              ->setParameter('category', $category);
