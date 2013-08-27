@@ -5,9 +5,9 @@
         <h4><span>Latest News</span></h4>
         {% for post in latest_news %}
         <div class="item">
-	        <h5><a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a></h5>
-	        <p class="small"><a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">Published Date: {{ post.publishdate|date('d/m/Y') }}</a></p>
-	        <p>{{ post.excerpt|truncate(250)|striptags('<p><a><strong><em>')|raw }} <a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">Read more...</a></p>
+	        <h5><a href="{{ path('posts_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a></h5>
+	        <p class="small"><a href="{{ path('posts_view', { 'date': post.date, 'slug': post.slug }) }}">Published Date: {{ post.publishdate|date('d/m/Y') }}</a></p>
+	        <p>{{ post.excerpt|truncate(250)|striptags('<p><a><strong><em>')|raw }} <a href="{{ path('posts_view', { 'date': post.date, 'slug': post.slug }) }}">Read more...</a></p>
 	    </div>
         {% endfor %}
     </div>
@@ -57,7 +57,7 @@
 {% spaceless %}
 <ul class="news">
     {% for post in recent_news %}
-    <li><a href="{{ path('news_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a></li>
+    <li><a href="{{ path('posts_view', { 'date': post.date, 'slug': post.slug }) }}">{{ post.title }}</a></li>
     {% endfor %}
 </ul>
 {% endspaceless %}
