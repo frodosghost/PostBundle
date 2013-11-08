@@ -24,10 +24,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image, document, user FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, attachment, user FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                LEFT JOIN post.documents document
+                LEFT JOIN post.attachments attachment
                 LEFT JOIN post.createdBy user
                 WHERE post.publishDate BETWEEN :date_start AND :date_end
                     AND post.slug = :slug
@@ -54,10 +54,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image, document, user FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, attachment, user FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                LEFT JOIN post.documents document
+                LEFT JOIN post.attachments attachment
                 LEFT JOIN post.createdBy user
                 WHERE post.publishDate < :date
                     AND post.publishState = :publishState
@@ -76,10 +76,10 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, category, image, document, user FROM ManhattanPostsBundle:Post post
+                SELECT post, category, image, attachment, user FROM ManhattanPostsBundle:Post post
                 LEFT JOIN post.category category
                 LEFT JOIN post.image image
-                LEFT JOIN post.documents document
+                LEFT JOIN post.attachments attachment
                 LEFT JOIN post.createdBy user
                 WHERE post.publishDate < :date
                     AND post.publishState = :publishState
@@ -126,8 +126,8 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post, document FROM ManhattanPostsBundle:Post post
-                LEFT JOIN post.documents document
+                SELECT post, attachment FROM ManhattanPostsBundle:Post post
+                LEFT JOIN post.attachments attachment
                 WHERE post.id = :id'
             )->setParameters(array(
                 'id' => $id

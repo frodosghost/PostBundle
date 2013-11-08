@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 use Manhattan\PublishBundle\Entity\Publish;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
-use Manhattan\Bundle\PostsBundle\Entity\Document;
+use Manhattan\Bundle\PostsBundle\Entity\Attachment;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
 
 /**
@@ -43,7 +43,7 @@ class Post extends Publish
     /**
      * @var Doctrine\Common\Collections\ArrayCollection
      */
-    private $documents;
+    private $attachments;
 
     /**
      * @var Manhattan\Bundle\PostsBundle\Entity\Image
@@ -58,7 +58,7 @@ class Post extends Publish
 
     public function __construct()
     {
-        $this->documents = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
 
         parent::__construct();
     }
@@ -162,26 +162,26 @@ class Post extends Publish
     }
 
     /**
-     * Add Document
+     * Add Attachment
      *
-     * @param Manhattan\Bundle\PostsBundle\Entity\Document $document
+     * @param Manhattan\Bundle\PostsBundle\Entity\Attachment $attachment
      */
-    public function addDocument(Document $document)
+    public function addAttachment(Attachment $attachment)
     {
-        $document->addPost($this);
-        $this->documents[] = $document;
+        $attachment->addPost($this);
+        $this->attachments[] = $attachment;
 
         return $this;
     }
 
     /**
-     * Get Documents
+     * Get Attachments
      *
      * @return Doctrine\Common\Collections\Collection
      */
-    public function getDocuments()
+    public function getAttachments()
     {
-        return $this->documents;
+        return $this->attachments;
     }
 
     /**

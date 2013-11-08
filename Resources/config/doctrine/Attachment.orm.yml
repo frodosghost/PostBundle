@@ -34,8 +34,7 @@ Manhattan\Bundle\PostsBundle\Entity\Attachment:
                 referencedColumnName: id
                 onDelete: SET NULL
         type:
-            targetEntity: Manhattan\Bundle\PostsBundle\Entity\AttachmentType
-            inversedBy: attachments
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Attachment\Type
             joinColumn:
                 name: attachment_type_id
                 referencedColumnName: id

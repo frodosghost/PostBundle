@@ -1,0 +1,18 @@
+Manhattan\Bundle\PostsBundle\Entity\Attachment\Type:
+    type:  entity
+    table: news_attachment_type
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    fields: [ title ]

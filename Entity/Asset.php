@@ -2,13 +2,14 @@
 
 namespace Manhattan\Bundle\PostsBundle\Entity;
 
+use Manhattan\PublishBundle\Entity\Publish;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Asset
  */
-abstract class Asset
+abstract class Asset extends Publish
 {
     /**
      * @var integer $id

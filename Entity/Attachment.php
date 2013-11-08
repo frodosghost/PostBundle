@@ -4,6 +4,7 @@ namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Manhattan\Bundle\PostsBundle\Entity\Asset;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Attachment\Type;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Attachment
@@ -24,6 +25,11 @@ class Attachment extends Asset
      * @var Manhattan\Bundle\PostsBundle\Entity\Post
      */
     private $post;
+
+    /**
+     * @var Manhattan\Bundle\PostsBundle\Entity\Attachment\Type
+     */
+    private $type;
 
 
     public function __toString()
@@ -94,6 +100,27 @@ class Attachment extends Asset
     public function getPost()
     {
         return $this->post;
+    }
+
+    /**
+     * Add type
+     *
+     * @param Manhattan\Bundle\PostsBundle\Entity\Attachment\Type $type
+     */
+    public function addType(Type $type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return Manhattan\Bundle\PostsBundle\Entity\Attachment\Type
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     public function getUploadDir()

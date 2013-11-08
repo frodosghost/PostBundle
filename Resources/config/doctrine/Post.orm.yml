@@ -40,8 +40,8 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
             inversedBy: posts
 
     oneToMany:
-        documents:
-            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Document
+        attachments:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\Attachment
             cascade:
                 - persist
             mappedBy: post
