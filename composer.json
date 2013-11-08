@@ -25,5 +25,8 @@
         "manhattan/content-bundle": "dev-master",
         "manhattan/publish-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "*"
+    },
+    "suggest": {
+        "rezzza/flickr-bundle": "1.0.*@dev"
     }
 }
