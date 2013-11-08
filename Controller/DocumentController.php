@@ -21,7 +21,7 @@ class DocumentController extends Controller
      */
     public function documentsAction(Request $request, $id)
     {
-        if (!$this->container->getParameter('manhattan_posts.include_documents')) {
+        if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
             throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
         }
 
@@ -53,7 +53,7 @@ class DocumentController extends Controller
      */
     public function createAction(Request $request, $id)
     {
-        if (!$this->container->getParameter('manhattan_posts.include_documents')) {
+        if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
             throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
         }
 
@@ -93,7 +93,7 @@ class DocumentController extends Controller
      */
     public function editAction(Request $request, $id, $document_id)
     {
-        if (!$this->container->getParameter('manhattan_posts.include_documents')) {
+        if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
             throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
         }
 
@@ -123,7 +123,7 @@ class DocumentController extends Controller
      */
     public function updateAction(Request $request, $id, $document_id)
     {
-        if (!$this->container->getParameter('manhattan_posts.include_documents')) {
+        if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
             throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
         }
 
@@ -162,7 +162,7 @@ class DocumentController extends Controller
      */
     public function deleteAction(Request $request, $id, $document_id)
     {
-        if (!$this->container->getParameter('manhattan_posts.include_documents')) {
+        if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
             throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
         }
 

@@ -28,7 +28,7 @@ class PublicController extends Controller
         return $this->render('ManhattanPostsBundle:Public:index.html.twig', array(
             'entities' => $paginated_entities,
             'category' => null,
-            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
+            'include_attachments' => $this->container->getParameter('manhattan_posts.include_attachments')
         ));
     }
 
@@ -68,7 +68,7 @@ class PublicController extends Controller
         return $this->render('ManhattanPostsBundle:Public:index.html.twig', array(
             'entities' => $paginated_entities,
             'category' => $category,
-            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
+            'include_attachments' => $this->container->getParameter('manhattan_posts.include_attachments')
         ));
     }
 
@@ -87,7 +87,7 @@ class PublicController extends Controller
 
         return $this->render('ManhattanPostsBundle:Public:view.html.twig', array(
             'entity' => $entity,
-            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
+            'include_attachments' => $this->container->getParameter('manhattan_posts.include_attachments')
         ));
     }
 

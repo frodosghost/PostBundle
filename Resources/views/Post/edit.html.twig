@@ -4,7 +4,7 @@
 
 <form action="{{ path('console_news_update', { 'id': entity.id }) }}" class ="form-horizontal well" method="POST" {{ form_enctype(edit_form) }} novalidate>
     <div class="manage">
-        {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn manage btn-warning">Manage Documents</a>{% endif %}
+        {%  if include_attachments %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="btn manage btn-warning">Manage Documents</a>{% endif %}
         <h2>{{ entity.title }}</h2>
         {{ form_widget(edit_form) }}
 

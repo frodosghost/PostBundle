@@ -34,7 +34,7 @@ class PostControllerTest extends WebTestCase
 
     public function testCompleteScenario()
     {
-        $this->getContainer()->set('manhattan_posts.include_documents', true);
+        $this->getContainer()->set('manhattan_posts.include_attachments', true);
 
         $user = $this->em->getRepository('ManhattanConsoleBundle:User')->find(1);
         $this->loginAs($user, 'secured_area');

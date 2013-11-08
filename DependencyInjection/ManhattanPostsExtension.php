@@ -26,7 +26,7 @@ class ManhattanPostsExtension extends Extension
 
         $container->setParameter('manhattan_posts.rss', $config['rss']);
         $container->setParameter('manhattan_posts.config', $config['configuration']);
-        $container->setParameter('manhattan_posts.include_documents', $config['configuration']['include_documents']);
+        $container->setParameter('manhattan_posts.include_attachments', $config['configuration']['include_attachments']);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');

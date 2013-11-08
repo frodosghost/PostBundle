@@ -30,7 +30,7 @@ class PostController extends Controller
 
         return $this->render('ManhattanPostsBundle:Post:index.html.twig', array(
             'entities' => $entities,
-            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
+            'include_attachments' => $this->container->getParameter('manhattan_posts.include_attachments')
         ));
     }
 
@@ -105,7 +105,7 @@ class PostController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
+            'include_attachments' => $this->container->getParameter('manhattan_posts.include_attachments')
         ));
     }
 
@@ -142,7 +142,7 @@ class PostController extends Controller
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'include_documents' => $this->container->getParameter('manhattan_posts.include_documents')
+            'include_attachments' => $this->container->getParameter('manhattan_posts.include_attachments')
         ));
     }
 

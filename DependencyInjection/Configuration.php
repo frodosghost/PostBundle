@@ -76,7 +76,7 @@ class Configuration implements ConfigurationInterface
                             ->defaultValue('Articles')
                             ->info('Sets the Title for the RSS Feed')
                             ->end()
-                        ->booleanNode('include_documents')
+                        ->booleanNode('include_attachments')
                             ->defaultValue(false)
                             ->info('If Document Management is required for use with the News Bundle.')
                             ->end()
