@@ -8,21 +8,21 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Manhattan\Bundle\PostsBundle\Entity\Post;
-use Manhattan\Bundle\PostsBundle\Entity\Document;
-use Manhattan\Bundle\PostsBundle\Form\DocumentType;
+use Manhattan\Bundle\PostsBundle\Entity\Attachment;
+use Manhattan\Bundle\PostsBundle\Form\AttachmentType;
 
 /**
- * Document controller.
+ * Attachment controller.
  */
 class DocumentController extends Controller
 {
     /**
      * Finds and displays documents for a Post.
      */
-    public function documentsAction(Request $request, $id)
+    public function attachmentsAction(Request $request, $id)
     {
         if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
-            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+            throw new AccessDeniedHttpException('Attachment functionality has not been enabled in the bundle.');
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
@@ -32,15 +32,15 @@ class DocumentController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $post = $em->getRepository('ManhattanPostsBundle:Post')
-            ->findOneByIdJoinDocuments($id);
+            ->findOneByIdJoinAttachments($id);
 
         if (!$post) {
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $document = new Document();
+        $document = new Attachment();
         $document->addPost($post);
-        $form  = $this->createForm(new DocumentType(), $document);
+        $form  = $this->createForm(new AttachmentType(), $document);
 
         return $this->render('ManhattanPostsBundle:Document:documents.html.twig', array(
             'entity' => $post,
@@ -54,7 +54,7 @@ class DocumentController extends Controller
     public function createAction(Request $request, $id)
     {
         if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
-            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+            throw new AccessDeniedHttpException('Attachment functionality has not been enabled in the bundle.');
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
@@ -69,10 +69,10 @@ class DocumentController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $document = new Document();
+        $document = new Attachment();
         $document->addPost($post);
 
-        $form  = $this->createForm(new DocumentType(), $document);
+        $form  = $this->createForm(new AttachmentType(), $document);
         $form->bind($request);
 
         if ($form->isValid()) {
@@ -89,12 +89,12 @@ class DocumentController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Document entity.
+     * Displays a form to edit an existing Attachment entity.
      */
     public function editAction(Request $request, $id, $document_id)
     {
         if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
-            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+            throw new AccessDeniedHttpException('Attachment functionality has not been enabled in the bundle.');
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
@@ -103,14 +103,14 @@ class DocumentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $document = $em->getRepository('ManhattanPostsBundle:Document')
+        $document = $em->getRepository('ManhattanPostsBundle:Attachment')
             ->findOneByIdJoinPost($document_id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find Document entity.');
+            throw $this->createNotFoundException('Unable to find Attachment entity.');
         }
 
-        $editForm = $this->createForm(new DocumentType(), $document);
+        $editForm = $this->createForm(new AttachmentType(), $document);
 
         return $this->render('ManhattanPostsBundle:Document:edit.html.twig', array(
             'entity'      => $document,
@@ -119,12 +119,12 @@ class DocumentController extends Controller
     }
 
     /**
-     * Edits an existing Document entity.
+     * Edits an existing Attachment entity.
      */
     public function updateAction(Request $request, $id, $document_id)
     {
         if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
-            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+            throw new AccessDeniedHttpException('Attachment functionality has not been enabled in the bundle.');
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_USER')) {
@@ -133,14 +133,14 @@ class DocumentController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $document = $em->getRepository('ManhattanPostsBundle:Document')
+        $document = $em->getRepository('ManhattanPostsBundle:Attachment')
             ->findOneByIdJoinPost($document_id);
 
         if (!$document) {
-            throw $this->createNotFoundException('Unable to find Document entity.');
+            throw $this->createNotFoundException('Unable to find Attachment entity.');
         }
 
-        $editForm = $this->createForm(new DocumentType(), $document);
+        $editForm = $this->createForm(new AttachmentType(), $document);
 
         $editForm->bind($request);
 
@@ -163,7 +163,7 @@ class DocumentController extends Controller
     public function deleteAction(Request $request, $id, $document_id)
     {
         if (!$this->container->getParameter('manhattan_posts.include_attachments')) {
-            throw new AccessDeniedHttpException('Document functionality has not been enabled in the bundle.');
+            throw new AccessDeniedHttpException('Attachment functionality has not been enabled in the bundle.');
         }
 
         if (false === $this->get('security.context')->isGranted('ROLE_ADMIN')) {
@@ -171,10 +171,10 @@ class DocumentController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('ManhattanPostsBundle:Document')->find($document_id);
+        $entity = $em->getRepository('ManhattanPostsBundle:Attachment')->find($document_id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Document entity.');
+            throw $this->createNotFoundException('Unable to find Attachment entity.');
         }
 
         $em->remove($entity);

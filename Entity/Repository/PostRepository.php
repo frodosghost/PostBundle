@@ -122,7 +122,7 @@ class PostRepository extends EntityRepository
      * @param  int     $id
      * @return Post
      */
-    public function findOneByIdJoinDocuments($id)
+    public function findOneByIdJoinAttachments($id)
     {
         $query = $this->getEntityManager()
             ->createQuery('

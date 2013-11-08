@@ -8,14 +8,22 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Manhattan\Bundle\PostsBundle\Form\EventListener\AddFileFieldSubscriber;
 
-class DocumentType extends AbstractType
+class AttachmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title', 'text', array(
+                'required' => true
+            ))
+            ->add('type', 'entity', array(
+                'required' => true,
+                'multiple' => false,
+                'expanded' => false,
+                'class'    => 'Manhattan\Bundle\PostsBundle\Entity\Attachment\Type'
+            ))
             ->add('description', 'textarea', array(
-                'required' => false,
+                'required' => true,
                 'label' => 'Description'
             ))
         ;
@@ -27,8 +35,7 @@ class DocumentType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Document',
-            'cascade_validation' => true
+            'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Attachment'
         ));
     }
 

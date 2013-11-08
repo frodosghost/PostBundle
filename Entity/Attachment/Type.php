@@ -23,6 +23,11 @@ class Type
      */
     private $slug;
 
+    /**
+     * @var boolean $hasFile
+     */
+    private $hasFile;
+
 
     /**
      * Get id
@@ -38,7 +43,7 @@ class Type
      * Set title
      *
      * @param string $title
-     * @return Post
+     * @return Type
      */
     public function setTitle($title)
     {
@@ -60,7 +65,7 @@ class Type
      * Set slug
      *
      * @param string $slug
-     * @return Post
+     * @return Type
      */
     public function setSlug($slug)
     {
@@ -76,6 +81,28 @@ class Type
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set hasFile
+     *
+     * @param string $hasFile
+     * @return Type
+     */
+    public function setHasFile($hasFile)
+    {
+        $this->hasFile = $hasFile;
+        return $this;
+    }
+
+    /**
+     * Get hasFile
+     *
+     * @return boolean
+     */
+    public function getHasFile()
+    {
+        return $this->hasFile;
     }
 
 }

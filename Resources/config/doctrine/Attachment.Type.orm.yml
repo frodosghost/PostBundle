@@ -16,3 +16,6 @@ Manhattan\Bundle\PostsBundle\Entity\Attachment\Type:
             gedmo:
                 slug:
                     fields: [ title ]
+        hasFile:
+            type: boolean
+            column: has_file

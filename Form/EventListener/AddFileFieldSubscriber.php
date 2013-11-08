@@ -46,7 +46,7 @@ class AddFileFieldSubscriber implements EventSubscriberInterface
             if (!$data->getId()) {
             $form->add('file', 'file', array(
                 'required' => true,
-                'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Document'
+                'data_class' => 'Manhattan\Bundle\PostsBundle\Entity\Attachment'
             ));
         }
         }
