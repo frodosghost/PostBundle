@@ -6,9 +6,9 @@ use Manhattan\Bundle\PostsBundle\Entity\Asset;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
- * Manhattan\Bundle\PostsBundle\Entity\Document
+ * Manhattan\Bundle\PostsBundle\Entity\Attachment
  */
-class Document extends Asset
+class Attachment extends Asset
 {
     /**
      * @var string $title
@@ -98,7 +98,7 @@ class Document extends Asset
 
     public function getUploadDir()
     {
-        return 'uploads/documents';
+        return 'uploads/attachments';
     }
 
     /**

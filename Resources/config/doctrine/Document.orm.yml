@@ -1,7 +1,7 @@
-Manhattan\Bundle\PostsBundle\Entity\Document:
+Manhattan\Bundle\PostsBundle\Entity\Attachment:
     type:  entity
-    table: news_document
-    repositoryClass: Manhattan\Bundle\PostsBundle\Entity\Repository\DocumentRepository
+    table: news_attachment
+    repositoryClass: Manhattan\Bundle\PostsBundle\Entity\Repository\AttachmentRepository
 
     fields:
         id:
@@ -12,30 +12,34 @@ Manhattan\Bundle\PostsBundle\Entity\Document:
         mime_type:
             type: string
             length: 255
+            nullable: true
         filename:
             type: string
             length: 255
+            nullable: true
         title:
             type: string
             length: 255
+            nullable: true
         description:
             type: text
             nullable: true
-        createdAt:
-            type: datetime
-            column: created_at
-        updatedAt:
-            type: datetime
-            column: updated_at
 
     manyToOne:
         post:
             targetEntity: Manhattan\Bundle\PostsBundle\Entity\Post
-            inversedBy: documents
+            inversedBy: attachments
             joinColumn:
                 name: post_id
                 referencedColumnName: id
                 onDelete: SET NULL
+        type:
+            targetEntity: Manhattan\Bundle\PostsBundle\Entity\AttachmentType
+            inversedBy: attachments
+            joinColumn:
+                name: attachment_type_id
+                referencedColumnName: id
+                onDelete: CASCADE
 
     lifecycleCallbacks:
         prePersist:
