@@ -25,5 +25,10 @@
         "manhattan/content-bundle": "dev-master",
         "manhattan/publish-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.0.x-dev"
+        }
     }
 }
