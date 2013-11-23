@@ -1,7 +1,9 @@
 {% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
 {% block template_title %}Console: Posts{% endblock template_title %}
+{% block title %}Console: Posts{% endblock title %}
 {% block breadcrumbs %}<li><a href="{{ path('console_index') }}">Console</a></li><li class="current"><a href="{{ path('console_news') }}">Posts</a></li>{% endblock breadcrumbs %}
+
 {% block template_console %}
 
 <table class="pure-table pure-table-striped">
@@ -22,6 +24,8 @@
                     <span class="pure-button pure-button-success">Published</span>
                 {% elseif entity.publishState == 4 %}
                     <span class="pure-button">Archived</span>
+                {% elseif entity.publishState == 8 %}
+                    <span class="pure-button pure-button-warning">Locked</span>
                 {% else %}
                     <span class="pure-button pure-button-secondary">Draft</span>
                 {% endif %}
@@ -32,7 +36,7 @@
 </table>
 
 <div class="l-box">
-    <a href="{{ path('console_news_new') }}"  class="pure-button pure-button-primary">Create a new post</a>
+    <a href="{{ path('console_news_new') }}" class="pure-button pure-button-primary">Create a new post</a>
 </div>
 
 {% endblock template_console %}
