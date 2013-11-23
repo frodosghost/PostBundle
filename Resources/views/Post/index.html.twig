@@ -1,39 +1,38 @@
-{% extends "ManhattanPostsBundle::layout.html.twig" %}
+{% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block content %}
+{% block template_title %}Console: Posts{% endblock template_title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index') }}">Console</a></li><li class="current"><a href="{{ path('console_news') }}">Posts</a></li>{% endblock breadcrumbs %}
+{% block template_console %}
 
-<table class="records_list table table-striped">
+<table class="pure-table pure-table-striped">
     <thead>
         <tr>
             <th class="title">Title</th>
-            <th>Slug</th>
             <th>Published Date</th>
             <th>&nbsp;</th>
-            <th class="actions">Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
-        <tr>
+        <tr{% if loop.index is odd %} class="pure-table-odd"{% endif %}>
             <td><a href="{{ path('console_news_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
-            <td>{{ entity.slug }}</td>
-            <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d') }}{% endif %}</td>
             <td class="update">{% spaceless %}
                 {% if entity.publishState == 2 %}
-                    <span class="btn-small btn-success">Published</span>
+                    <span class="pure-button pure-button-success">Published</span>
                 {% elseif entity.publishState == 4 %}
-                    <span class="btn-small">Archived</span>
+                    <span class="pure-button">Archived</span>
                 {% else %}
-                    <span class="btn-small btn-info">Draft</span>
+                    <span class="pure-button pure-button-secondary">Draft</span>
                 {% endif %}
             {% endspaceless %}</td>
-            <td>
-                <a href="{{ path('console_news_edit', { 'id': entity.id }) }}" class="btn btn-small btn-info">edit</a>
-            </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<a href="{{ path('console_news_new') }}"  class="btn primary btn-success">Create a new post</a>
-{% endblock %}
+<div class="l-box">
+    <a href="{{ path('console_news_new') }}"  class="pure-button pure-button-primary">Create a new post</a>
+</div>
+
+{% endblock template_console %}

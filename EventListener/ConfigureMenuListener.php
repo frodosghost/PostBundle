@@ -31,6 +31,6 @@ class ConfigureMenuListener
 
     public function getTitle()
     {
-        return (isset($this->title)) ? $this->title : 'News';
+        return (isset($this->title)) ? $this->title : 'Posts';
     }
 }

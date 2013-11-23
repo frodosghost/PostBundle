@@ -26,7 +26,7 @@ class PostController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ManhattanPostsBundle:Post')->findAll();
+        $entities = $em->getRepository('ManhattanPostsBundle:Post')->findBy(array(), array('publishDate' => 'DESC'));
 
         return $this->render('ManhattanPostsBundle:Post:index.html.twig', array(
             'entities' => $entities,
