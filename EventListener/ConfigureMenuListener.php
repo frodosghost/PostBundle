@@ -15,17 +15,13 @@ class ConfigureMenuListener
     {
         $menu = $event->getMenu();
 
-        $dropdown = $menu->addChild($this->getTitle(), array('route'=>'console_news'))
-            ->setLinkattribute('class', 'dropdown-toggle')
-            ->setLinkattribute('data-toggle', 'dropdown')
-            ->setAttribute('class', 'dropdown')
-            ->setChildrenAttribute('class', 'menu-dropdown');
+        $dropdown = $menu->addChild($this->getTitle(), array('route'=>''))
+            ->setLabelAttribute('class', 'pure-menu-heading')
+            ->setChildrenAttribute('class', 'pure-menu-children yellow');
 
-        $dropdown->addChild($this->getTitle(), array('route' => 'console_news'))
-            ->setLinkattribute('class', 'main');
+        $dropdown->addChild($this->getTitle() .' Index', array('route' => 'console_news'));
         $dropdown->addChild('New Post', array('route' => 'console_news_new'));
-        $dropdown->addChild('Category', array('route' => 'console_news_category'))
-            ->setLinkattribute('class', 'main');
+        $dropdown->addChild('Category Index', array('route' => 'console_news_category'));
     }
 
     public function setTitle($title)
