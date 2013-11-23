@@ -43,7 +43,7 @@
                         {% endfor %}
                         </ul>
                     </div>
-                    {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="pure-button pure-button-secondary">Manage Documents</a>{% endif %}
+                    {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="pure-button pure-button-secondary"><i class="fa fa-briefcase"></i> Manage Documents</a>{% endif %}
                 </div>
             {% endif %}
         </div>
