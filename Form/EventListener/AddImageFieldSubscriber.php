@@ -41,7 +41,6 @@ class AddImageFieldSubscriber implements EventSubscriberInterface
         if ($data->getId()) {
             $form->add('image', new ImageType(), array(
                 'property_path' => 'image',
-                'widget_control_group' => false,
                 'label' => false
             ));
         }

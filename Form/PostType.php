@@ -24,7 +24,6 @@ class PostType extends AbstractType
             ))
             ->add('image', new ImageType(), array(
                 'property_path' => 'image',
-                'widget_control_group' => false,
                 'label' => false
             ))
             ->add('publishState', 'publish_state', array(
