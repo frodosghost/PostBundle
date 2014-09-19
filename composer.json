@@ -21,7 +21,7 @@
     },
     "target-dir": "Manhattan/Bundle/PostsBundle",
     "require": {
-        "symfony/symfony": ">=2.3.*",
+        "symfony/symfony": ">=2.3,<2.7-dev",
         "manhattan/content-bundle": "3.0.*@dev",
         "manhattan/publish-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "*"
