@@ -7,6 +7,7 @@
         <parameter key="manhattan_posts.twig.extension.class">Manhattan\Bundle\PostsBundle\Twig\NewsTwigExtension</parameter>
         <parameter key="manhattan_posts.menu.menu_listener">Manhattan\Bundle\PostsBundle\EventListener\ConfigureMenuListener</parameter>
         <parameter key="manhattan_posts.event.persist_listener">Manhattan\Bundle\PostsBundle\EventListener\ObjectPersistListener</parameter>
+        <parameter key="manhattan_posts.entity.post.repository.class">Manhattan\Bundle\PostsBundle\Entity\Repository\PostRepository</parameter>
     </parameters>
 
     <services>
@@ -37,6 +38,11 @@
 
         <service id="doctrine.post_remove" class="%manhattan_posts.event.persist_listener%">
             <tag name="doctrine.event_listener" event="postRemove" />
+        </service>
+
+        <service id="manhattan.posts.entity.manager" class="%manhattan_posts.entity.post.repository.class%"
+            factory-service="doctrine.orm.entity_manager" factory-method="getRepository">
+            <argument>Manhattan\Bundle\PostsBundle\Entity\Post</argument>
         </service>
 
         <service id="manhattan.posts.twig.extension" class="%manhattan_posts.twig.extension.class%">

@@ -26,7 +26,8 @@ class PostController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('ManhattanPostsBundle:Post')->findBy(array(), array('publishDate' => 'DESC'));
+        $entities = $this->get('manhattan.posts.entity.manager')
+            ->findBy(array(), array('publishDate' => 'DESC'));
 
         return $this->render('ManhattanPostsBundle:Post:index.html.twig', array(
             'entities' => $entities,
@@ -92,7 +93,7 @@ class PostController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
+        $entity = $this->get('manhattan.posts.entity.manager')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
@@ -120,7 +121,7 @@ class PostController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
+        $entity = $this->get('manhattan.posts.entity.manager')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Post entity.');
@@ -161,7 +162,7 @@ class PostController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('ManhattanPostsBundle:Post')->find($id);
+            $entity = $this->get('manhattan.posts.entity.manager')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Post entity.');
