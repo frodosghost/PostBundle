@@ -1,18 +1,25 @@
 <?php
 
+/*
+ * This file is part of Manhattan Posts Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\PostsBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 
+use Manhattan\PublishBundle\Entity\Publish;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Category
  */
-class Category
+class Category extends Publish
 {
     /**
      * @var integer $id
@@ -30,24 +37,21 @@ class Category
     private $slug;
 
     /**
+     * @var string $excerpt
+     */
+    private $excerpt;
+
+    /**
      * @var Manhattan\Bundle\PostsBundle\Entity\Post
      **/
     private $posts;
-
-    /**
-     * @var datetime $createdAt
-     */
-    private $createdAt;
-
-    /**
-     * @var datetime $updatedAt
-     */
-    private $updatedAt;
 
 
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+
+        parent::__construct();
     }
 
     public function __toString()
@@ -110,6 +114,28 @@ class Category
     }
 
     /**
+     * Set excerpt
+     *
+     * @param string $excerpt
+     * @return Category
+     */
+    public function setExcerpt($excerpt)
+    {
+        $this->excerpt = $excerpt;
+        return $this;
+    }
+
+    /**
+     * Get excerpt
+     *
+     * @return string
+     */
+    public function getExcerpt()
+    {
+        return $this->excerpt;
+    }
+
+    /**
      * Add post
      *
      * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
@@ -131,62 +157,4 @@ class Category
         return $this->posts;
     }
 
-    /**
-     * Set createdAt
-     *
-     * @param datetime $createdAt
-     * @return Category
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return datetime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param datetime $updatedAt
-     * @return Category
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return datetime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * PrePersist()
-     */
-    public function prePersist() {
-        $this->setCreatedAt(new \DateTime());
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    /**
-     * PreUpdate()
-     */
-    public function preUpdate() {
-        $this->setUpdatedAt(new \DateTime());
-    }
 }
