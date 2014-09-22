@@ -9,6 +9,8 @@
         <parameter key="manhattan_posts.event.persist_listener">Manhattan\Bundle\PostsBundle\EventListener\ObjectPersistListener</parameter>
         <parameter key="manhattan_posts.entity.post.repository.class">Manhattan\Bundle\PostsBundle\Entity\Repository\PostRepository</parameter>
         <parameter key="manhattan.posts.form.post.type.class">Manhattan\Bundle\PostsBundle\Form\PostType</parameter>
+
+        <parameter key="manhattan.posts.entity.post.class">Manhattan\Bundle\PostsBundle\Entity\Post</parameter>
     </parameters>
 
     <services>
@@ -46,8 +48,10 @@
             <argument>Manhattan\Bundle\PostsBundle\Entity\Post</argument>
         </service>
 
+        <service id="manhattan.posts.entity.post" class="%manhattan.posts.entity.post.class%" />
+
         <service id="manhattan.posts.form.post.type" class="%manhattan.posts.form.post.type.class%">
-            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%manhattan.posts.entity.post.class%</argument>
         </service>
 
         <service id="manhattan.posts.twig.extension" class="%manhattan_posts.twig.extension.class%">
