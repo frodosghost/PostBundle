@@ -50,8 +50,6 @@ class Category extends Publish
     public function __construct()
     {
         $this->posts = new ArrayCollection();
-
-        parent::__construct();
     }
 
     public function __toString()
