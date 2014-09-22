@@ -1,31 +1,59 @@
-{% extends "ManhattanPostsBundle::layout.html.twig" %}
-{% block subheadline %}Category{% endblock %}
+{% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block content %}
-<form action="{{ path('console_news_category_create') }}" method="post" class="form-horizontal well" {{ form_enctype(form) }} novalidate>
+{% block headline %}Console: Posts | Create New{% endblock headline %}
+{% block title %}Console: Posts{% endblock title %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_news') }}">Posts</a></li><li><a href="{{ path('console_news_category') }}">Category</a></li><li class="current">Create New Category</li>{% endblock breadcrumbs %}
 
-  <fieldset>
+{% block content_content %}
+<form action="{{ path('console_news_category_create') }}" method="POST" role="form" class="form-horizontal" {{ form_enctype(form) }} novalidate>
     {{ form_widget(form) }}
+
     <div class="form-actions">
-        <button type="submit" class="btn btn-primary">Create</button>
-        <a href="{{ path('console_news_category') }}" class="btn">Back to the list</a>
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
     </div>
-  </fieldset>
 </form>
-{% endblock %}
+{% endblock content_content %}
+
+{% block content_sidebar %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Create New Category</h3>
+    </div>
+    <div class="panel-body">
+        <p>To create a new category just fill in the Category and Body, then click <em>Create</em>.</p>
+        <a href="{{ path('console_news_category') }}" class="btn btn-info">Back to the list</a>
+    </div>
+</div>
+{% endblock content_sidebar %}
+
+{% block head_style %}
+{% stylesheets filter='less,cssembed,cssrewrite,?yui_css' output='css/style.default.css'
+    '@ManhattanConsoleBundle/Resources/public/less/bootstrap.less'
+    '@ManhattanConsoleBundle/Resources/public/css/prettify.css'
+    '@ManhattanConsoleBundle/Resources/public/less/dashboard.less'
+    '@OrnjMarkdownBundle/Resources/public/css/*'
+%}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+{% endblock head_style %}
 
 {% block foot_script %}
     {% javascripts
-        'http://yui.yahooapis.com/3.13.0/build/yui/yui-min.js'
-        '@ManhattanConsoleBundle/Resources/public/js/yui/mainmenu.js'
         'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js'
+        '@MopaBootstrapBundle/Resources/public/bootstrap/js/tooltip.js'
+        '@MopaBootstrapBundle/Resources/public/bootstrap/js/*.js'
+        '@MopaBootstrapBundle/Resources/public/js/*.js'
         '@OrnjMarkdownBundle/Resources/public/js/markdown.js'
         '@OrnjMarkdownBundle/Resources/public/js/to-markdown.js'
         '@OrnjMarkdownBundle/Resources/public/js/bootbox.js'
         '@OrnjMarkdownBundle/Resources/public/js/bootstrap-markdown.js'
         filter="?yui_js"
-        output="js/console-edit.js"
+        output="js/console_new.js"
     %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
+    {% endjavascripts %}
 {% endblock foot_script %}
+
+
