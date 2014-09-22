@@ -14,7 +14,7 @@ namespace Manhattan\Bundle\PostsBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Manhattan\Bundle\ConsoleBundle\Entity\Publish;
-use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Base\Post;
 
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Category
@@ -136,7 +136,7 @@ class Category extends Publish
     /**
      * Add post
      *
-     * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
+     * @param Manhattan\Bundle\PostsBundle\Entity\Base\Post $post
      * @return Category
      */
     public function addPost(Post $post)
