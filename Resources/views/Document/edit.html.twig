@@ -2,7 +2,7 @@
 
 {% block title %}Console: Posts | {{ entity.title }}{% endblock title %}
 {% block template_title %}Console: Posts | Edit Document{% endblock template_title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_news') }}">Posts</a></li><li><a href="{{ path('console_news_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></li><li class="current"><a href="{{ path('console_news_documents', { 'id': entity.id }) }}">Documents</a></li>{% endblock breadcrumbs %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_news') }}">Posts</a></li><li><a href="{{ path('console_news_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></li><li class="current">Documents</li>{% endblock breadcrumbs %}
 
 {% block template_console %}
 
