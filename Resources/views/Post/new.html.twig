@@ -5,15 +5,7 @@
 {% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li><a href="{{ path('console_news') }}">Posts</a></li><li class="current"><a href="{{ path('console_news_new') }}">Create New Post</a></li>{% endblock breadcrumbs %}
 
 {% block content_content %}
-<form action="{{ path('console_news_create') }}" method="POST" role="form" class="form-horizontal" {{ form_enctype(form) }} novalidate>
-    {{ form_widget(form) }}
-
-    <div class="form-actions">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Create</button>
-        </div>
-    </div>
-</form>
+    {{ form(form) }}
 {% endblock content_content %}
 
 {% block content_sidebar %}

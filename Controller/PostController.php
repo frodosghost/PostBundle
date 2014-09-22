@@ -45,7 +45,7 @@ class PostController extends Controller
         }
 
         $entity = new Post();
-        $form   = $this->createForm(new PostType(), $entity);
+        $form   = $this->createdCreateForm($entity);
 
         return $this->render('ManhattanPostsBundle:Post:new.html.twig', array(
             'entity' => $entity,
@@ -62,10 +62,10 @@ class PostController extends Controller
             throw new AccessDeniedException();
         }
 
-        $entity  = new Post();
+        $entity = new Post();
 
-        $form = $this->createForm(new PostType(), $entity);
-        $form->bind($request);
+        $form = $this->createdCreateForm($entity);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -99,7 +99,7 @@ class PostController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $editForm = $this->createForm(new PostType(), $entity);
+        $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ManhattanPostsBundle:Post:edit.html.twig', array(
@@ -127,7 +127,7 @@ class PostController extends Controller
             throw $this->createNotFoundException('Unable to find Post entity.');
         }
 
-        $editForm   = $this->createForm(new PostType(), $entity);
+        $editForm   = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $editForm->bind($request);
@@ -181,5 +181,60 @@ class PostController extends Controller
             ->add('id', 'hidden')
             ->getForm()
         ;
+    }
+
+    /**
+     * Create a form
+     *
+     * @param  Post $entity
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createdCreateForm(Post $entity)
+    {
+        $type = $this->get('manhattan.posts.form.post.type');
+
+        $form = $this->createForm($type, $entity, array(
+            'action' => $this->generateUrl('console_news_create'),
+            'method' => 'POST',
+            'attr' => array(
+                'role' => 'form'
+            )
+        ));
+
+        $form->add('submit', 'submit', array(
+            'label' => 'Create',
+            'attr' => array(
+                'class' => 'btn btn-primary col-sm-offset-2',
+                'formnovalidate' => 'formnovalidate'
+            )
+        ));
+
+        return $form;
+    }
+
+    /**
+     * Creates a form to edit a Post entity.
+     *
+     * @param Post $entity
+     * @return \Symfony\Component\Form\Form
+     */
+    private function createEditForm(Post $entity)
+    {
+        $type = $this->get('manhattan.posts.form.post.type');
+
+        $form = $this->createForm($type, $entity, array(
+            'action' => $this->generateUrl('console_news_update', array('id' => $entity->getId())),
+            'method' => 'PUT',
+        ));
+
+        $form->add('submit', 'submit', array(
+            'label' => 'Update',
+            'attr' => array(
+                'class' => 'btn btn-primary col-sm-offset-2',
+                'formnovalidate' => 'formnovalidate'
+            )
+        ));
+
+        return $form;
     }
 }
