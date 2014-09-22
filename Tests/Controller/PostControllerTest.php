@@ -44,7 +44,7 @@ class PostControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/console/posts');
 
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
-        $crawler = $client->click($crawler->selectLink('Create a new post')->link());
+        $crawler = $client->click($crawler->selectLink('Create a New Post')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
