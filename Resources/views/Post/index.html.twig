@@ -22,13 +22,13 @@
                     <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d') }}{% endif %}</td>
                     <td class="update">{% spaceless %}
                         {% if entity.publishState == 2 %}
-                            <span class="pure-button pure-button-success">Published</span>
+                            <span class="btn btn-success btn-sm">Published</span>
                         {% elseif entity.publishState == 4 %}
-                            <span class="pure-button">Archived</span>
+                            <span class="btn btn-default btn-sm">Archived</span>
                         {% elseif entity.publishState == 8 %}
-                            <span class="pure-button pure-button-warning">Locked</span>
+                            <span class="btn btn-warning btn-sm">Locked</span>
                         {% else %}
-                            <span class="pure-button pure-button-secondary">Draft</span>
+                            <span class="btn btn-info btn-sm">Draft</span>
                         {% endif %}
                     {% endspaceless %}</td>
                 </tr>
