@@ -13,7 +13,7 @@ namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Manhattan\PublishBundle\Entity\Publish;
+use Manhattan\Bundle\ConsoleBundle\Entity\Publish;
 use Manhattan\Bundle\PostsBundle\Entity\Post;
 
 /**
