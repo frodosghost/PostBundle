@@ -1,0 +1,24 @@
+Manhattan\Bundle\PostsBundle\Entity\Base\Post:
+    type:  mappedSuperclass
+
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        title:
+            type: string
+            length: 255
+        slug:
+            type: string
+            gedmo:
+                slug:
+                    fields: [ title ]
+        excerpt:
+            type: string
+            length: 500
+            nullable: true
+        body:
+            type: text
+            nullable: true

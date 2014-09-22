@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-use Manhattan\Bundle\PostsBundle\Entity\Post;
+use Manhattan\Bundle\PostsBundle\Entity\Base\Post;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
 use Manhattan\Bundle\PostsBundle\Form\PostType;
 
@@ -45,7 +45,7 @@ class PostController extends Controller
         }
 
         $entity = $this->get('manhattan.posts.entity.post');
-        $this->createdCreateForm($entity);
+        $form   = $this->createdCreateForm($entity);
 
         return $this->render('ManhattanPostsBundle:Post:new.html.twig', array(
             'entity' => $entity,
@@ -63,7 +63,6 @@ class PostController extends Controller
         }
 
         $entity = $this->get('manhattan.posts.entity.post');
-
         $form = $this->createdCreateForm($entity);
         $form->handleRequest($request);
 
