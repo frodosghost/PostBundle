@@ -14,6 +14,9 @@ class CategoryType extends AbstractType
             ->add('title', 'text', array(
                 'label' => 'Category'
             ))
+            ->add('excerpt', 'markdown', array(
+                'show_help' => false
+            ))
         ;
     }
 
