@@ -44,8 +44,8 @@ class PostController extends Controller
             throw new AccessDeniedException();
         }
 
-        $entity = new Post();
-        $form   = $this->createdCreateForm($entity);
+        $entity = $this->get('manhattan.posts.entity.post');
+        $this->createdCreateForm($entity);
 
         return $this->render('ManhattanPostsBundle:Post:new.html.twig', array(
             'entity' => $entity,
@@ -62,7 +62,7 @@ class PostController extends Controller
             throw new AccessDeniedException();
         }
 
-        $entity = new Post();
+        $entity = $this->get('manhattan.posts.entity.post');
 
         $form = $this->createdCreateForm($entity);
         $form->handleRequest($request);
