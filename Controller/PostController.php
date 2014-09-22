@@ -227,7 +227,7 @@ class PostController extends Controller
         ));
 
         $form->add('submit', 'submit', array(
-            'label' => 'Update',
+            'label' => 'Save and Update',
             'attr' => array(
                 'class' => 'btn btn-primary col-sm-offset-2',
                 'formnovalidate' => 'formnovalidate'

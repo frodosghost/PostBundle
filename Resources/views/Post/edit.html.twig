@@ -7,26 +7,7 @@
 {% block content_content %}
 <h2>{{ entity.title }}</h2>
 
-<form action="{{ path('console_news_update', { 'id': entity.id }) }}" class="form-horizontal" role="form" method="POST" {{ form_enctype(edit_form) }} novalidate>
-    <input type="hidden" name="_method" value="PUT" />
-    {{ form(edit_form) }}
-
-    <div class="control-group">
-        <label class="control-label" for="content_documents">Documents</label>
-        <div class="controls">
-            <ul class="documents">
-            {% for document in entity.documents %}
-                <li class="{{ document.extension }}"><i class="icon-file"></i> {{ document.title }} - <small><a href="{{ asset(document.webPath) }}" target="_document">view</a></small></li>
-            {% endfor %}
-            </ul>
-        </div>
-    </div>
-    <div class="form-actions">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Save and Update</button>
-        </div>
-    </div>
-</form>
+{{ form(edit_form) }}
 {% endblock content_content %}
 
 {% block content_sidebar %}
@@ -35,9 +16,16 @@
         <h3 class="panel-title">Edit Article</h3>
     </div>
     <div class="panel-body">
-        <p><a href="{{ path('console_article_document', { 'article_id': entity.id }) }}" class="btn manage btn-warning">Manage Documents</a></p>
-        <p><a href="{{ path('console_article') }}" class="btn btn-default">Back to the list</a></p>
-        {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="pure-button pure-button-secondary"><i class="fa fa-briefcase"></i> Manage Documents</a>{% endif %}
+        {%  if include_documents %}<a href="{{ path('console_news_documents', { 'id': entity.id }) }}" class="pure-button pure-button-secondary"><i class="glyphicon glyphicon-briefcase"></i> Manage Documents</a>{% endif %}
+        {% if include_documents %}
+            <ul class="documents">
+            {% for document in entity.documents %}
+                <li class="{{ document.extension }}"><i class="glyphicon glyphicon-file"></i> {{ document.title }} - <small><a href="{{ asset(document.webPath) }}" target="_document">view</a></small></li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        <p><a href="{{ path('console_news') }}" class="btn btn-default">Back to the list</a></p>
+
         {% if is_granted('ROLE_SUPER_ADMIN') %}
         <form action="{{ path('console_news_delete', { 'id': entity.id }) }}" class="actions-delete" method="POST">
             {{ form_row(delete_form.id) }}
