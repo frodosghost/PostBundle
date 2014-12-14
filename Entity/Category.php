@@ -139,7 +139,7 @@ class Category extends Publish
      * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
      * @return Category
      */
-    public function addPost(Post $post)
+    public function addPost(BasePost $post)
     {
         $this->posts[] = $post;
         return $this;

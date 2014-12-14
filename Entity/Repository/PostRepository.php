@@ -101,7 +101,8 @@ class PostRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
             ->createQuery('
-                SELECT post FROM ManhattanPostsBundle:Post post
+                SELECT post, image FROM ManhattanPostsBundle:Post post
+                LEFT JOIN post.image image
                 WHERE post.publishDate < :date
                     AND post.publishState = :publishState
                 ORDER BY post.publishDate DESC')
