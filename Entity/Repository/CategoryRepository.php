@@ -20,7 +20,7 @@ class CategoryRepository extends EntityRepository
         $query = $this->getEntityManager()
             ->createQuery('
                 SELECT category, post FROM ManhattanPostsBundle:Category category
-                JOIN category.posts post'
+                LEFT JOIN category.posts post'
             );
 
         try {
