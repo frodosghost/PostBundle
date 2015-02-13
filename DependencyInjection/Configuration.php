@@ -49,7 +49,7 @@ class Configuration implements ConfigurationInterface
                                     ->info('Route name to the index page of the news.')
                                     ->end()
                                 ->scalarNode('src')
-                                    ->defaultValue('posts')
+                                    ->defaultValue('/apple-touch-icon-152x152.png')
                                     ->info('Route name to the index page of the news.')
                                     ->end()
                             ->end()
