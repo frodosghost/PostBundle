@@ -9,22 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Manhattan\Bundle\PostsBundle\Entity;
+namespace Manhattan\Bundle\PostsBundle\Entity\Base;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
-use Manhattan\Bundle\ConsoleBundle\Entity\Publish;
-use Manhattan\Bundle\PostsBundle\Entity\Post as BasePost;
+use Manhattan\PublishBundle\Entity\Publish;
 
 /**
- * Manhattan\Bundle\PostsBundle\Entity\Category
+ * Manhattan\Bundle\PostsBundle\Entity\Post
  */
-class Category extends Publish
+abstract class Post extends Publish
 {
+
     /**
      * @var integer $id
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $title
@@ -37,24 +35,19 @@ class Category extends Publish
     private $slug;
 
     /**
-     * @var string $excerpt
+     * @var text $excerpt
      */
     private $excerpt;
 
     /**
-     * @var Manhattan\Bundle\PostsBundle\Entity\Post
-     **/
-    private $posts;
+     * @var text $body
+     */
+    private $body;
 
 
     public function __construct()
     {
-        $this->posts = new ArrayCollection();
-    }
-
-    public function __toString()
-    {
-        return $this->getTitle();
+        parent::__construct();
     }
 
     /**
@@ -71,7 +64,7 @@ class Category extends Publish
      * Set title
      *
      * @param string $title
-     * @return Category
+     * @return Post
      */
     public function setTitle($title)
     {
@@ -93,7 +86,7 @@ class Category extends Publish
      * Set slug
      *
      * @param string $slug
-     * @return Category
+     * @return Post
      */
     public function setSlug($slug)
     {
@@ -115,7 +108,7 @@ class Category extends Publish
      * Set excerpt
      *
      * @param string $excerpt
-     * @return Category
+     * @return Post
      */
     public function setExcerpt($excerpt)
     {
@@ -134,25 +127,25 @@ class Category extends Publish
     }
 
     /**
-     * Add post
+     * Set body
      *
-     * @param Manhattan\Bundle\PostsBundle\Entity\Post $post
-     * @return Category
+     * @param text $body
+     * @return Post
      */
-    public function addPost(BasePost $post)
+    public function setBody($body)
     {
-        $this->posts[] = $post;
+        $this->body = $body;
         return $this;
     }
 
     /**
-     * Get posts
+     * Get body
      *
-     * @return Doctrine\Common\Collections\Collection
+     * @return text
      */
-    public function getPosts()
+    public function getBody()
     {
-        return $this->posts;
+        return $this->body;
     }
 
 }

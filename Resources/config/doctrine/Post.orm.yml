@@ -3,28 +3,6 @@ Manhattan\Bundle\PostsBundle\Entity\Post:
     table: news_post
     repositoryClass: Manhattan\Bundle\PostsBundle\Entity\Repository\PostRepository
 
-    fields:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-        title:
-            type: string
-            length: 255
-        slug:
-            type: string
-            gedmo:
-                slug:
-                    fields: [ title ]
-        excerpt:
-            type: string
-            length: 500
-            nullable: true
-        body:
-            type: text
-            nullable: true
-
     oneToOne:
         image:
             targetEntity: Manhattan\Bundle\PostsBundle\Entity\Image

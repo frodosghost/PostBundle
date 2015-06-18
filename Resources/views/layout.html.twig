@@ -1,5 +1,12 @@
-{% extends "ManhattanConsoleBundle::layout.html.twig" %}
+{% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block title %}Manhattan Console{% endblock %}
-
-{% block headline %}<span>Articles:</span> {% block subheadline %}Post{% endblock %}{% endblock %}
+{% block head_style %}
+{% stylesheets filter='less,cssembed,cssrewrite,?yui_css' output='css/style.default.css'
+    '@ManhattanConsoleBundle/Resources/public/less/bootstrap.less'
+    '@ManhattanConsoleBundle/Resources/public/css/prettify.css'
+    '@ManhattanConsoleBundle/Resources/public/less/dashboard.less'
+    '@OrnjMarkdownBundle/Resources/public/css/*'
+%}
+<link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="screen" />
+{% endstylesheets %}
+{% endblock head_style %}

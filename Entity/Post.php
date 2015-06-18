@@ -1,10 +1,19 @@
 <?php
 
+/*
+ * This file is part of Manhattan Posts Bundle
+ *
+ * (c) James Rickard <james@frodosghost.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Manhattan\Bundle\PostsBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Manhattan\PublishBundle\Entity\Publish;
+use Manhattan\Bundle\PostsBundle\Entity\Base\Post as BasePost;
 use Manhattan\Bundle\PostsBundle\Entity\Image;
 use Manhattan\Bundle\PostsBundle\Entity\Document;
 use Manhattan\Bundle\PostsBundle\Entity\Category;
@@ -12,33 +21,8 @@ use Manhattan\Bundle\PostsBundle\Entity\Category;
 /**
  * Manhattan\Bundle\PostsBundle\Entity\Post
  */
-class Post extends Publish
+class Post extends BasePost
 {
-
-    /**
-     * @var integer $id
-     */
-    private $id;
-
-    /**
-     * @var string $title
-     */
-    private $title;
-
-    /**
-     * @var string $slug
-     */
-    private $slug;
-
-    /**
-     * @var text $excerpt
-     */
-    private $excerpt;
-
-    /**
-     * @var text $body
-     */
-    private $body;
 
     /**
      * @var Doctrine\Common\Collections\ArrayCollection
@@ -63,103 +47,6 @@ class Post extends Publish
         parent::__construct();
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Post
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Post
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set excerpt
-     *
-     * @param string $excerpt
-     * @return Post
-     */
-    public function setExcerpt($excerpt)
-    {
-        $this->excerpt = $excerpt;
-        return $this;
-    }
-
-    /**
-     * Get excerpt
-     *
-     * @return string
-     */
-    public function getExcerpt()
-    {
-        return $this->excerpt;
-    }
-
-    /**
-     * Set body
-     *
-     * @param text $body
-     * @return Post
-     */
-    public function setBody($body)
-    {
-        $this->body = $body;
-        return $this;
-    }
-
-    /**
-     * Get body
-     *
-     * @return text
-     */
-    public function getBody()
-    {
-        return $this->body;
-    }
 
     /**
      * Add Document

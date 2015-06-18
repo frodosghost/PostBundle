@@ -17,14 +17,14 @@ class CategoryRepository extends EntityRepository
      */
     public function getCategoriesJoinPost()
     {
-        $query = $this->getEntityManager()
-            ->createQuery('
-                SELECT category, post FROM ManhattanPostsBundle:Category category
-                JOIN category.posts post'
-            );
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb->select('category, post')
+            ->from('Manhattan\Bundle\PostsBundle\Entity\Category', 'category')
+            ->leftJoin('category.posts', 'post');
 
         try {
-            return $query->getResult();
+            return $qb->getQuery()->getResult();
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }

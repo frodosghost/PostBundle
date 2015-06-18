@@ -1,42 +1,51 @@
 {% extends "ManhattanConsoleBundle:Console:template.html.twig" %}
 
-{% block template_title %}Console: Posts{% endblock template_title %}
+{% block headline %}Console: Posts{% endblock headline %}
 {% block title %}Console: Posts{% endblock title %}
-{% block breadcrumbs %}<li><a href="{{ path('console_index') }}">Console</a></li><li class="current"><a href="{{ path('console_news') }}">Posts</a></li>{% endblock breadcrumbs %}
+{% block breadcrumbs %}<li><a href="{{ path('console_index', { 'subdomain': subdomain }) }}">Console</a></li><li class="current"><a href="{{ path('console_news') }}">Posts</a></li>{% endblock breadcrumbs %}
 
-{% block template_console %}
+{% block content_content %}
 
-<table class="pure-table pure-table-striped">
-    <thead>
-        <tr>
-            <th class="title">Title</th>
-            <th>Published Date</th>
-            <th>&nbsp;</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr{% if loop.index is odd %} class="pure-table-odd"{% endif %}>
-            <td><a href="{{ path('console_news_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
-            <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d') }}{% endif %}</td>
-            <td class="update">{% spaceless %}
-                {% if entity.publishState == 2 %}
-                    <span class="pure-button pure-button-success">Published</span>
-                {% elseif entity.publishState == 4 %}
-                    <span class="pure-button">Archived</span>
-                {% elseif entity.publishState == 8 %}
-                    <span class="pure-button pure-button-warning">Locked</span>
-                {% else %}
-                    <span class="pure-button pure-button-secondary">Draft</span>
-                {% endif %}
-            {% endspaceless %}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="title">Title</th>
+                    <th>Published Date</th>
+                    <th>&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr{% if loop.index is odd %} class="pure-table-odd"{% endif %}>
+                    <td><a href="{{ path('console_news_edit', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                    <td>{% if entity.publishdate %}{{ entity.publishdate|date('Y-m-d') }}{% endif %}</td>
+                    <td class="update">{% spaceless %}
+                        {% if entity.publishState == 2 %}
+                            <span class="btn btn-success btn-sm">Published</span>
+                        {% elseif entity.publishState == 4 %}
+                            <span class="btn btn-default btn-sm">Archived</span>
+                        {% elseif entity.publishState == 8 %}
+                            <span class="btn btn-warning btn-sm">Locked</span>
+                        {% else %}
+                            <span class="btn btn-info btn-sm">Draft</span>
+                        {% endif %}
+                    {% endspaceless %}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-<div class="l-box">
-    <a href="{{ path('console_news_new') }}" class="pure-button pure-button-primary">Create a new post</a>
+{% endblock content_content %}
+
+{% block content_sidebar %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Article Controls</h3>
+    </div>
+    <div class="panel-body">
+        <a href="{{ path('console_news_new') }}"  class="btn primary btn-success">Create a New Post</a>
+    </div>
 </div>
-
-{% endblock template_console %}
+{% endblock content_sidebar %}

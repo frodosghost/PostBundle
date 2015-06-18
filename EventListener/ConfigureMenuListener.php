@@ -15,12 +15,18 @@ class ConfigureMenuListener
     {
         $menu = $event->getMenu();
 
-        $dropdown = $menu->addChild($this->getTitle(), array('route'=>''))
-            ->setLabelAttribute('class', 'pure-menu-heading')
-            ->setChildrenAttribute('class', 'pure-menu-children yellow');
-
+        // Main Menu Item
+        $dropdown = $menu->addChild($this->getTitle(), array(
+            'route' => 'console_news',
+            'icon' => 'file',
+            'inverted' => false,
+            'append' => false,
+            'dropdown' => true,
+            'caret' => true
+        ));
         $dropdown->addChild($this->getTitle() .' Index', array('route' => 'console_news'));
         $dropdown->addChild('New Post', array('route' => 'console_news_new'));
+        $dropdown->addChild('divider_1', array('divider' => true));
         $dropdown->addChild('Category Index', array('route' => 'console_news_category'));
     }
 
