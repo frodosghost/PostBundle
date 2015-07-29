@@ -2,6 +2,7 @@
 
 namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
+use Doctrine\ORM\Tools\SchemaTool;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 
 class PostControllerTest extends WebTestCase
@@ -13,9 +14,16 @@ class PostControllerTest extends WebTestCase
 
     public function setUp()
     {
-        static::$kernel = static::createKernel();
-        static::$kernel->boot();
-        $this->em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $this->em = $this->getContainer()->get('doctrine')->getManager();
+        if (!isset($metadatas)) {
+            $metadatas = $this->em->getMetadataFactory()->getAllMetadata();
+        }
+        $schemaTool = new SchemaTool($this->em);
+        $schemaTool->dropDatabase();
+        if (!empty($metadatas)) {
+            $schemaTool->createSchema($metadatas);
+        }
+        $this->postFixtureSetup();
 
         // Add data with Fixtures
         $this->loadFixtures(array(
@@ -26,7 +34,9 @@ class PostControllerTest extends WebTestCase
 
     protected function tearDown()
     {
-        $this->loadFixtures(array());
+        $schemaTool = new SchemaTool($this->em);
+        $schemaTool->dropDatabase();
+        $this->postFixtureSetup();
 
         $this->getContainer()->get('doctrine')->getConnection()->close();
         parent::tearDown();
@@ -40,8 +50,11 @@ class PostControllerTest extends WebTestCase
         $this->loginAs($user, 'secured_area');
         $client = $this->makeClient(true);
 
-        // Create a new entry in the database
-        $crawler = $client->request('GET', '/console/posts');
+        $domain = static::$kernel->getContainer()->getParameter('domain');
+        $crawler = $client->request('GET', '/posts', array(), array(), array(
+            'HTTP_HOST'       => 'console.'. $domain,
+            'HTTP_USER_AGENT' => 'Symfony2 BrowserKit'
+        ));
 
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
         $crawler = $client->click($crawler->selectLink('Create a New Post')->link());
@@ -63,7 +76,7 @@ class PostControllerTest extends WebTestCase
         // Edit the entity
         $crawler = $client->click($crawler->filter('a:contains("Foo")')->last()->link());
 
-        $form = $crawler->selectButton('Edit')->form(array(
+        $form = $crawler->selectButton('Save and Update')->form(array(
             'post[title]'  => 'Foo',
             // ... other fields to fill
         ));

@@ -2,6 +2,7 @@
 
 namespace Manhattan\Bundle\PostsBundle\Tests\Controller;
 
+use Doctrine\ORM\Tools\SchemaTool;
 use Liip\FunctionalTestBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -14,9 +15,16 @@ class DocumentControllerTest extends WebTestCase
 
     public function setUp()
     {
-        static::$kernel = static::createKernel();
-        static::$kernel->boot();
-        $this->em = static::$kernel->getContainer()->get('doctrine.orm.entity_manager');
+        $this->em = $this->getContainer()->get('doctrine')->getManager();
+        if (!isset($metadatas)) {
+            $metadatas = $this->em->getMetadataFactory()->getAllMetadata();
+        }
+        $schemaTool = new SchemaTool($this->em);
+        $schemaTool->dropDatabase();
+        if (!empty($metadatas)) {
+            $schemaTool->createSchema($metadatas);
+        }
+        $this->postFixtureSetup();
 
         // Add data with Fixtures
         $this->loadFixtures(array(
@@ -27,7 +35,9 @@ class DocumentControllerTest extends WebTestCase
 
     protected function tearDown()
     {
-        $this->loadFixtures(array());
+        $schemaTool = new SchemaTool($this->em);
+        $schemaTool->dropDatabase();
+        $this->postFixtureSetup();
 
         $this->getContainer()->get('doctrine')->getConnection()->close();
         parent::tearDown();
@@ -39,7 +49,11 @@ class DocumentControllerTest extends WebTestCase
         $this->loginAs($user, 'secured_area');
         $client = $this->makeClient(true);
 
-        $crawler = $client->request('GET', '/console/posts/new');
+        $domain = static::$kernel->getContainer()->getParameter('domain');
+        $crawler = $client->request('GET', '/posts/new', array(), array(), array(
+            'HTTP_HOST'       => 'console.'. $domain,
+            'HTTP_USER_AGENT' => 'Symfony2 BrowserKit'
+        ));
 
         $this->assertTrue(200 === $client->getResponse()->getStatusCode());
 
@@ -60,9 +74,9 @@ class DocumentControllerTest extends WebTestCase
         // Follow to the Edit page to display link to Documents
         $crawler = $client->click($crawler->filter('a:contains("Foo")')->link());
 
-        $crawler = $client->click($crawler->selectLink('Manage Documents')->link());
+        $crawler = $client->click($crawler->filter('a:contains("Manage Documents")')->link());
 
-        $this->assertEquals('Documents: Foo', $crawler->filter('h2')->text(),
+        $this->assertEquals('Documents: Foo', $crawler->filter('h3')->text(),
             'Manage Documents page shows correct heading.');
 
         $this->assertEquals(0, $crawler->filter('.document-list')->children()->count(),
@@ -89,7 +103,7 @@ class DocumentControllerTest extends WebTestCase
 
         $crawler = $client->click($crawler->selectLink('Edit')->last()->link());
 
-        $form = $crawler->selectButton('Edit')->form(array(
+        $form = $crawler->selectButton('Save')->form(array(
             'document[title]' => 'Bar'
         ));
 
