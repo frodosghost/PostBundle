@@ -42,8 +42,7 @@ class PostType extends AbstractType
             ->add('category', 'entity', array(
                 'multiple' => false,
                 'expanded' => true,
-                'class'    => 'Manhattan\Bundle\PostsBundle\Entity\Category',
-                'data_class'    => 'Manhattan\Bundle\PostsBundle\Entity\Category'
+                'class'    => 'ManhattanPostsBundle:Category'
             ))
         ;
     }
